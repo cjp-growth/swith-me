@@ -1,4 +1,4 @@
-package project.swithme.order.core.domain.order.entity;
+package project.swithme.order.core.domain.reservation.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -14,8 +14,8 @@ import project.swithme.order.core.common.BaseInformation;
 import java.time.Instant;
 import java.util.Objects;
 
-@Entity(name = "order")
-public class Order extends BaseEntity {
+@Entity(name = "reservation")
+public class Reservation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,29 +24,38 @@ public class Order extends BaseEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "reservation_id")
-    private Long reservationId;
+    @Column(name = "study_cafe_id")
+    private Long studyCafeId;
+
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "seat_id")
+    private Long seatId;
+
+    @Column(name = "start_time")
+    private Instant startTime;
+
+    @Column(name = "end_time")
+    private Instant endTime;
 
     @Enumerated(EnumType.STRING)
     @Column(
-            name = "order_status",
-            columnDefinition = "ENUM('PAYMENT_REQUEST', 'COMPLETE', 'CANCEL', 'REFUND')"
+            name = "reservation_status",
+            columnDefinition = "ENUM('RESERVED', 'CANCEL')"
     )
-    private OrderStatus orderStatus;
+    private ReservationStatus reservationStatus;
 
-    @Column(name = "deposit_deadline")
-    private Instant depositDeadline;
-
-    @Column(name = "refund_reason")
-    private String refundReason;
+    @Column(name = "cancel_reason")
+    private String cancelReason;
 
     @Embedded
     private BaseInformation baseInformation;
 
     /**
-     * @Nullary-Constructor. JPA 기본 생성자로 order 외부 패키지에서 호출하지 말 것.
+     * @Nullary-Constructor. JPA 기본 생성자로 reservation 외부 패키지에서 호출하지 말 것.
      */
-    protected Order() {
+    protected Reservation() {
     }
 
     public Long getId() {
@@ -56,8 +65,8 @@ public class Order extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order order)) return false;
-        return getId().equals(order.getId());
+        if (!(o instanceof Reservation that)) return false;
+        return getId().equals(that.getId());
     }
 
     @Override
@@ -70,4 +79,3 @@ public class Order extends BaseEntity {
         return id.toString();
     }
 }
-
