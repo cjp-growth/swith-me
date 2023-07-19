@@ -24,6 +24,9 @@ public class Order extends BaseEntity {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "reservation_id")
+    private Long reservationId;
+
     @Enumerated(EnumType.STRING)
     @Column(
             name = "order_status",
