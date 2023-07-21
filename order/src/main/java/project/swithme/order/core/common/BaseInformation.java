@@ -18,9 +18,15 @@ public class BaseInformation {
     private boolean deleted;
 
     /**
-     * @Nullary-Constructor. JPA 기본 생성자로 order 외부 패키지에서 호출하지 말 것.
+     * @Nullary-Constructor. JPA 기본 생성자로 createOrder 외부 패키지에서 호출하지 말 것.
      */
     protected BaseInformation() {
+    }
+
+    public BaseInformation(Long createdBy) {
+        this.createdBy = createdBy;
+        this.lastModifiedBy = null;
+        this.deleted = false;
     }
 
     public BaseInformation(
