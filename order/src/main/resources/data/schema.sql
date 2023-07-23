@@ -19,7 +19,6 @@ CREATE TABLE order_line
     order_id         BIGINT                            NOT NULL COMMENT '주문 PK',
     study_cafe_id    BIGINT                            NOT NULL COMMENT '스터디 카페 PK',
     product_id       BIGINT                            NOT NULL COMMENT '상품 PK',
-    locker_id        BIGINT                            NULL COMMENT '사물함 PK',
     price            DECIMAL(38, 2)                    NOT NULL COMMENT '가격',
     created_by       BIGINT                            NOT NULL COMMENT '생성자',
     create_at        DATETIME(6)                       NOT NULL COMMENT '생성일',

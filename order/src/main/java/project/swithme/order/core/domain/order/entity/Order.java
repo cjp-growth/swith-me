@@ -1,5 +1,6 @@
 package project.swithme.order.core.domain.order.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -8,13 +9,18 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "order")
+import static java.time.Duration.ofHours;
+
+@Entity(name = "`order`")
 public class Order extends BaseEntity {
 
     @Id
@@ -40,6 +46,9 @@ public class Order extends BaseEntity {
     @Column(name = "refund_reason")
     private String refundReason;
 
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST})
+    private List<OrderLine> orderLines = new ArrayList<>();
+
     @Embedded
     private BaseInformation baseInformation;
 
@@ -47,6 +56,29 @@ public class Order extends BaseEntity {
      * @Nullary-Constructor. JPA 기본 생성자로 order 외부 패키지에서 호출하지 말 것.
      */
     protected Order() {
+    }
+
+    public Order(
+            Long userId,
+            List<OrderLine> orderLines
+    ) {
+        this.userId = userId;
+        this.orderStatus = OrderStatus.PAYMENT_REQUEST;
+        this.depositDeadline = createDeadline();
+        this.orderLines = init(orderLines);
+        this.baseInformation = new BaseInformation(userId);
+    }
+
+    private List<OrderLine> init(List<OrderLine> orderLines) {
+        orderLines.forEach(
+                orderLine -> orderLine.add(this)
+        );
+        return orderLines;
+    }
+
+    private Instant createDeadline() {
+        Instant now = Instant.now();
+        return now.plus(ofHours(1));
     }
 
     public Long getId() {

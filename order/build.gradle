@@ -1,7 +1,34 @@
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+buildscript {
+    ext {
+        springBootVersion = "3.0.7"
+        snippetsDir = file('build/generated-snippets')
+        springDependencyManagementVersion = "1.1.0"
+        restdocsApiSpecVersion = "0.17.1"
+        jvmConvertVersion = "3.3.2"
+        swaggerVersion = "2.18.2"
+    }
+}
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.7'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id 'org.asciidoctor.jvm.convert' version "${jvmConvertVersion}"
+    id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+    id 'org.hidetake.swagger.generator' version "${swaggerVersion}"
+}
+
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}
+
+configurations {
+    asciidoctorExtensions
 }
 
 group = 'project.swith-me'
@@ -15,14 +42,46 @@ repositories {
     mavenCentral()
 }
 
+openapi3 {
+    setServer("http://localhost:8080")
+    title = 'Study-With-Me API 문서'
+    description = 'Study-With-Me API 문서'
+    version = '0.0.1'
+    format = 'yaml'
+}
+
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-webflux')
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    swaggerUI("org.webjars:swagger-ui")
+
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
+    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
+    asciidoctorExtensions('org.springframework.restdocs:spring-restdocs-asciidoctor')
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(GenerateSwaggerUI) {
+    dependsOn 'openapi3'
+}
+
+tasks.withType(BootJar) {
+    dependsOn 'copySwaggerUI'
 }

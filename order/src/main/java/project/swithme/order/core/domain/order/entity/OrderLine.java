@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
@@ -28,13 +28,10 @@ public class OrderLine extends BaseEntity {
     @Column(name = "product_id")
     private Long productId;
 
-    @Column(name = "locker_id")
-    private Long lockerId;
-
     @Column(name = "price")
     private BigDecimal price;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -47,8 +44,38 @@ public class OrderLine extends BaseEntity {
     protected OrderLine() {
     }
 
+    private OrderLine(
+            Long studyCafeId,
+            Long productId,
+            BigDecimal price,
+            BaseInformation baseInformation
+    ) {
+        this.studyCafeId = studyCafeId;
+        this.productId = productId;
+        this.price = price;
+        this.baseInformation = baseInformation;
+    }
+
+    public static OrderLine createOrderLine(
+            Long userId,
+            Long studyCafeId,
+            Long productId,
+            BigDecimal price
+    ) {
+        return new OrderLine(
+                studyCafeId,
+                productId,
+                price,
+                new BaseInformation(userId)
+        );
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void add(Order order) {
+        this.order = order;
     }
 
     @Override
