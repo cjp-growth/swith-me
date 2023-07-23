@@ -2,9 +2,11 @@ package project.swithme.order.core.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 @Embeddable
 public class BaseInformation {
 
@@ -37,18 +39,6 @@ public class BaseInformation {
         this.createdBy = createdBy;
         this.lastModifiedBy = lastModifiedBy;
         this.deleted = deleted;
-    }
-
-    public Long getCreatedBy() {
-        return createdBy;
-    }
-
-    public Long getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
     }
 
     @Override
