@@ -2,6 +2,7 @@ package project.swithme.order.core.web.order.presentation;
 
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,14 +16,11 @@ import project.swithme.order.core.web.order.presentation.request.OrderRequest;
 import project.swithme.order.core.web.order.presentation.response.OrderCreateResponse;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/orders")
 public class OrderCreateAPI {
 
     private final OrderFacade orderFacade;
-
-    public OrderCreateAPI(OrderFacade orderFacade) {
-        this.orderFacade = orderFacade;
-    }
 
     @PostMapping
     public ApiResponse<OrderCreateResponse> order(
