@@ -1,7 +1,10 @@
 package project.swithme.order.core.web.order.facade.validator.request;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
+@Getter
 public class ProductValidationRequest {
 
     private Long studyCafeId;
@@ -25,26 +28,6 @@ public class ProductValidationRequest {
         this.productPrice = productPrice;
         this.lockerId = lockerId;
         this.lockerPrice = lockerPrice;
-    }
-
-    public Long getStudyCafeId() {
-        return studyCafeId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public Long getLockerId() {
-        return lockerId;
-    }
-
-    public BigDecimal getLockerPrice() {
-        return lockerPrice;
     }
 
     @Override

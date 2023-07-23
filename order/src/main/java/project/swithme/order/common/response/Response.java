@@ -1,9 +1,11 @@
 package project.swithme.order.common.response;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class Response<T> {
 
     private final T data;
@@ -28,22 +30,6 @@ public class Response<T> {
         this.data = data;
         this.code = status.value();
         this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
     }
 
     @Override

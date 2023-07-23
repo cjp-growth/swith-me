@@ -1,17 +1,16 @@
 package project.swithme.order.common.auth;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
+@Getter
 public class StudyWithMeUser {
 
     private final Long userId;
 
     public StudyWithMeUser(Long userId) {
         this.userId = userId;
-    }
-
-    public Long getUserId() {
-        return userId;
     }
 
     @Override
@@ -29,5 +28,9 @@ public class StudyWithMeUser {
     @Override
     public String toString() {
         return userId.toString();
+    }
+
+    public Long getUserId() {
+        return this.userId;
     }
 }
