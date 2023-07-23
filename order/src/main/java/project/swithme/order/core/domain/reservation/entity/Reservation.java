@@ -8,12 +8,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
 import java.time.Instant;
 import java.util.Objects;
 
+@Getter
 @Entity(name = "reservation")
 public class Reservation extends BaseEntity {
 
@@ -56,10 +58,6 @@ public class Reservation extends BaseEntity {
      * @Nullary-Constructor. JPA 기본 생성자로 reservation 외부 패키지에서 호출하지 말 것.
      */
     protected Reservation() {
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

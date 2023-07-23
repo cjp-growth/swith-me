@@ -9,12 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Getter
 @Entity(name = "order_line")
 public class OrderLine extends BaseEntity {
 
@@ -68,10 +70,6 @@ public class OrderLine extends BaseEntity {
                 price,
                 new BaseInformation(userId)
         );
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public void add(Order order) {
