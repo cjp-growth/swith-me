@@ -13,11 +13,11 @@ public class OrderValidator {
 
     public void validate(OrderCreateCommand orderCreateCommand) {
         productClient.validateProductDetails(
-                orderCreateCommand.getStudyCafeId(),
-                orderCreateCommand.getProductId(),
-                orderCreateCommand.getProductPrice(),
-                orderCreateCommand.getLockerId(),
-                orderCreateCommand.getLockerPrice()
+                orderCreateCommand.studyCafeId(),
+                orderCreateCommand.productId(),
+                orderCreateCommand.productPrice(),
+                orderCreateCommand.lockerId(),
+                orderCreateCommand.lockerPrice()
         );
     }
 }

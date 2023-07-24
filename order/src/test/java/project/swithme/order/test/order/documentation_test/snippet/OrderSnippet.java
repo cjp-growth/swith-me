@@ -41,7 +41,9 @@ public interface OrderSnippet {
             fieldWithPath("lockerId").description("락커 PK")
                     .attributes(getAttribute("lockerId")),
             fieldWithPath("lockerPrice").description("락커 가격")
-                    .attributes(getAttribute("lockerPrice"))
+                    .attributes(getAttribute("lockerPrice")),
+            fieldWithPath("payType").description("결제 수단")
+                    .attributes(getAttribute("payType"))
     );
 
     ResponseFieldsSnippet ORDER_CREATE_RESPONSE =
