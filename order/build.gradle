@@ -72,6 +72,12 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     asciidoctorExtensions('org.springframework.restdocs:spring-restdocs-asciidoctor')
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testAnnotationProcessor("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
 }
 
 tasks.named('test') {

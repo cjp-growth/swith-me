@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
@@ -20,6 +21,7 @@ import java.util.Objects;
 
 import static java.time.Duration.ofHours;
 
+@Getter
 @Entity(name = "`order`")
 public class Order extends BaseEntity {
 
@@ -79,10 +81,6 @@ public class Order extends BaseEntity {
     private Instant createDeadline() {
         Instant now = Instant.now();
         return now.plus(ofHours(1));
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

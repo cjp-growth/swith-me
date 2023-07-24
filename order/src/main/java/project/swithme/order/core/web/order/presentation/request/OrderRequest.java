@@ -4,10 +4,12 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Getter;
 import project.swithme.order.core.web.order.application.command.OrderCreateCommand;
 
 import java.math.BigDecimal;
 
+@Getter
 public class OrderRequest {
 
     @NotNull(message = "스터디 카페 PK를 입력해주세요.")
@@ -43,26 +45,6 @@ public class OrderRequest {
         this.productPrice = productPrice;
         this.lockerId = lockerId;
         this.lockerPrice = lockerPrice;
-    }
-
-    public Long getStudyCafeId() {
-        return studyCafeId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public Long getLockerId() {
-        return lockerId;
-    }
-
-    public BigDecimal getLockerPrice() {
-        return lockerPrice;
     }
 
     public OrderCreateCommand toCommand() {
