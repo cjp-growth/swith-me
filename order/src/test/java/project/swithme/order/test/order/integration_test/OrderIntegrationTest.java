@@ -27,7 +27,8 @@ class OrderIntegrationTest extends IntegrationTestBase {
                 1L,
                 BigDecimal.valueOf(75000),
                 1L,
-                BigDecimal.valueOf(10000)
+                BigDecimal.valueOf(10000),
+                "카카오 페이"
         );
 
         Long newOrderId = orderFacade.createOrder(studyWithMeUser, orderRequest.toCommand());
@@ -39,14 +40,16 @@ class OrderIntegrationTest extends IntegrationTestBase {
             Long productId,
             BigDecimal productPrice,
             Long lockerId,
-            BigDecimal lockerPrice
+            BigDecimal lockerPrice,
+            String payType
     ) {
         return new OrderRequest(
                 studyCafeId,
                 productId,
                 productPrice,
                 lockerId,
-                lockerPrice
+                lockerPrice,
+                payType
         );
     }
 }

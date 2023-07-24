@@ -45,7 +45,8 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
                 1L,
                 BigDecimal.valueOf(100_000),
                 1L,
-                BigDecimal.valueOf(30_000)
+                BigDecimal.valueOf(30_000),
+                "카카오 페이"
         );
     }
 
