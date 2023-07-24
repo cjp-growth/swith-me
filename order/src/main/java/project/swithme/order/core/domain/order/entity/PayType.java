@@ -23,7 +23,7 @@ public enum PayType {
         return Arrays.stream(values())
                 .filter(isEqualTo(type))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("올바른 결제 타입을 입력해주세요."));
+                .orElseThrow(() -> new IllegalArgumentException("올바른 결제 수단을 입력해주세요."));
     }
 
     private static Predicate<PayType> isEqualTo(String type) {
