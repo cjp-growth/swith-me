@@ -21,7 +21,7 @@ class PayTypeUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"PayPal", "삼성 페이", "알라딘 페이"})
-    @DisplayName("올바르지 않은 결제 수단을 입력하면 Ill")
+    @DisplayName("올바르지 않은 결제 수단을 입력하면 IllegalArgumentException이 발생한다.")
     void pay_type_find_failure_test(String parameter) {
         assertThatThrownBy(() -> PayType.findPayType(parameter))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
