@@ -37,6 +37,13 @@ public class Order extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(
+            name = "pay_type",
+            columnDefinition = "ENUM('CARD', 'KAKAO_PAY' ,'NAVER_PAY', 'TOSS_PAY', 'REMITTANCE')"
+    )
+    private PayType payType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(
             name = "order_status",
             columnDefinition = "ENUM('PAYMENT_REQUEST', 'COMPLETE', 'CANCEL', 'REFUND')"
     )
