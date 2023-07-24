@@ -1,8 +1,8 @@
 package project.swithme.order.core.web.order.application.command;
 
-import lombok.Getter;
 import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.order.entity.OrderLine;
+import project.swithme.order.core.domain.order.entity.PayType;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,28 +10,17 @@ import java.util.List;
 
 import static project.swithme.order.core.domain.order.entity.OrderLine.createOrderLine;
 
-@Getter
-public class OrderCreateCommand {
+public record OrderCreateCommand(
+        Long studyCafeId,
+        Long productId,
+        BigDecimal productPrice,
+        Long lockerId,
+        BigDecimal lockerPrice,
+        PayType payType
+) {
 
-    private Long studyCafeId;
-    private Long productId;
-    private BigDecimal productPrice;
-    private Long lockerId;
-    private BigDecimal lockerPrice;
-
-    public OrderCreateCommand(
-            Long studyCafeId,
-            Long productId,
-            BigDecimal productPrice,
-            Long lockerId,
-            BigDecimal lockerPrice
-    ) {
+    public OrderCreateCommand {
         validateLocker(lockerId, lockerPrice);
-        this.studyCafeId = studyCafeId;
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.lockerId = lockerId;
-        this.lockerPrice = lockerPrice;
     }
 
     private void validateLocker(

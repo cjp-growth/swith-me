@@ -2,9 +2,11 @@ package project.swithme.order.core.web.order.presentation.request;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
+import project.swithme.order.core.domain.order.entity.PayType;
 import project.swithme.order.core.web.order.application.command.OrderCreateCommand;
 
 import java.math.BigDecimal;
@@ -30,6 +32,10 @@ public class OrderRequest {
     @Nullable
     private BigDecimal lockerPrice;
 
+    @NotNull(message = "결제 수단을 입력해주세요.")
+    @NotBlank(message = "올바른 결제 수단을 입력해주세요.")
+    private String payType;
+
     private OrderRequest() {
     }
 
@@ -38,13 +44,15 @@ public class OrderRequest {
             Long productId,
             BigDecimal productPrice,
             Long lockerId,
-            BigDecimal lockerPrice
+            BigDecimal lockerPrice,
+            String payType
     ) {
         this.studyCafeId = studyCafeId;
         this.productId = productId;
         this.productPrice = productPrice;
         this.lockerId = lockerId;
         this.lockerPrice = lockerPrice;
+        this.payType = payType;
     }
 
     public OrderCreateCommand toCommand() {
@@ -53,7 +61,8 @@ public class OrderRequest {
                 productId,
                 productPrice,
                 lockerId,
-                lockerPrice
+                lockerPrice,
+                PayType.findPayType(payType)
         );
     }
 }
