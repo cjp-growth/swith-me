@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 @Getter
 public enum PayType {
     CARD("신용카드"),
+    TOSS("토스"),
     KAKAO_PAY("카카오 페이"),
     NAVER_PAY("네이버 페이"),
-    TOSS_PAY("토스 페이"),
     REMITTANCE("무통장 입금");
 
     private final String type;
