@@ -9,6 +9,7 @@ buildscript {
         jvmConvertVersion = "3.3.2"
         swaggerVersion = "2.18.2"
         checkStyleVersion = "10.2"
+        pmdVersion = "6.52.0"
     }
 }
 
@@ -20,6 +21,7 @@ plugins {
     id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
     id 'org.hidetake.swagger.generator' version "${swaggerVersion}"
     id 'checkstyle'
+    id 'pmd'
 }
 
 group = 'project.swith-me'
@@ -41,6 +43,14 @@ tasks.withType(Checkstyle) {
         xml.required = true
         html.required = true
     }
+}
+
+pmd {
+    toolVersion = pmdVersion
+    pmdTest.enabled = true
+    consoleOutput = true
+    ignoreFailures = false
+    ruleSetFiles = files("${rootDir}/lint-config/pmd/pmd-rules.xml")
 }
 
 checkstyle {
