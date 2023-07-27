@@ -22,6 +22,7 @@ plugins {
     id 'org.hidetake.swagger.generator' version "${swaggerVersion}"
     id 'checkstyle'
     id 'pmd'
+    id 'jacoco'
 }
 
 group = 'project.swith-me'
@@ -114,9 +115,43 @@ tasks.withType(GenerateSwaggerUI) {
 }
 
 test {
+    finalizedBy jacocoTestReport
     useJUnitPlatform()
 }
 
 tasks.withType(BootJar) {
     dependsOn 'copySwaggerUI'
+}
+
+jacocoTestReport {
+    dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/common/*",
+                    "**/command/*",
+                    "**/configuration/*",
+                    "project/**/*Application.*",
+                    "project/**/*Request.*",
+                    "project/**/*Response.*",
+            ])
+        }))
+    }
+    finalizedBy jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true;
+            element = 'CLASS'
+
+            // TODO. 개발 초기 단계라 커버리지 추후 조정
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+        }
+    }
 }
