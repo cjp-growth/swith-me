@@ -1,3 +1,4 @@
+import com.github.spotbugs.snom.SpotBugsTask
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 buildscript {
@@ -23,6 +24,7 @@ plugins {
     id 'checkstyle'
     id 'pmd'
     id 'jacoco'
+    id 'com.github.spotbugs' version '5.0.14'
 }
 
 group = 'project.swith-me'
@@ -61,6 +63,21 @@ checkstyle {
     toolVersion = checkStyleVersion
 }
 
+spotbugs {
+    ignoreFailures = false
+    showStackTraces = true
+    showProgress = true
+    effort = 'default'
+    reportLevel = 'default'
+    visitors = ['FindSqlInjection', 'SwitchFallthrough']
+    omitVisitors = ['FindNonShortCircuit']
+    reportsDir = file("$buildDir/spotbugs")
+    onlyAnalyze = ['project.*']
+    maxHeapSize = '1g'
+    extraArgs = ['-nested:false']
+    jvmArgs = ['-Duser.language=ja']
+}
+
 swaggerSources {
     sample {
         setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
@@ -96,6 +113,7 @@ dependencies {
     swaggerUI("org.webjars:swagger-ui")
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
+    spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
@@ -153,5 +171,12 @@ jacocoTestCoverageVerification {
                 minimum = 0.0
             }
         }
+    }
+}
+
+tasks.withType(SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
     }
 }
