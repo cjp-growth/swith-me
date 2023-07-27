@@ -1,5 +1,6 @@
 package project.swithme.order.core.domain.order.entity;
 
+import static java.time.Duration.ofHours;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -10,16 +11,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import project.swithme.order.core.common.BaseEntity;
-import project.swithme.order.core.common.BaseInformation;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.time.Duration.ofHours;
+import lombok.Getter;
+import project.swithme.order.core.common.BaseEntity;
+import project.swithme.order.core.common.BaseInformation;
 
 @Getter
 @Entity(name = "`order`")
@@ -37,15 +35,15 @@ public class Order extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(
-            name = "pay_type",
-            columnDefinition = "ENUM('CARD', 'KAKAO_PAY' ,'NAVER_PAY', 'TOSS_PAY', 'REMITTANCE')"
+        name = "pay_type",
+        columnDefinition = "ENUM('CARD', 'KAKAO_PAY' ,'NAVER_PAY', 'TOSS_PAY', 'REMITTANCE')"
     )
     private PayType payType;
 
     @Enumerated(EnumType.STRING)
     @Column(
-            name = "order_status",
-            columnDefinition = "ENUM('PAYMENT_REQUEST', 'COMPLETE', 'CANCEL', 'REFUND')"
+        name = "order_status",
+        columnDefinition = "ENUM('PAYMENT_REQUEST', 'COMPLETE', 'CANCEL', 'REFUND')"
     )
     private OrderStatus orderStatus;
 
@@ -68,8 +66,8 @@ public class Order extends BaseEntity {
     }
 
     public Order(
-            Long userId,
-            List<OrderLine> orderLines
+        Long userId,
+        List<OrderLine> orderLines
     ) {
         this.userId = userId;
         this.orderStatus = OrderStatus.PAYMENT_REQUEST;
@@ -80,7 +78,7 @@ public class Order extends BaseEntity {
 
     private List<OrderLine> init(List<OrderLine> orderLines) {
         orderLines.forEach(
-                orderLine -> orderLine.add(this)
+            orderLine -> orderLine.add(this)
         );
         return orderLines;
     }
@@ -91,9 +89,13 @@ public class Order extends BaseEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order order)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Order order)) {
+            return false;
+        }
         return getId().equals(order.getId());
     }
 

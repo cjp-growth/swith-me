@@ -1,6 +1,5 @@
 package project.swithme.order.core.web.order.presentation;
 
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +23,8 @@ public class OrderCreateAPI {
 
     @PostMapping
     public ApiResponse<OrderCreateResponse> order(
-            @LoginUser StudyWithMeUser studyWithMeUser,
-            @Valid @RequestBody OrderRequest request
+        @LoginUser StudyWithMeUser studyWithMeUser,
+        @Valid @RequestBody OrderRequest request
     ) {
         Long orderId = orderFacade.createOrder(studyWithMeUser, request.toCommand());
         OrderCreateResponse data = new OrderCreateResponse(orderId);

@@ -2,9 +2,14 @@ package project.swithme.order.core.web.order.presentation.response;
 
 import java.util.List;
 
-public record PayGroupResponse(
-        List<String> payGroups
-) {
+public class PayGroupsResponse {
+
+    private final List<String> payGroups;
+
+    public PayGroupsResponse(List<String> payGroups) {
+        this.payGroups = payGroups;
+    }
+
     @Override
     public String toString() {
         return payGroups.toString();

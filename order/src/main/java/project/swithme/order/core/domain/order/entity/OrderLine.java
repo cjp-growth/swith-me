@@ -9,12 +9,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
-
-import java.math.BigDecimal;
-import java.util.Objects;
 
 @Getter
 @Entity(name = "order_line")
@@ -47,10 +46,10 @@ public class OrderLine extends BaseEntity {
     }
 
     private OrderLine(
-            Long studyCafeId,
-            Long productId,
-            BigDecimal price,
-            BaseInformation baseInformation
+        Long studyCafeId,
+        Long productId,
+        BigDecimal price,
+        BaseInformation baseInformation
     ) {
         this.studyCafeId = studyCafeId;
         this.productId = productId;
@@ -59,16 +58,16 @@ public class OrderLine extends BaseEntity {
     }
 
     public static OrderLine createOrderLine(
-            Long userId,
-            Long studyCafeId,
-            Long productId,
-            BigDecimal price
+        Long userId,
+        Long studyCafeId,
+        Long productId,
+        BigDecimal price
     ) {
         return new OrderLine(
-                studyCafeId,
-                productId,
-                price,
-                new BaseInformation(userId)
+            studyCafeId,
+            productId,
+            price,
+            new BaseInformation(userId)
         );
     }
 
@@ -77,9 +76,13 @@ public class OrderLine extends BaseEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderLine orderLine)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof OrderLine orderLine)) {
+            return false;
+        }
         return getId().equals(orderLine.getId());
     }
 

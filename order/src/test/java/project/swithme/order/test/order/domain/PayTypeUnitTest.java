@@ -1,13 +1,11 @@
 package project.swithme.order.test.order.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static project.swithme.order.core.domain.order.entity.PayType.findPayType;
-
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("[UnitTest] 결제 수단 단위 테스트")
 class PayTypeUnitTest {
@@ -24,8 +22,8 @@ class PayTypeUnitTest {
     @DisplayName("올바르지 않은 결제 수단을 입력하면 IllegalArgumentException이 발생한다.")
     void pay_type_find_failure_test(String parameter) {
         assertThatThrownBy(() -> findPayType(parameter))
-                .isExactlyInstanceOf(IllegalArgumentException.class)
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("올바른 결제 수단을 입력해주세요.");
+            .isExactlyInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("올바른 결제 수단을 입력해주세요.");
     }
 }

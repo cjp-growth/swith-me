@@ -8,12 +8,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.Instant;
+import java.util.Objects;
 import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
-
-import java.time.Instant;
-import java.util.Objects;
 
 @Getter
 @Entity(name = "reservation")
@@ -43,8 +42,8 @@ public class Reservation extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(
-            name = "reservation_status",
-            columnDefinition = "ENUM('RESERVED', 'CANCEL')"
+        name = "reservation_status",
+        columnDefinition = "ENUM('RESERVED', 'CANCEL')"
     )
     private ReservationStatus reservationStatus;
 
@@ -61,9 +60,13 @@ public class Reservation extends BaseEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Reservation that)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Reservation that)) {
+            return false;
+        }
         return getId().equals(that.getId());
     }
 

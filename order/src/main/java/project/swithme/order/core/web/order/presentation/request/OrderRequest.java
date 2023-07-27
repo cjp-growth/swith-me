@@ -5,11 +5,10 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
 import lombok.Getter;
 import project.swithme.order.core.domain.order.entity.PayType;
 import project.swithme.order.core.web.order.application.command.OrderCreateCommand;
-
-import java.math.BigDecimal;
 
 @Getter
 public class OrderRequest {
@@ -40,12 +39,12 @@ public class OrderRequest {
     }
 
     public OrderRequest(
-            Long studyCafeId,
-            Long productId,
-            BigDecimal productPrice,
-            Long lockerId,
-            BigDecimal lockerPrice,
-            String payType
+        Long studyCafeId,
+        Long productId,
+        BigDecimal productPrice,
+        Long lockerId,
+        BigDecimal lockerPrice,
+        String payType
     ) {
         this.studyCafeId = studyCafeId;
         this.productId = productId;
@@ -57,12 +56,12 @@ public class OrderRequest {
 
     public OrderCreateCommand toCommand() {
         return new OrderCreateCommand(
-                studyCafeId,
-                productId,
-                productPrice,
-                lockerId,
-                lockerPrice,
-                PayType.findPayType(payType)
+            studyCafeId,
+            productId,
+            productPrice,
+            lockerId,
+            lockerPrice,
+            PayType.findPayType(payType)
         );
     }
 }

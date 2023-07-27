@@ -18,10 +18,10 @@ public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
     // TODO. 인증 관련 로직은 지율님 서버 작업 후 처리
     @Override
     public Object resolveArgument(
-            MethodParameter parameter,
-            ModelAndViewContainer mavContainer,
-            NativeWebRequest webRequest,
-            WebDataBinderFactory binderFactory
+        MethodParameter parameter,
+        ModelAndViewContainer mavContainer,
+        NativeWebRequest webRequest,
+        WebDataBinderFactory binderFactory
     ) {
         return new StudyWithMeUser(1L);
     }

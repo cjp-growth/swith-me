@@ -1,9 +1,8 @@
 package project.swithme.order.common.response;
 
+import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class Response<T> {
@@ -14,8 +13,8 @@ public class Response<T> {
     private final LocalDateTime time = LocalDateTime.now();
 
     public Response(
-            T data,
-            HttpStatus status
+        T data,
+        HttpStatus status
     ) {
         this.data = data;
         this.code = status.value();
@@ -23,9 +22,9 @@ public class Response<T> {
     }
 
     public Response(
-            T data,
-            HttpStatus status,
-            String message
+        T data,
+        HttpStatus status,
+        String message
     ) {
         this.data = data;
         this.code = status.value();
@@ -35,7 +34,7 @@ public class Response<T> {
     @Override
     public String toString() {
         return String.format(
-                "Response: [data: %s, code: %s, message: %s, time:%s]", data, code, message, time
+            "Response: [data: %s, code: %s, message: %s, time:%s]", data, code, message, time
         );
     }
 }

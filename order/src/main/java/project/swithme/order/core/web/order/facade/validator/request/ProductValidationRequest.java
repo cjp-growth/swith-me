@@ -1,8 +1,7 @@
 package project.swithme.order.core.web.order.facade.validator.request;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
+import lombok.Getter;
 
 @Getter
 public class ProductValidationRequest {
@@ -17,11 +16,11 @@ public class ProductValidationRequest {
     }
 
     public ProductValidationRequest(
-            Long studyCafeId,
-            Long productId,
-            BigDecimal productPrice,
-            Long lockerId,
-            BigDecimal lockerPrice
+        Long studyCafeId,
+        Long productId,
+        BigDecimal productPrice,
+        Long lockerId,
+        BigDecimal lockerPrice
     ) {
         this.studyCafeId = studyCafeId;
         this.productId = productId;
@@ -33,8 +32,8 @@ public class ProductValidationRequest {
     @Override
     public String toString() {
         return String.format(
-                "Response: [StudyCafeId: %s, ProductId: %s, ProductPrice: %s, LockerId: %s, LockerPrice: %s]",
-                studyCafeId, productId, productPrice, lockerId, lockerPrice
+            "Response: [StudyCafeId: %s, ProductId: %s, ProductPrice: %s, LockerId: %s, LockerPrice: %s]",
+            studyCafeId, productId, productPrice, lockerId, lockerPrice
         );
     }
 }

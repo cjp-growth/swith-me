@@ -2,9 +2,8 @@ package project.swithme.order.core.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
-
 import java.util.Objects;
+import lombok.Getter;
 
 @Getter
 @Embeddable
@@ -31,20 +30,20 @@ public class BaseInformation {
         this.deleted = false;
     }
 
-    public BaseInformation(
-            Long createdBy,
-            Long lastModifiedBy,
-            boolean deleted
-    ) {
+    public BaseInformation(Long createdBy, Long lastModifiedBy, boolean deleted) {
         this.createdBy = createdBy;
         this.lastModifiedBy = lastModifiedBy;
         this.deleted = deleted;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BaseInformation that)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof BaseInformation that)) {
+            return false;
+        }
         return getCreatedBy().equals(that.getCreatedBy());
     }
 

@@ -1,13 +1,12 @@
-package project.swithme.order.test.order.integration_test;
+package project.swithme.order.test.order.integrationtest;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import project.swithme.order.core.web.order.presentation.PaymentGroupSearchAPI;
 import project.swithme.order.test.IntegrationTestBase;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @DisplayName("[IntegrationTest] 결제 그룹/타입 조회 캐싱 테스트")
 class PaymentGroupSearchIntegrationTest extends IntegrationTestBase {
