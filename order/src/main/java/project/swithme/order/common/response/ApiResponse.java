@@ -28,4 +28,11 @@ public class ApiResponse<T> extends ResponseEntity<Response<T>> {
     ) {
         return new ApiResponse<>(data, status, CREATED);
     }
+
+    public static <T> ApiResponse<T> of(
+            T data,
+            HttpStatus status
+    ) {
+        return new ApiResponse<>(data, status);
+    }
 }
