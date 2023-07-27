@@ -1,16 +1,12 @@
 package project.swithme.order.common.configuration.business;
 
-import lombok.Getter;
-import project.swithme.order.core.domain.order.entity.PayGroup;
-
+import static project.swithme.order.core.domain.order.entity.PayGroup.findPayTypes;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import project.swithme.order.core.domain.order.entity.PayGroup;
 
-import static java.util.stream.Collectors.toUnmodifiableList;
-import static project.swithme.order.core.domain.order.entity.PayGroup.findPayTypes;
-
-@Getter
 public class PaymentGroup {
 
     private final List<String> payGroups;
@@ -23,18 +19,22 @@ public class PaymentGroup {
 
     private List<String> extractPayGroups(List<PayGroup> payGroup) {
         return payGroup.stream()
-                .map(Enum::name)
-                .collect(toUnmodifiableList());
+            .map(Enum::name)
+            .toList();
     }
 
     private Map<String, List<String>> extractPayTypeMap(List<PayGroup> payGroup) {
-        Map<String, List<String>> payTypeMap = new HashMap<>();
+        Map<String, List<String>> payTypesMapGroupByPayGroup = new HashMap<>();
 
         for (PayGroup eachGroup : payGroup) {
             List<String> payType = findPayTypes(eachGroup);
-            payTypeMap.put(eachGroup.name(), payType);
+            payTypesMapGroupByPayGroup.put(eachGroup.name(), payType);
         }
-        return payTypeMap;
+        return payTypesMapGroupByPayGroup;
+    }
+
+    public List<String> getPayGroups() {
+        return new ArrayList<>(payGroups);
     }
 
     public List<String> getPayTypes(String payGroup) {

@@ -1,8 +1,7 @@
 package project.swithme.order.common.auth;
 
-import lombok.Getter;
-
 import java.util.Objects;
+import lombok.Getter;
 
 @Getter
 public class StudyWithMeUser {
@@ -14,9 +13,13 @@ public class StudyWithMeUser {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof StudyWithMeUser that)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof StudyWithMeUser that)) {
+            return false;
+        }
         return getUserId().equals(that.getUserId());
     }
 

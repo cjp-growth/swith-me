@@ -1,4 +1,4 @@
-import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+import com.github.spotbugs.snom.SpotBugsTask
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 buildscript {
@@ -9,6 +9,8 @@ buildscript {
         restdocsApiSpecVersion = "0.17.1"
         jvmConvertVersion = "3.3.2"
         swaggerVersion = "2.18.2"
+        checkStyleVersion = "10.2"
+        pmdVersion = "6.52.0"
     }
 }
 
@@ -19,16 +21,10 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version "${jvmConvertVersion}"
     id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
     id 'org.hidetake.swagger.generator' version "${swaggerVersion}"
-}
-
-swaggerSources {
-    sample {
-        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
-    }
-}
-
-configurations {
-    asciidoctorExtensions
+    id 'checkstyle'
+    id 'pmd'
+    id 'jacoco'
+    id 'com.github.spotbugs' version '5.0.14'
 }
 
 group = 'project.swith-me'
@@ -40,6 +36,56 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+pmd {
+    toolVersion = pmdVersion
+    pmdTest.enabled = true
+    consoleOutput = true
+    ignoreFailures = false
+    ruleSetFiles = files("${rootDir}/lint-config/pmd/pmd-rules.xml")
+}
+
+checkstyle {
+    maxWarnings = 0
+    configFile = file("${rootDir}/lint-config/checkstyle/naver-checkstyle-rules.xml")
+    configProperties = ["suppressionFile": "${rootDir}/config/checkstyle/naver-checkstyle-suppressions.xml"]
+    toolVersion = checkStyleVersion
+}
+
+spotbugs {
+    ignoreFailures = false
+    showStackTraces = true
+    showProgress = true
+    effort = 'default'
+    reportLevel = 'default'
+    visitors = ['FindSqlInjection', 'SwitchFallthrough']
+    omitVisitors = ['FindNonShortCircuit']
+    reportsDir = file("$buildDir/spotbugs")
+    onlyAnalyze = ['project.*']
+    maxHeapSize = '1g'
+    extraArgs = ['-nested:false']
+    jvmArgs = ['-Duser.language=ja']
+}
+
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}
+
+configurations {
+    asciidoctorExtensions
 }
 
 openapi3 {
@@ -67,6 +113,7 @@ dependencies {
     swaggerUI("org.webjars:swagger-ui")
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
+    spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
@@ -81,14 +128,55 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
-
 tasks.withType(GenerateSwaggerUI) {
     dependsOn 'openapi3'
 }
 
+test {
+    finalizedBy jacocoTestReport
+    useJUnitPlatform()
+}
+
 tasks.withType(BootJar) {
     dependsOn 'copySwaggerUI'
+}
+
+jacocoTestReport {
+    dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/common/*",
+                    "**/command/*",
+                    "**/configuration/*",
+                    "project/**/*Application.*",
+                    "project/**/*Request.*",
+                    "project/**/*Response.*",
+            ])
+        }))
+    }
+    finalizedBy jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true;
+            element = 'CLASS'
+
+            // TODO. 개발 초기 단계라 커버리지 추후 조정
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+        }
+    }
+}
+
+tasks.withType(SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
 }

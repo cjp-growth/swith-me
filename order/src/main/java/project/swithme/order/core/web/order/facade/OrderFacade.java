@@ -19,8 +19,8 @@ public class OrderFacade {
     // TODO. 상품 매핑이 끝난 후 Validation 추가
     @Transactional
     public Long createOrder(
-            StudyWithMeUser switmeUser,
-            OrderCreateCommand orderCreateCommand
+        StudyWithMeUser switmeUser,
+        OrderCreateCommand orderCreateCommand
     ) {
         orderValidator.validate(orderCreateCommand);
         Order order = orderCreateCommand.toEntity(switmeUser.getUserId());

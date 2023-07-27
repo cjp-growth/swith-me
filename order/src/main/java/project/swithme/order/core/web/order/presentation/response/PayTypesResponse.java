@@ -2,9 +2,14 @@ package project.swithme.order.core.web.order.presentation.response;
 
 import java.util.List;
 
-public record PayTypeResponse(
-        List<String> payTypes
-) {
+public class PayTypesResponse {
+
+    private final List<String> payTypes;
+
+    public PayTypesResponse(List<String> payTypes) {
+        this.payTypes = payTypes;
+    }
+
     @Override
     public String toString() {
         return payTypes.toString();

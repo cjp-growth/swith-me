@@ -1,9 +1,8 @@
 package project.swithme.order.core.domain.order.entity;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.function.Predicate;
+import lombok.Getter;
 
 @Getter
 public enum PayType {
@@ -21,9 +20,9 @@ public enum PayType {
 
     public static PayType findPayType(String type) {
         return Arrays.stream(values())
-                .filter(isEqualTo(type))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("올바른 결제 수단을 입력해주세요."));
+            .filter(isEqualTo(type))
+            .findAny()
+            .orElseThrow(() -> new IllegalArgumentException("올바른 결제 수단을 입력해주세요."));
     }
 
     private static Predicate<PayType> isEqualTo(String type) {

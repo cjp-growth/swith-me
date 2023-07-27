@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.swithme.order.common.configuration.business.PaymentGroup;
 import project.swithme.order.common.response.ApiResponse;
-import project.swithme.order.core.web.order.presentation.response.PayGroupResponse;
-import project.swithme.order.core.web.order.presentation.response.PayTypeResponse;
+import project.swithme.order.core.web.order.presentation.response.PayGroupsResponse;
+import project.swithme.order.core.web.order.presentation.response.PayTypesResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,15 +21,16 @@ public class PaymentGroupSearchAPI {
 
     @GetMapping("/pay-group")
     @Cacheable(cacheNames = "payGroup")
-    public ApiResponse<PayGroupResponse> searchPayGroup() {
-        PayGroupResponse data = new PayGroupResponse(paymentGroup.getPayGroups());
+    public ApiResponse<PayGroupsResponse> searchPayGroup() {
+        PayGroupsResponse data = new PayGroupsResponse(paymentGroup.getPayGroups());
         return ApiResponse.of(data, HttpStatus.OK);
     }
 
     @GetMapping
     @Cacheable(cacheNames = "payTypes")
-    public ApiResponse<PayTypeResponse> searchPayTypes(@RequestParam("pay-group") String payGroup) {
-        PayTypeResponse data = new PayTypeResponse(paymentGroup.getPayTypes(payGroup));
+    public ApiResponse<PayTypesResponse> searchPayTypes(
+        @RequestParam("pay-group") String payGroup) {
+        PayTypesResponse data = new PayTypesResponse(paymentGroup.getPayTypes(payGroup));
         return ApiResponse.of(data, HttpStatus.OK);
     }
 }

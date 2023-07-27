@@ -4,5 +4,7 @@ import java.math.BigDecimal;
 
 public interface ProductClient {
 
-    void validateProductDetails(Long studyCafeId, Long productId, BigDecimal productPrice, Long lockerId, BigDecimal lockerPrice);
+    void validateProductDetails(Long studyCafeId, Long productId, BigDecimal productPrice,
+        Long lockerId,
+        BigDecimal lockerPrice);
 }
