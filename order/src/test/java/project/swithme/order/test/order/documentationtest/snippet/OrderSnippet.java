@@ -10,9 +10,14 @@ import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.RequestFieldsSnippet;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
 import org.springframework.restdocs.snippet.Attributes;
+import project.swithme.order.core.domain.payment.entity.toss.PaymentType;
 import project.swithme.order.core.web.order.presentation.request.OrderRequest;
 
 public interface OrderSnippet {
+
+    String PAYMENT_NORMAL = PaymentType.NORMAL.name();
+    String PAYMENT_KEY = "vNA96Bjgq7XZYkKL4MrjOOEqnYGGk80zJwlEWR52xydGPnOQ";
+    String AMOUNT = "130000";
 
     RequestFieldsSnippet ORDER_CREATE_REQUEST_FIELD_DESCRIPTOR = requestFields(
         fieldWithPath("studyCafeId").description("스터디 카페 PK")

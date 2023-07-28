@@ -27,7 +27,7 @@ class PayTypeListSearchDocumentationTest extends IntegrationTestBase {
 
             .when()
             .contentType(JSON)
-            .get("/api/orders?pay-group={payGroup}", "CASH")
+            .get("/api/orders?payGroup={payGroup}", "CASH")
 
             .then()
             .statusCode(equalTo(200))
