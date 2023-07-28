@@ -15,12 +15,14 @@ import project.swithme.order.core.domain.order.entity.PayType;
 
 public final class OrderFixture {
 
-    private static final Long TEST_STUDY_CAFE_ID = 1L;
-    private static final Long PRODUCT_STUDY_CAFE_ID = 1L;
-    private static final Long PRODUCT_LOCKER_ID = 2L;
+    private static final Long USER_ID = 1L;
+    private static final Long STUDY_CAFE_ID = 1L;
+    private static final Long STUDY_CAFE_TICKET_ID = 1L;
+    private static final Long LOCKER_ID = 2L;
+    private static final Long RESERVATION_ID = null;
 
-    private static final BigDecimal STUDY_CAFE_PRICE = BigDecimal.valueOf(100000L);
-    private static final BigDecimal LOCKER_PRICE = BigDecimal.valueOf(30000L);
+    private static final BigDecimal STUDY_CAFE_PRICE = BigDecimal.valueOf(100_000L);
+    private static final BigDecimal LOCKER_PRICE = BigDecimal.valueOf(30_000L);
 
     private OrderFixture() {
         throw new AssertionError("올바른 방식으로 생성자를 호출해주세요.");
@@ -32,9 +34,9 @@ public final class OrderFixture {
 
     public static Order createOrder(OrderStatus orderStatus) {
         return new Order(
+            USER_ID,
             1L,
-            1L,
-            null,
+            RESERVATION_ID,
             Generators.timeBasedGenerator().generate(),
             PayType.TOSS,
             orderStatus,
@@ -52,8 +54,8 @@ public final class OrderFixture {
     ) {
         return new Order(
             orderId,
-            1L,
-            null,
+            USER_ID,
+            RESERVATION_ID,
             uuid,
             PayType.TOSS,
             orderStatus,
@@ -67,8 +69,8 @@ public final class OrderFixture {
     public static Order createOrder(UUID uuid) {
         return new Order(
             1L,
-            1L,
-            null,
+            USER_ID,
+            RESERVATION_ID,
             uuid,
             PayType.TOSS,
             OrderStatus.PAYMENT_REQUEST,
@@ -85,8 +87,8 @@ public final class OrderFixture {
     ) {
         return new Order(
             orderId,
-            1L,
-            null,
+            USER_ID,
+            RESERVATION_ID,
             uuid,
             PayType.TOSS,
             OrderStatus.PAYMENT_REQUEST,
@@ -100,15 +102,15 @@ public final class OrderFixture {
     private static List<OrderLine> createOrderLines() {
         List<OrderLine> orderLines = new ArrayList<>();
         OrderLine studyCafe = OrderLine.createOrderLine(
-            1L,
-            TEST_STUDY_CAFE_ID,
-            PRODUCT_STUDY_CAFE_ID,
+            USER_ID,
+            STUDY_CAFE_ID,
+            STUDY_CAFE_TICKET_ID,
             STUDY_CAFE_PRICE
         );
         OrderLine locker = OrderLine.createOrderLine(
-            1L,
-            TEST_STUDY_CAFE_ID,
-            PRODUCT_LOCKER_ID,
+            USER_ID,
+            STUDY_CAFE_ID,
+            LOCKER_ID,
             LOCKER_PRICE
         );
 
