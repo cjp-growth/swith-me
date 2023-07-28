@@ -42,6 +42,6 @@ public record OrderCreateCommand(
             OrderLine locker = createOrderLine(userId, studyCafeId, lockerId, lockerPrice);
             orderLines.add(locker);
         }
-        return new Order(userId, orderLines);
+        return new Order(userId, payType, orderLines);
     }
 }
