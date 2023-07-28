@@ -30,7 +30,11 @@ public class BaseInformation {
         this.deleted = false;
     }
 
-    public BaseInformation(Long createdBy, Long lastModifiedBy, boolean deleted) {
+    public BaseInformation(
+        Long createdBy,
+        Long lastModifiedBy,
+        boolean deleted
+    ) {
         this.createdBy = createdBy;
         this.lastModifiedBy = lastModifiedBy;
         this.deleted = deleted;
