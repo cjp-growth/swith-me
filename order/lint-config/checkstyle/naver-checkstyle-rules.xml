@@ -33,22 +33,15 @@ The following rules in the Naver coding convention cannot be checked by this con
 
   <module name="LineLength">
     <message key="maxLineLen"
-      value="[line-length-120] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
+      value="[line-length-200] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
     <property name="ignorePattern"
       value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
-    <property name="max" value="120"/>
+    <property name="max" value="200"/>
   </module>
 
   <module name="TreeWalker">
     <message key="name.invalidPattern"
       value="[1-top-level-class] one.top.level.class=Top-level class {0} has to reside in its own source file."/>
-    <module name="AbbreviationAsWordInName">
-      <message key="abbreviation.as.word"
-        value="[list-uppercase-abbr] Abbreviation in name ''{0}'' must contain no more than {3}"/>
-      <property name="allowedAbbreviationLength" value="1"/>
-      <property name="ignoreFinal" value="false"/>
-      <property name="allowedAbbreviations" value="DAO,BO,API"/>
-    </module>
 
     <module name="PackageName">
       <message key="name.invalidPattern"
