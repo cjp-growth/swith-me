@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class PayTypeUnitTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"신용카드", "카카오 페이", "네이버 페이", "토스", "무통장 입금"})
+    @ValueSource(strings = {"CARD", "TOSS", "KAKAO_PAY", "NAVER_PAY", "REMITTANCE"})
     @DisplayName("올바른 결제 수단을 입력하면 PayType 객체를 찾을 수 있다.")
     void pay_type_find_success_test(String parameter) {
         assertNotNull(findPayType(parameter));
