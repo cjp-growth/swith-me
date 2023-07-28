@@ -26,6 +26,6 @@ public enum PayType {
     }
 
     private static Predicate<PayType> isEqualTo(String type) {
-        return payType -> payType.type.equals(type);
+        return payType -> payType.name().equals(type);
     }
 }

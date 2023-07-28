@@ -26,7 +26,7 @@ class OrderIntegrationTest extends IntegrationTestBase {
             BigDecimal.valueOf(75000),
             1L,
             BigDecimal.valueOf(10000),
-            "카카오 페이"
+            "KAKAO_PAY"
         );
 
         Long newOrderId = orderFacade.createOrder(studyWithMeUser, orderRequest.toCommand());

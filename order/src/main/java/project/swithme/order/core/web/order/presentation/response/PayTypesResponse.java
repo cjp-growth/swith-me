@@ -1,7 +1,9 @@
 package project.swithme.order.core.web.order.presentation.response;
 
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class PayTypesResponse {
 
     private final List<String> payTypes;

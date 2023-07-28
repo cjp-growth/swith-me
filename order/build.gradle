@@ -1,5 +1,4 @@
 import com.github.spotbugs.snom.SpotBugsTask
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 buildscript {
     ext {
@@ -113,6 +112,8 @@ dependencies {
     swaggerUI("org.webjars:swagger-ui")
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
+    implementation(group: 'com.fasterxml.uuid', name: 'java-uuid-generator', version: '3.1.4')
+
     spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -137,9 +138,9 @@ test {
     useJUnitPlatform()
 }
 
-tasks.withType(BootJar) {
-    dependsOn 'copySwaggerUI'
-}
+// tasks.withType(BootJar) {
+// dependsOn 'copySwaggerUI'
+// }
 
 jacocoTestReport {
     dependsOn test

@@ -13,6 +13,10 @@
     <exclude name="AbstractClassWithoutAbstractMethod"/>
     <exclude name="JUnitAssertionsShouldIncludeMessage"/>
     <exclude name="JUnitTestsShouldIncludeAssert"/>
+    <exclude name="JUnitTestContainsTooManyAsserts"/>
+    <exclude name="AbbreviationAsWordInName"/>
+    <exclude name="SimplifiableTestAssertion"/>
+    <exclude name="PreserveStackTrace"/>
     <exclude name="ConstantsInInterface"/>
   </rule>
 </ruleset>

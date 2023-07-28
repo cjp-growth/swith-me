@@ -50,7 +50,7 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
             BigDecimal.valueOf(100_000),
             1L,
             BigDecimal.valueOf(30_000),
-            "카카오 페이"
+            "TOSS"
         );
     }
 }
