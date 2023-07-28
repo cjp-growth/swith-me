@@ -1,6 +1,6 @@
 package project.swithme.order.core.web.payment.application;
 
-import project.swithme.order.core.domain.payment.entity.toss.pojo.Payment;
+import project.swithme.order.core.domain.payment.entity.Payment;
 
 public interface PaymentSaveUseCase {
 

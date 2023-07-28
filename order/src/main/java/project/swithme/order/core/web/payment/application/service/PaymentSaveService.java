@@ -2,8 +2,8 @@ package project.swithme.order.core.web.payment.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.toss.Toss;
-import project.swithme.order.core.domain.payment.entity.toss.pojo.Payment;
 import project.swithme.order.core.domain.payment.persistence.toss.TossJpaRepository;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
 

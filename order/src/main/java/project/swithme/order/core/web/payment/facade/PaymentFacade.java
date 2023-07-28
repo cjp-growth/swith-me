@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.swithme.order.core.domain.order.entity.Order;
-import project.swithme.order.core.domain.payment.entity.toss.pojo.Payment;
+import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.web.order.application.OrderQueryUseCase;
 import project.swithme.order.core.web.order.exception.OrderNotFoundException;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
