@@ -7,6 +7,10 @@ public class ApiResponse<T> extends ResponseEntity<Response<T>> {
 
     private static final String CREATED = "CREATED";
 
+    public ApiResponse(T data) {
+        super(new Response<>(data, HttpStatus.CREATED), HttpStatus.CREATED);
+    }
+
     public ApiResponse(
         T data,
         HttpStatus status
@@ -20,6 +24,10 @@ public class ApiResponse<T> extends ResponseEntity<Response<T>> {
         String message
     ) {
         super(new Response<>(data, status, message), status);
+    }
+
+    public static <T> ApiResponse<T> created(T data) {
+        return new ApiResponse<>(data);
     }
 
     public static <T> ApiResponse<T> created(
