@@ -1,6 +1,7 @@
 package project.swithme.order.core.domain.order.entity;
 
 import static java.time.Duration.ofHours;
+import com.fasterxml.uuid.Generators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -11,16 +12,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import lombok.Getter;
 import project.swithme.order.core.common.BaseEntity;
 import project.swithme.order.core.common.BaseInformation;
 
 @Getter
-@Entity(name = "`order`")
+@Entity(name = "orders")
 public class Order extends BaseEntity {
 
     @Id
@@ -33,18 +36,15 @@ public class Order extends BaseEntity {
     @Column(name = "reservation_id")
     private Long reservationId;
 
+    @Column(name = "unique_id", columnDefinition = "BINARY(16)")
+    private UUID uniqueId;
+
     @Enumerated(EnumType.STRING)
-    @Column(
-        name = "pay_type",
-        columnDefinition = "ENUM('CARD', 'KAKAO_PAY' ,'NAVER_PAY', 'TOSS_PAY', 'REMITTANCE')"
-    )
+    @Column(name = "pay_type")
     private PayType payType;
 
     @Enumerated(EnumType.STRING)
-    @Column(
-        name = "order_status",
-        columnDefinition = "ENUM('PAYMENT_REQUEST', 'COMPLETE', 'CANCEL', 'REFUND')"
-    )
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
 
     @Column(name = "deposit_deadline")
@@ -67,13 +67,40 @@ public class Order extends BaseEntity {
 
     public Order(
         Long userId,
+        PayType payType,
         List<OrderLine> orderLines
     ) {
         this.userId = userId;
+        this.payType = payType;
+        this.uniqueId = Generators.timeBasedGenerator().generate();
         this.orderStatus = OrderStatus.PAYMENT_REQUEST;
         this.depositDeadline = createDeadline();
         this.orderLines = init(orderLines);
         this.baseInformation = new BaseInformation(userId);
+    }
+
+    public Order(
+        Long id,
+        Long userId,
+        Long reservationId,
+        UUID uniqueId,
+        PayType payType,
+        OrderStatus orderStatus,
+        Instant depositDeadline,
+        String refundReason,
+        List<OrderLine> orderLines,
+        BaseInformation baseInformation
+    ) {
+        this.id = id;
+        this.userId = userId;
+        this.reservationId = reservationId;
+        this.uniqueId = uniqueId;
+        this.payType = payType;
+        this.orderStatus = orderStatus;
+        this.depositDeadline = depositDeadline;
+        this.refundReason = refundReason;
+        this.orderLines = init(orderLines);
+        this.baseInformation = baseInformation;
     }
 
     private List<OrderLine> init(List<OrderLine> orderLines) {
@@ -86,6 +113,24 @@ public class Order extends BaseEntity {
     private Instant createDeadline() {
         Instant now = Instant.now();
         return now.plus(ofHours(1));
+    }
+
+    public boolean isValidStatus() {
+        return this.orderStatus.equals(OrderStatus.PAYMENT_REQUEST);
+    }
+
+    public boolean validatePrice(BigDecimal amount) {
+        return getTotalPrice().compareTo(amount) == 0;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return orderLines.stream()
+            .map(OrderLine::getPrice)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public void updateOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
