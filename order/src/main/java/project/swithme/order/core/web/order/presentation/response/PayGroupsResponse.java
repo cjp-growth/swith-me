@@ -10,6 +10,10 @@ public class PayGroupsResponse {
         this.payGroups = payGroups;
     }
 
+    public List<String> getPayGroups() {
+        return payGroups;
+    }
+
     @Override
     public String toString() {
         return payGroups.toString();

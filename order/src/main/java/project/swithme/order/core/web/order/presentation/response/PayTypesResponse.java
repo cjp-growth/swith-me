@@ -10,6 +10,10 @@ public class PayTypesResponse {
         this.payTypes = payTypes;
     }
 
+    public List<String> getPayTypes() {
+        return payTypes;
+    }
+
     @Override
     public String toString() {
         return payTypes.toString();
