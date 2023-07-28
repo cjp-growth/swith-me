@@ -29,7 +29,7 @@ public class PaymentGroupSearchAPI {
     @GetMapping
     @Cacheable(cacheNames = "payTypes")
     public ApiResponse<PayTypesResponse> searchPayTypes(
-        @RequestParam("pay-group") String payGroup) {
+        @RequestParam("payGroup") String payGroup) {
         PayTypesResponse data = new PayTypesResponse(paymentGroup.getPayTypes(payGroup));
         return ApiResponse.of(data, HttpStatus.OK);
     }
