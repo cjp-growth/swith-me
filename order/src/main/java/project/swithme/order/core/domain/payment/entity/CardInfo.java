@@ -22,7 +22,7 @@ public class CardInfo {
 
     @Column(name = "card_acquirer_comany")
     @Enumerated(EnumType.STRING)
-    private CardAcquirerComany cardAcquirerComany;
+    private CardAcquirerCompany cardAcquirerCompany;
 
     @Column(name = "card_number")
     private String cardNumber;
@@ -77,7 +77,7 @@ public class CardInfo {
     ) {
         this.cardAmount = cardAmount;
         this.cardIssuerCompany = CardIssuerCompany.findByCode(issuerCode);
-        this.cardAcquirerComany = CardAcquirerComany.findByCode(acquirerCode);
+        this.cardAcquirerCompany = CardAcquirerCompany.findByCode(acquirerCode);
         this.cardNumber = cardNumber;
         this.installmentPlanMonths = Integer.parseInt(installmentPlanMonths);
         this.isInterestFree = isInterestFree;

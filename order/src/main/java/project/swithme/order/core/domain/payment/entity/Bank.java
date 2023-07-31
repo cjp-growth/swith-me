@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public enum Bank {
-    KYONGNAMBANK("강남은행", List.of("039", "39")),
+    KYONGNAMBANK("경남은행", List.of("039", "39")),
     GWANGJUBANK("광주", List.of("034", "34")),
     LOCALNONGHYEOP("단위농협", List.of("012", "12")),
     BUSANBANK("부산", List.of("032", "32")),

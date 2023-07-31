@@ -3,7 +3,7 @@ package project.swithme.order.core.domain.payment.entity;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-public enum CardAcquirerComany {
+public enum CardAcquirerCompany {
     HYUNDAI("현대", "61"),
     SAMSUNG("삼성", "51"),
     LOTTE("롯데", "71"),
@@ -33,7 +33,7 @@ public enum CardAcquirerComany {
     private final String company;
     private final String code;
 
-    CardAcquirerComany(
+    CardAcquirerCompany(
         String company,
         String code
     ) {
@@ -41,14 +41,14 @@ public enum CardAcquirerComany {
         this.code = code;
     }
 
-    public static CardAcquirerComany findByCode(String code) {
+    public static CardAcquirerCompany findByCode(String code) {
         return Arrays.stream(values())
             .filter(equalTo(code))
             .findAny()
             .orElseThrow(() -> new IllegalArgumentException("올바른 카드 공급사 코드 입력해주세요."));
     }
 
-    private static Predicate<CardAcquirerComany> equalTo(String code) {
+    private static Predicate<CardAcquirerCompany> equalTo(String code) {
         return company -> company.code.equals(code);
     }
 }
