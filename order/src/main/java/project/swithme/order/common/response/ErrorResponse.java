@@ -1,8 +1,7 @@
-package project.swithme.order.common.exception.response;
+package project.swithme.order.common.response;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import project.swithme.order.common.exception.DomainException;
 
 @Getter
 public class ErrorResponse {
@@ -11,10 +10,14 @@ public class ErrorResponse {
     private final String message;
     private final String domain;
 
-    public ErrorResponse(DomainException domainException) {
-        this.code = domainException.getCode();
-        this.message = domainException.getErrorMessage();
-        this.domain = domainException.getDomain();
+    public ErrorResponse(
+        int code,
+        String message,
+        String domain
+    ) {
+        this.code = code;
+        this.message = message;
+        this.domain = domain;
     }
 
     private ErrorResponse(
