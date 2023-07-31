@@ -36,8 +36,14 @@ public class Order extends BaseEntity {
     @Column(name = "reservation_id")
     private Long reservationId;
 
-    @Column(name = "unique_id", columnDefinition = "BINARY(16)")
+    @Column(name = "unique_id", columnDefinition = "uuid", length = 16)
     private UUID uniqueId;
+
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
+
+    @Column(name = "discounted_total_price")
+    private BigDecimal discountedTotalPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "pay_type")
@@ -76,6 +82,8 @@ public class Order extends BaseEntity {
         this.orderStatus = OrderStatus.PAYMENT_REQUEST;
         this.depositDeadline = createDeadline();
         this.orderLines = init(orderLines);
+        this.totalPrice = getTotalPrice();
+        this.discountedTotalPrice = totalPrice;
         this.baseInformation = new BaseInformation(userId);
     }
 
@@ -100,6 +108,8 @@ public class Order extends BaseEntity {
         this.depositDeadline = depositDeadline;
         this.refundReason = refundReason;
         this.orderLines = init(orderLines);
+        this.totalPrice = getTotalPrice();
+        this.discountedTotalPrice = totalPrice;
         this.baseInformation = baseInformation;
     }
 
@@ -131,6 +141,12 @@ public class Order extends BaseEntity {
 
     public void updateOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public void updatePrice(BigDecimal discountedAmount) {
+        if (discountedAmount != null) {
+            this.discountedTotalPrice = discountedAmount;
+        }
     }
 
     @Override
