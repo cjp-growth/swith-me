@@ -118,6 +118,37 @@ class OrderDomainTest {
     }
 
     @Test
+    @DisplayName("(카드사 할인으로 인해) 주문 가격을 변경하면 가격이 변경된다.")
+    void order_price_change_test() {
+        Order order = createOrder(orderUniqueId);
+
+        order.updatePrice(new BigDecimal(100_000L));
+
+        BigDecimal discountedPrice = order.getDiscountedTotalPrice();
+        assertTrue(discountedPrice.compareTo(new BigDecimal(100_000L)) == 0);
+    }
+
+    @Test
+    @DisplayName("(카드사 할인으로 인해) 주문 가격을 변경하더라도 할인 내역이 없다면 가격이 변경되지 않는다.")
+    void order_price_change_null_test() {
+        Order order = createOrder(orderUniqueId);
+
+        order.updatePrice(null);
+
+        BigDecimal discountedPrice = order.getDiscountedTotalPrice();
+        assertTrue(discountedPrice.compareTo(new BigDecimal(130_000L)) == 0);
+    }
+
+    @Test
+    @DisplayName("총 주문 가격을 조회할 수 있다.")
+    void order_total_price_search_test() {
+        Order order = createOrder(orderUniqueId);
+
+        BigDecimal totalPrice = order.getTotalPrice();
+        assertTrue(totalPrice.compareTo(new BigDecimal(130_000L)) == 0);
+    }
+
+    @Test
     @DisplayName("equals를 재정의 하면 값으로 객체를 비교한다.")
     void equals_test() {
         Order newOrder = new Order(
@@ -151,7 +182,7 @@ class OrderDomainTest {
     }
 
     @Test
-    @DisplayName("equals를 재정의 하면 값으로 객체를 비교한다.")
+    @DisplayName("hashcode를 재정의 하면 값으로 객체를 비교한다.")
     void hashcode_test() {
         Order newOrder = new Order(
             1L,
