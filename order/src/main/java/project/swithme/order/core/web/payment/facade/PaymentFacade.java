@@ -32,7 +32,7 @@ public class PaymentFacade {
         PaymentType paymentType,
         BigDecimal amount
     ) {
-        Order findOrder = orderQueryUseCase.findById(orderUniqueId)
+        Order findOrder = orderQueryUseCase.findByUniqueId(orderUniqueId)
             .orElseThrow(OrderNotFoundException::new);
 
         paymentValidator.validate(findOrder, amount);

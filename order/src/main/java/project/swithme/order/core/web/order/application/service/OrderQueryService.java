@@ -15,7 +15,7 @@ public class OrderQueryService implements OrderQueryUseCase {
     private final OrderJpaRepository orderRepository;
 
     @Override
-    public Optional<Order> findById(String orderUniqueId) {
+    public Optional<Order> findByUniqueId(String orderUniqueId) {
         return orderRepository.findOrderByUniqueId(UUID.fromString(orderUniqueId), false);
     }
 }
