@@ -8,7 +8,7 @@ import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.order.infrastructure.OrderJpaRepository;
 
 @Component
-public class OrderPersistenceHelper {
+public class PersistenceHelper {
 
     @Autowired
     private OrderJpaRepository orderJpaRepository;
