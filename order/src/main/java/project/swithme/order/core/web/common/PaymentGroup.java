@@ -1,4 +1,4 @@
-package project.swithme.order.common.configuration.business;
+package project.swithme.order.core.web.common;
 
 import static project.swithme.order.core.domain.order.entity.PayGroup.findPayTypes;
 import java.util.ArrayList;

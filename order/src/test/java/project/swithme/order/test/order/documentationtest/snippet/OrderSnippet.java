@@ -10,7 +10,7 @@ import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.RequestFieldsSnippet;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
 import org.springframework.restdocs.snippet.Attributes;
-import project.swithme.order.core.domain.payment.entity.toss.PaymentType;
+import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.web.order.presentation.request.OrderRequest;
 
 public interface OrderSnippet {
