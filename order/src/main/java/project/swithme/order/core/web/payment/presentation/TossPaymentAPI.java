@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.swithme.order.common.response.ApiResponse;
-import project.swithme.order.core.domain.payment.entity.Payment;
-import project.swithme.order.core.domain.payment.entity.toss.PaymentType;
-import project.swithme.order.core.domain.payment.entity.toss.pojo.payments.TossPayment;
+import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.web.payment.facade.PaymentFacade;
 import project.swithme.order.core.web.payment.presentation.response.PaymentCompleteResponse;
 
@@ -28,10 +26,8 @@ public class TossPaymentAPI {
         @RequestParam("paymentType") PaymentType paymentType,
         @RequestParam("amount") BigDecimal amount
     ) {
-        Payment payment = new TossPayment(orderId, paymentKey, paymentType, amount);
-        PaymentCompleteResponse data = new PaymentCompleteResponse(
-            paymentFacade.pay(orderId, payment)
-        );
+        Long paymentId = paymentFacade.pay(orderId, paymentKey, paymentType, amount);
+        PaymentCompleteResponse data = new PaymentCompleteResponse(paymentId);
         return ApiResponse.of(data, HttpStatus.CREATED);
     }
 }
