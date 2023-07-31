@@ -9,7 +9,7 @@ import project.swithme.order.core.domain.order.entity.Order;
 
 public interface OrderJpaRepository extends JpaRepository<Order, Long> {
 
-    @Query("SELECT o FROM orders o JOIN o.orderLines WHERE o.uniqueId = :uniqueId AND o.baseInformation.deleted = :deleted")
+    @Query("SELECT o FROM orders o JOIN FETCH o.orderLines WHERE o.uniqueId = :uniqueId AND o.baseInformation.deleted = :deleted")
     Optional<Order> findOrderByUniqueId(
         @Param("uniqueId") UUID uniqueId,
         @Param("deleted") Boolean deleted
