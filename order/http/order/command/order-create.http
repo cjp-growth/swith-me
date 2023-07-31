@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "studyCafeId": 1,
   "productId": 1,
-  "productPrice": 30000,
+  "productPrice": 100,
   "payType": "TOSS",
   "lockerId": 1,
   "lockerPrice": 1
