@@ -26,11 +26,11 @@ public class TossPaymentAdapter implements PaymentPort {
         String orderId,
         BigDecimal amount
     ) {
+        TossPaymentApproveResponse response;
         try {
-            TossPaymentApproveResponse response = getResponse(
+            response = paymentApprovalAdapter.requestApproval(
                 paymentKey,
-                orderId,
-                amount.longValue()
+                new TossPaymentApproveRequest(orderId, amount.longValue())
             );
             return convertToDomainLanguage(response);
         } catch (RestClientException e) {
@@ -38,31 +38,6 @@ public class TossPaymentAdapter implements PaymentPort {
             log.error("");
             throw new RuntimeException();
         }
-    }
-
-    private TossPaymentApproveResponse getResponse(
-        String paymentKey,
-        String orderId,
-        Long amount
-    ) {
-        try {
-            return requestApproval(paymentKey, orderId, amount);
-        } catch (RestClientException e) {
-            // TODO. 에러 처리 조금 더 고민
-            log.error("");
-            throw new RuntimeException();
-        }
-    }
-
-    private TossPaymentApproveResponse requestApproval(
-        String paymentKey,
-        String orderId,
-        Long amount
-    ) {
-        return paymentApprovalAdapter.requestApproval(
-            paymentKey,
-            new TossPaymentApproveRequest(orderId, amount)
-        );
     }
 
     private TossPaymentCommand convertToDomainLanguage(TossPaymentApproveResponse response) {
