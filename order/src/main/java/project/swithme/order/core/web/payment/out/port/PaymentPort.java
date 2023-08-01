@@ -1,4 +1,4 @@
-package project.swithme.order.core.web.payment.out;
+package project.swithme.order.core.web.payment.out.port;
 
 import java.math.BigDecimal;
 import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;

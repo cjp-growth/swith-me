@@ -14,7 +14,7 @@ import project.swithme.order.core.web.order.exception.OrderNotFoundException;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
 import project.swithme.order.core.web.payment.exception.PaymentFailureException;
 import project.swithme.order.core.web.payment.facade.validator.PaymentValidator;
-import project.swithme.order.core.web.payment.out.PaymentPort;
+import project.swithme.order.core.web.payment.out.port.PaymentPort;
 
 @Component
 @RequiredArgsConstructor
