@@ -22,7 +22,7 @@ class OrderQueryIntegrationTest extends IntegrationTestBase {
     @DisplayName("존재하지 않는 주문을 UUID로 조회하면 빈 객체가 조회된다.")
     void invalid_order_search_test() {
         Optional<Order> findOrder =
-            orderQueryUseCase.findById(UUID.randomUUID().toString());
+            orderQueryUseCase.findByUniqueId(UUID.randomUUID().toString());
 
         assertEquals(true, findOrder.isEmpty());
     }
@@ -32,7 +32,7 @@ class OrderQueryIntegrationTest extends IntegrationTestBase {
     void valid_order_search_test() {
         Order order = persistenceHelper.persist(createOrder(PAYMENT_REQUEST));
         Optional<Order> findOrder =
-            orderQueryUseCase.findById(order.getUniqueId().toString());
+            orderQueryUseCase.findByUniqueId(order.getUniqueId().toString());
 
         assertEquals(true, findOrder.isPresent());
     }

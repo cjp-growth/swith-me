@@ -6,7 +6,7 @@ import project.swithme.order.core.common.BaseInformation;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.domain.payment.entity.Toss;
 import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;
-import project.swithme.order.core.domain.payment.persistence.toss.TossJpaRepository;
+import project.swithme.order.core.domain.payment.repository.toss.TossJpaRepository;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
 
 @Service

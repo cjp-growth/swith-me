@@ -5,5 +5,5 @@ import project.swithme.order.core.domain.order.entity.Order;
 
 public interface OrderQueryUseCase {
 
-    Optional<Order> findById(String orderUniqueId);
+    Optional<Order> findByUniqueId(String orderUniqueId);
 }

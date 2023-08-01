@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import project.swithme.order.core.domain.order.entity.Order;
-import project.swithme.order.core.domain.order.infrastructure.OrderJpaRepository;
+import project.swithme.order.core.domain.order.repository.OrderJpaRepository;
 
 @Component
 public class PersistenceHelper {

@@ -1,4 +1,4 @@
-package project.swithme.order.core.domain.order.infrastructure;
+package project.swithme.order.core.domain.order.repository;
 
 import java.util.Optional;
 import java.util.UUID;
