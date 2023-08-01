@@ -10,8 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import project.swithme.order.common.configuration.business.PaymentGroup;
 import project.swithme.order.core.domain.order.entity.PayGroup;
+import project.swithme.order.core.web.common.PaymentGroup;
 
 @DisplayName("[UnitTest] 결제/지불 그룹 단위 테스트")
 class PaymentGroupUnitTest {

@@ -34,8 +34,8 @@ public final class OrderFixture {
 
     public static Order createOrder(OrderStatus orderStatus) {
         return new Order(
+            null,
             USER_ID,
-            1L,
             RESERVATION_ID,
             Generators.timeBasedGenerator().generate(),
             PayType.TOSS,
@@ -43,7 +43,7 @@ public final class OrderFixture {
             Instant.now().plus(Duration.ofHours(1)),
             null,
             createOrderLines(),
-            new BaseInformation(1L)
+            new BaseInformation(USER_ID)
         );
     }
 
@@ -77,7 +77,7 @@ public final class OrderFixture {
             Instant.now().plus(Duration.ofHours(1)),
             null,
             createOrderLines(),
-            new BaseInformation(1L)
+            new BaseInformation(USER_ID)
         );
     }
 
@@ -99,23 +99,47 @@ public final class OrderFixture {
         );
     }
 
+    public static OrderLine createOrderLine(Long id) {
+        OrderLine orderLine = new OrderLine(
+            id,
+            STUDY_CAFE_ID,
+            STUDY_CAFE_TICKET_ID,
+            new BigDecimal(100_000L),
+            null,
+            new BaseInformation(1L)
+        );
+        Order order = new Order(
+            1L,
+            USER_ID,
+            RESERVATION_ID,
+            UUID.randomUUID(),
+            PayType.TOSS,
+            OrderStatus.PAYMENT_REQUEST,
+            Instant.now().plus(Duration.ofHours(1)),
+            null,
+            List.of(orderLine),
+            new BaseInformation(1L)
+        );
+        return orderLine;
+    }
+
     private static List<OrderLine> createOrderLines() {
         List<OrderLine> orderLines = new ArrayList<>();
-        OrderLine studyCafe = OrderLine.createOrderLine(
+        OrderLine studyCafeTicket = OrderLine.createOrderLine(
             USER_ID,
             STUDY_CAFE_ID,
             STUDY_CAFE_TICKET_ID,
             STUDY_CAFE_PRICE
         );
-        OrderLine locker = OrderLine.createOrderLine(
+        OrderLine lockerTicket = OrderLine.createOrderLine(
             USER_ID,
             STUDY_CAFE_ID,
             LOCKER_ID,
             LOCKER_PRICE
         );
 
-        orderLines.add(studyCafe);
-        orderLines.add(locker);
+        orderLines.add(studyCafeTicket);
+        orderLines.add(lockerTicket);
         return orderLines;
     }
 }

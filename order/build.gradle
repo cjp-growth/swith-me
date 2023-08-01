@@ -10,6 +10,7 @@ buildscript {
         swaggerVersion = "2.18.2"
         checkStyleVersion = "10.2"
         pmdVersion = "6.52.0"
+        springCloudVersion = "2022.0.3"
     }
 }
 
@@ -31,6 +32,12 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 repositories {
@@ -95,12 +102,6 @@ openapi3 {
     format = 'yaml'
 }
 
-swaggerSources {
-    sample {
-        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
-    }
-}
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -113,6 +114,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
     implementation(group: 'com.fasterxml.uuid', name: 'java-uuid-generator', version: '3.1.4')
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+    testImplementation("com.github.tomakehurst:wiremock:3.0.0-beta-2")
+
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
 
@@ -121,7 +126,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     asciidoctorExtensions('org.springframework.restdocs:spring-restdocs-asciidoctor')
-
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -138,17 +143,23 @@ test {
     useJUnitPlatform()
 }
 
-// tasks.withType(BootJar) {
-// dependsOn 'copySwaggerUI'
-// }
+//tasks.withType(BootJar) {
+//    dependsOn 'copySwaggerUI'
+//}
 
 jacocoTestReport {
     dependsOn test
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
+                    "**/reservation/*",
+                    "**/extractor/*",
+                    "**/adapter/*",
                     "**/common/*",
                     "**/command/*",
+                    "**/request/*",
+                    "**/response/*",
+                    "**/exception/*",
                     "**/configuration/*",
                     "project/**/*Application.*",
                     "project/**/*Request.*",

@@ -8,6 +8,6 @@ import project.swithme.order.common.exception.DomainException;
 public class OrderNotFoundException extends DomainException {
 
     public OrderNotFoundException() {
-        super(NOT_FOUND, "해당 주문을 찾을 수 없습니다.", "ORDER");
+        super(NOT_FOUND, "주문을 찾을 수 없습니다.", "ORDER");
     }
 }

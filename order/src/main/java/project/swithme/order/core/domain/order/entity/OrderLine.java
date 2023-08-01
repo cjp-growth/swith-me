@@ -57,6 +57,22 @@ public class OrderLine extends BaseEntity {
         this.baseInformation = baseInformation;
     }
 
+    public OrderLine(
+        Long id,
+        Long studyCafeId,
+        Long productId,
+        BigDecimal price,
+        Order order,
+        BaseInformation baseInformation
+    ) {
+        this.id = id;
+        this.studyCafeId = studyCafeId;
+        this.productId = productId;
+        this.price = price;
+        this.order = order;
+        this.baseInformation = baseInformation;
+    }
+
     public static OrderLine createOrderLine(
         Long userId,
         Long studyCafeId,

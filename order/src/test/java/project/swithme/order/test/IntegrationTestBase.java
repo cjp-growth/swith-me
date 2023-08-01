@@ -18,6 +18,7 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.operation.preprocess.OperationPreprocessor;
 import org.springframework.restdocs.restassured.RestAssuredOperationPreprocessorsConfigurer;
 import project.swithme.order.common.annotation.IntegrationTest;
+import project.swithme.order.common.persistence.order.PersistenceHelper;
 
 @IntegrationTest
 public abstract class IntegrationTestBase {
@@ -29,6 +30,9 @@ public abstract class IntegrationTestBase {
 
     @Autowired
     protected ObjectMapper objectMapper;
+
+    @Autowired
+    protected PersistenceHelper persistenceHelper;
 
     protected RequestSpecification specification;
 

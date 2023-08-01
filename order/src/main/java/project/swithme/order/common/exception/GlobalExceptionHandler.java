@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import project.swithme.order.common.exception.response.ErrorResponse;
+import project.swithme.order.common.response.ErrorResponse;
 
 @Slf4j
 @RestControllerAdvice
@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ErrorResponse> catchTest(DomainException domainException) {
-        ErrorResponse data = new ErrorResponse(domainException);
+        ErrorResponse data = createResponse(domainException);
         log.error("Error: {}", data);
         return new ResponseEntity<>(data, domainException.getStatus());
     }
@@ -23,5 +23,13 @@ public class GlobalExceptionHandler {
         ErrorResponse data = ErrorResponse.ofServer();
         log.error("Error: {}", data);
         return new ResponseEntity<>(data, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ErrorResponse createResponse(DomainException domainException) {
+        return new ErrorResponse(
+            domainException.getCode(),
+            domainException.getErrorMessage(),
+            domainException.getDomain()
+        );
     }
 }
