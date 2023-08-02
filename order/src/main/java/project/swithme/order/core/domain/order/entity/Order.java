@@ -39,6 +39,9 @@ public class Order extends BaseEntity {
     @Column(name = "unique_id", columnDefinition = "uuid", length = 16)
     private UUID uniqueId;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
@@ -88,10 +91,29 @@ public class Order extends BaseEntity {
     }
 
     public Order(
+        Long userId,
+        String title,
+        PayType payType,
+        List<OrderLine> orderLines
+    ) {
+        this.userId = userId;
+        this.title = title;
+        this.payType = payType;
+        this.uniqueId = Generators.timeBasedGenerator().generate();
+        this.orderStatus = OrderStatus.PAYMENT_REQUEST;
+        this.depositDeadline = createDeadline();
+        this.orderLines = init(orderLines);
+        this.totalPrice = getTotalPrice();
+        this.discountedTotalPrice = totalPrice;
+        this.baseInformation = new BaseInformation(userId);
+    }
+
+    public Order(
         Long id,
         Long userId,
         Long reservationId,
         UUID uniqueId,
+        String title,
         PayType payType,
         OrderStatus orderStatus,
         Instant depositDeadline,
@@ -103,6 +125,7 @@ public class Order extends BaseEntity {
         this.userId = userId;
         this.reservationId = reservationId;
         this.uniqueId = uniqueId;
+        this.title = title;
         this.payType = payType;
         this.orderStatus = orderStatus;
         this.depositDeadline = depositDeadline;
