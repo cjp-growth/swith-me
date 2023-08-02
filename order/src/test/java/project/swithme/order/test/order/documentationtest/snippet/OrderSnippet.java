@@ -30,6 +30,8 @@ public interface OrderSnippet {
             .attributes(getAttribute("lockerId")),
         fieldWithPath("lockerPrice").description("락커 가격")
             .attributes(getAttribute("lockerPrice")),
+        fieldWithPath("title").description("주문명")
+            .attributes(getAttribute("title")),
         fieldWithPath("payType").description("결제 수단")
             .attributes(getAttribute("payType"))
     );

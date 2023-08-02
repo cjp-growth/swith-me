@@ -47,6 +47,7 @@ class OrderIntegrationTest extends IntegrationTestBase {
             productPrice,
             lockerId,
             lockerPrice,
+            "스터디 카페 1달 정기 이용권",
             payType
         );
     }

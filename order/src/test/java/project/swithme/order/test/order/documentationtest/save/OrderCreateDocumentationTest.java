@@ -50,6 +50,7 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
             BigDecimal.valueOf(100_000),
             1L,
             BigDecimal.valueOf(30_000),
+            "스터디 카페 1달 정기 이용권",
             "TOSS"
         );
     }
