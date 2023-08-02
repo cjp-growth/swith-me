@@ -10,4 +10,13 @@ public class CancelsResponse {
 
     private CancelsResponse() {
     }
+
+    public CancelsResponse(List<CancelResponse> cancels) {
+        this.cancels = cancels;
+    }
+
+    @Override
+    public String toString() {
+        return cancels.toString();
+    }
 }

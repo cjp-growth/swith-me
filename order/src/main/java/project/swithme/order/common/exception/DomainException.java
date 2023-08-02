@@ -2,14 +2,15 @@ package project.swithme.order.common.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import project.swithme.order.common.exception.error.CodeAndMessage;
 
 @Getter
 public class DomainException extends RuntimeException {
 
-    private final HttpStatus status;
-    private final int code;
+    private HttpStatus status;
+    private CodeAndMessage codeAndMessage;
+    private final int statusCode;
     private final String errorMessage;
-    private final String domain;
 
     public DomainException(
         HttpStatus status,
@@ -17,9 +18,16 @@ public class DomainException extends RuntimeException {
         String domain
     ) {
         super(errorMessage);
-        this.status = status;
-        this.code = status.value();
+        this.status = HttpStatus.valueOf(status.value());
+        this.statusCode = status.value();
         this.errorMessage = errorMessage;
-        this.domain = domain;
+    }
+
+    public DomainException(CodeAndMessage codeAndMessage) {
+        super(codeAndMessage.getKrErrorMessage());
+        this.statusCode = codeAndMessage.getStatusCode();
+        this.status = HttpStatus.valueOf(statusCode);
+        this.codeAndMessage = codeAndMessage;
+        this.errorMessage = codeAndMessage.getKrErrorMessage();
     }
 }

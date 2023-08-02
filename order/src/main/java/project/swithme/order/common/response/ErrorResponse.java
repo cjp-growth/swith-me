@@ -1,35 +1,57 @@
 package project.swithme.order.common.response;
 
+import java.time.Instant;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import project.swithme.order.common.exception.error.CodeAndMessage;
 
 @Getter
 public class ErrorResponse {
 
-    private final int code;
+    private static final String DOMAIN = "PAYMENT";
+
+    private final Instant time = Instant.now();
+    private final int statusCode;
     private final String message;
-    private final String domain;
+    private final String domain = DOMAIN;
+    private String errorCode;
 
     public ErrorResponse(
-        int code,
+        int statusCode,
         String message,
         String domain
     ) {
-        this.code = code;
+        this.statusCode = statusCode;
         this.message = message;
-        this.domain = domain;
+    }
+
+    public ErrorResponse(CodeAndMessage codeAndMessage) {
+        this.statusCode = codeAndMessage.getStatusCode();
+        this.errorCode = codeAndMessage.getErrorCode();
+        this.message = codeAndMessage.getKrErrorMessage();
     }
 
     private ErrorResponse(
         HttpStatus httpStatus,
         String domain
     ) {
-        this.code = httpStatus.value();
+        this.statusCode = httpStatus.value();
         this.message = "서버 내부 오류입니다.";
-        this.domain = domain;
     }
 
     public static ErrorResponse ofServer() {
         return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "ORDER");
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "time: %s, statusCode: %s, message: %s, errorCode: %s, domain: %s",
+            time,
+            statusCode,
+            message,
+            errorCode,
+            domain
+        );
     }
 }

@@ -8,15 +8,13 @@ import project.swithme.order.common.configuration.feign.BasicAuthConfiguration;
 import project.swithme.order.core.web.payment.out.adapter.response.CancelsResponse;
 
 @FeignClient(
-    name = "tossCancelClient",
-    url = "https://api.tosspayments.com",
+    name = "paymentCancelPort",
+    url = "${payment.toss.baseUrl}",
     configuration = {BasicAuthConfiguration.class}
 )
 public interface PaymentCancelPort {
 
-    @PostMapping(
-        value = "/v1/payments/{paymentKey}/cancel"
-    )
+    @PostMapping(value = "${payment.toss.path}/{paymentKey}/cancel")
     CancelsResponse requestCancel(
         @PathVariable("paymentKey") String paymentKey,
         @RequestBody TossPaymentCancelRequest data
