@@ -32,7 +32,7 @@ public final class OrderSut {
     }
 
     public OrderSut withReservationId() {
-        assertNotNull(order.getReservationId());
+        assertNull(order.getReservationId());
         return this;
     }
 
@@ -57,7 +57,7 @@ public final class OrderSut {
     }
 
     public OrderSut withoutRefundReason() {
-        assertNotNull(order.getRefundReason());
+        assertNull(order.getRefundReason());
         return this;
     }
 
