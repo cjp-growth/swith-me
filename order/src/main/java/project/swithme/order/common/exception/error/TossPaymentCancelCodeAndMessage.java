@@ -191,7 +191,7 @@ public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
 
     public static CodeAndMessage findCodeAndMessage(String errorCode) {
         return Arrays.stream(values())
-            .filter(x -> x.errorCode.equals(errorCode))
+            .filter(error -> error.errorCode.equals(errorCode))
             .findAny()
             .orElseThrow();
     }
