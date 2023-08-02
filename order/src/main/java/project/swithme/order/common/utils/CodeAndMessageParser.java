@@ -1,25 +1,21 @@
-package project.swithme.order.core.web.payment.application.service;
+package project.swithme.order.common.utils;
 
 import static project.swithme.order.common.exception.error.PaymentCancelCodeAndMessage.findCodeAndMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import project.swithme.order.common.exception.error.CodeAndMessage;
 import project.swithme.order.common.response.PaymentErrorResponse;
 
-@Component
-@RequiredArgsConstructor
 public class CodeAndMessageParser {
 
     private static final String DELIMETER = ": ";
     private static final int CODE_AND_MESSAGE = 1;
 
-    private final ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public CodeAndMessage parse(String errorMessage) {
+    public static CodeAndMessage parse(String errorMessage) {
         try {
             String[] errorInforArray = errorMessage.split(DELIMETER);
             PaymentErrorResponse[] responses = objectMapper.readValue(
@@ -34,7 +30,7 @@ public class CodeAndMessageParser {
         }
     }
 
-    private CodeAndMessage findCodeAndMessageByCode(List<PaymentErrorResponse> errors) {
+    private static CodeAndMessage findCodeAndMessageByCode(List<PaymentErrorResponse> errors) {
         return errors.stream()
             .map(error -> findCodeAndMessage(error.getCode()))
             .findFirst()
