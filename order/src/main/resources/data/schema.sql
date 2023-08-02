@@ -4,6 +4,7 @@ CREATE TABLE orders
     user_id                BIGINT                                                        NOT NULL COMMENT '사용자 PK',
     reservation_id         BIGINT                                                        NULL COMMENT '예약 PK',
     unique_id              BINARY(16)                                                    NOT NULL COMMENT '주문 조회 노출용 아이디',
+    title                  VARCHAR(50)                                                   NOT NULL COMMENT '주문명',
     total_price            DECIMAL(38, 2)                                                NULL COMMENT '총 주문 가격',
     discounted_total_price DECIMAL(38, 2)                                                NULL COMMENT '할인된 주문 가격',
     pay_type               ENUM ('CARD', 'KAKAO_PAY', 'NAVER_PAY', 'TOSS', 'REMITTANCE') NOT NULL COMMENT '결제 수단',
