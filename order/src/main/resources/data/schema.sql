@@ -50,7 +50,7 @@ CREATE TABLE reservation
     deleted            BIT                                           NOT NULL COMMENT '삭제 유무'
 ) ENGINE = InnoDB COMMENT '예약';
 
-CREATE TABLE toss
+CREATE TABLE payment
 (
     id                          BIGINT AUTO_INCREMENT PRIMARY KEY                   NOT NULL COMMENT '토스 결제 PK',
     version                     VARCHAR(10)                                         NOT NULL COMMENT '토스 결제 시스템 버전',
