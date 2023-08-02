@@ -1,5 +1,6 @@
 package project.swithme.order.core.web.payment.presentation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class TossPaymentCancel {
     public ApiResponse<CancelsResponse> test(
         @RequestParam("paymentKey") String paymentKey,
         @RequestParam("cancelReason") String cancelReason
-    ) {
+    ) throws JsonProcessingException {
         CancelsResponse data = paymentCancelUseCase.cancel(paymentKey, cancelReason);
         return ApiResponse.of(data, HttpStatus.BAD_REQUEST);
     }
