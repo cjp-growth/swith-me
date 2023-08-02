@@ -2,10 +2,10 @@ package project.swithme.order.test.payment.documentationtest.pay;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static project.swithme.order.common.testhelper.env.TossPaymentFixture.getPaymentKey;
 import static project.swithme.order.common.testhelper.order.fixture.OrderFixture.createOrder;
 import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.FIXED_TOTAL_PRICE;
 import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.FIXED_TOTAL_PRICE_PARAM;
+import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.getPaymentKey;
 import static project.swithme.order.core.domain.order.entity.OrderStatus.PAYMENT_REQUEST;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.web.payment.facade.PaymentFacade;
-import project.swithme.order.core.web.payment.presentation.TossPaymentAPI;
+import project.swithme.order.core.web.payment.presentation.PaymentAPI;
 import project.swithme.order.test.IntegrationTestBase;
 
 @AutoConfigureMockMvc
@@ -34,15 +34,15 @@ class PaymentDocumentationTest extends IntegrationTestBase {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private TossPaymentAPI tossPaymentAPI;
+    private PaymentAPI paymentAPI;
 
     @Mock
     private PaymentFacade paymentFacade;
 
     @BeforeEach
     void setUp() {
-        this.tossPaymentAPI = new TossPaymentAPI(paymentFacade);
-        mockMvc = MockMvcBuilders.standaloneSetup(tossPaymentAPI)
+        this.paymentAPI = new PaymentAPI(paymentFacade);
+        mockMvc = MockMvcBuilders.standaloneSetup(paymentAPI)
             .build();
     }
 

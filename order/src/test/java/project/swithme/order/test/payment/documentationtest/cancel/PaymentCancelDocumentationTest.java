@@ -2,7 +2,7 @@ package project.swithme.order.test.payment.documentationtest.cancel;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static project.swithme.order.common.testhelper.env.TossPaymentFixture.getPaymentKey;
+import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.getPaymentKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
