@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.swithme.order.common.exception.error.CodeAndMessage;
 import project.swithme.order.core.web.payment.application.PaymentCancelUseCase;
 import project.swithme.order.core.web.payment.out.port.PaymentCancelPort;
-import project.swithme.order.core.web.payment.out.port.TossPaymentCancelRequest;
+import project.swithme.order.core.web.payment.out.port.PaymentCancelRequest;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class PaymentCancelService implements PaymentCancelUseCase {
         try {
             paymentCancelPort.requestCancel(
                 paymentKey,
-                new TossPaymentCancelRequest(cancelReason)
+                new PaymentCancelRequest(cancelReason)
             );
         } catch (FeignException e) {
             CodeAndMessage codeAndMessage = messageParser.parse(e.getMessage());

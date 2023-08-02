@@ -4,7 +4,7 @@ import java.beans.Transient;
 import lombok.Getter;
 
 @Getter
-public class TossVirtualAccountResponse {
+public class PaymentVirtualAccountResponse {
 
     private String accountType;
     private String accountNumber;
@@ -16,7 +16,7 @@ public class TossVirtualAccountResponse {
     private String settlementStatus;
     private RefundReceiveAccountResponse refundReceiveAccount;
 
-    private TossVirtualAccountResponse() {
+    private PaymentVirtualAccountResponse() {
     }
 
     @Transient

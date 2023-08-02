@@ -15,16 +15,16 @@ import project.swithme.order.core.domain.payment.entity.GiftCertificateInfo;
 import project.swithme.order.core.domain.payment.entity.MobilePhoneInfo;
 import project.swithme.order.core.domain.payment.entity.TransferInfo;
 import project.swithme.order.core.domain.payment.entity.VirtualAccountInfo;
-import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;
+import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
 import project.swithme.order.core.web.payment.out.adapter.response.CashReceiptResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.CashReceiptsResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.DiscountResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.EasyPayResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.GiftCertificateResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.MobilePhoneResponse;
-import project.swithme.order.core.web.payment.out.adapter.response.TossPaymentApproveResponse;
-import project.swithme.order.core.web.payment.out.adapter.response.TossPaymentCardResponse;
-import project.swithme.order.core.web.payment.out.adapter.response.TossVirtualAccountResponse;
+import project.swithme.order.core.web.payment.out.adapter.response.PaymentApproveResponse;
+import project.swithme.order.core.web.payment.out.adapter.response.PaymentCardResponse;
+import project.swithme.order.core.web.payment.out.adapter.response.PaymentVirtualAccountResponse;
 import project.swithme.order.core.web.payment.out.adapter.response.TransferResponse;
 
 @Component
@@ -35,7 +35,7 @@ public class PaymentInfoExtractor {
 
     private static final String TRUE = "true";
 
-    public TossPaymentCommand extractInfo(TossPaymentApproveResponse response) {
+    public PaymentCommand extractInfo(PaymentApproveResponse response) {
         CardInfo cardInfo = extractCardInfo(response.getCard());
         VirtualAccountInfo virtualAccountInfo = extractVAccountInfo(response.getVirtualAccount());
         MobilePhoneInfo mobileInfo = extractMobilInfo(response.getMobilePhone());
@@ -48,7 +48,7 @@ public class PaymentInfoExtractor {
         // TODO
         CashReceiptsInfo cashReceiptsInfo = extractCashReceiptsInfo(response.getCashReceipts());
         DiscountInfo discountInfo = extractDiscountInfo(response.getDiscount());
-        return TossPaymentCommand.createPaymentInfo()
+        return PaymentCommand.createPaymentInfo()
             .version(response.getVersion())
             .paymentKey(response.getPaymentKey())
             .type(response.getType())
@@ -83,7 +83,7 @@ public class PaymentInfoExtractor {
             .build();
     }
 
-    private CardInfo extractCardInfo(TossPaymentCardResponse cardResponse) {
+    private CardInfo extractCardInfo(PaymentCardResponse cardResponse) {
         if (cardResponse == null) {
             return null;
         }
@@ -103,7 +103,7 @@ public class PaymentInfoExtractor {
         );
     }
 
-    private VirtualAccountInfo extractVAccountInfo(TossVirtualAccountResponse accountResponse) {
+    private VirtualAccountInfo extractVAccountInfo(PaymentVirtualAccountResponse accountResponse) {
         if (accountResponse == null) {
             return VirtualAccountInfo.createEmptyVirtualAccountInfo();
         }

@@ -3,16 +3,16 @@ package project.swithme.order.core.web.payment.out.adapter.response;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentCancelResponse {
+public class PaymentCancelResponse {
 
     private String errorCode;
     private String errorMsg;
     private String orderId;
 
-    private TossPaymentCancelResponse() {
+    private PaymentCancelResponse() {
     }
 
-    public TossPaymentCancelResponse(
+    public PaymentCancelResponse(
         String errorCode,
         String errorMsg,
         String orderId

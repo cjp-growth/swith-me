@@ -15,7 +15,7 @@ import project.swithme.order.core.domain.payment.entity.TransferInfo;
 import project.swithme.order.core.domain.payment.entity.VirtualAccountInfo;
 
 @Getter
-public class TossPaymentCommand {
+public class PaymentCommand {
 
     private String version;
     private String paymentKey;
@@ -50,11 +50,11 @@ public class TossPaymentCommand {
     private String failureMessage;
     private DiscountInfo discountInfo;
 
-    protected TossPaymentCommand() {
+    protected PaymentCommand() {
     }
 
     @Builder(builderMethodName = "createPaymentInfo")
-    public TossPaymentCommand(
+    public PaymentCommand(
         String version,
         String paymentKey,
         String type,

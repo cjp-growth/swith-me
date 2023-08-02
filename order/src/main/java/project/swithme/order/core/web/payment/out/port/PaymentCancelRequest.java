@@ -3,14 +3,14 @@ package project.swithme.order.core.web.payment.out.port;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentCancelRequest {
+public class PaymentCancelRequest {
 
     private String cancelReason;
 
-    private TossPaymentCancelRequest() {
+    private PaymentCancelRequest() {
     }
 
-    public TossPaymentCancelRequest(String cancelReason) {
+    public PaymentCancelRequest(String cancelReason) {
         this.cancelReason = cancelReason;
     }
 

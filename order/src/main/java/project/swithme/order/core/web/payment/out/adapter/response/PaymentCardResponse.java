@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentCardResponse {
+public class PaymentCardResponse {
 
     private BigDecimal amount;
     private String issuerCode;
@@ -21,6 +21,6 @@ public class TossPaymentCardResponse {
     private String company;
     private String receiptUrl;
 
-    private TossPaymentCardResponse() {
+    private PaymentCardResponse() {
     }
 }

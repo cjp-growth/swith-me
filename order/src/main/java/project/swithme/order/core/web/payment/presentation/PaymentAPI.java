@@ -15,7 +15,7 @@ import project.swithme.order.core.web.payment.presentation.response.PaymentCompl
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/payments")
-public class TossPaymentAPI {
+public class PaymentAPI {
 
     private final PaymentFacade paymentFacade;
 

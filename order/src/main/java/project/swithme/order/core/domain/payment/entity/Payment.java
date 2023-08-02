@@ -18,7 +18,7 @@ import project.swithme.order.core.common.BaseInformation;
 
 @Getter
 @Entity(name = "toss")
-public class Toss extends BaseEntity {
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -126,11 +126,11 @@ public class Toss extends BaseEntity {
     /**
      * @Nullary-Constructor. JPA 기본 생성자로 payment 외부 패키지에서 호출하지 말 것.
      */
-    protected Toss() {
+    protected Payment() {
     }
 
     @Builder
-    public Toss(
+    public Payment(
         Long id,
         Long orderId,
         String paymentKey,
@@ -205,10 +205,10 @@ public class Toss extends BaseEntity {
         if (this == object) {
             return true;
         }
-        if (!(object instanceof Toss toss)) {
+        if (!(object instanceof Payment payment)) {
             return false;
         }
-        return getId().equals(toss.getId());
+        return getId().equals(payment.getId());
     }
 
     @Override

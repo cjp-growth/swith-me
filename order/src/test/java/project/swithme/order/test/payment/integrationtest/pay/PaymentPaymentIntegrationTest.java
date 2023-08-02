@@ -3,10 +3,10 @@ package project.swithme.order.test.payment.integrationtest.pay;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
-import static project.swithme.order.common.testhelper.env.TossPaymentFixture.getPaymentKey;
 import static project.swithme.order.common.testhelper.order.fixture.OrderFixture.createOrder;
 import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.FIXED_TOTAL_PRICE;
-import static project.swithme.order.common.testhelper.payment.fixture.TossFixture.createApprovedCommand;
+import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.createApprovedCommand;
+import static project.swithme.order.common.testhelper.payment.fixture.PaymentFixture.getPaymentKey;
 import static project.swithme.order.core.domain.order.entity.OrderStatus.PAYMENT_REQUEST;
 import static project.swithme.order.core.domain.payment.entity.PaymentType.NORMAL;
 import com.fasterxml.uuid.Generators;
@@ -29,7 +29,7 @@ import project.swithme.order.test.IntegrationTestBase;
 
 @Description(content = "토스 API 서비스를 호출하기 때문에 필요한 일부 모킹 처리 ")
 @DisplayName("[IntegrationTest] 토스 결제 통합 테스트")
-class TossPaymentIntegrationTest extends IntegrationTestBase {
+class PaymentPaymentIntegrationTest extends IntegrationTestBase {
 
     private PaymentFacade paymentFacade;
 
@@ -78,7 +78,7 @@ class TossPaymentIntegrationTest extends IntegrationTestBase {
 
     @Test
     @DisplayName("주문이 존재하지 않는데 결제를 요청하면 OrderNotFoundException이 발생한다.")
-    void toss_payment_failure_by_invalid_order_test() {
+    void payment_failure_by_invalid_order_test() {
         UUID uuid = Generators.timeBasedGenerator().generate();
         BigDecimal price = new BigDecimal(130_000L);
 

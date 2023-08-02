@@ -1,10 +1,10 @@
 package project.swithme.order.core.web.payment.application;
 
+import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
-import project.swithme.order.core.domain.payment.entity.Toss;
-import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;
+import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
 
 public interface PaymentSaveUseCase {
 
-    Toss save(Long userId, Long orderId, PaymentType paymentType, TossPaymentCommand command);
+    Payment save(Long userId, Long orderId, PaymentType paymentType, PaymentCommand command);
 }

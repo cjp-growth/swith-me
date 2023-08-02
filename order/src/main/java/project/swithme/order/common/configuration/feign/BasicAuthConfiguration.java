@@ -11,7 +11,7 @@ import java.util.Base64.Encoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import project.swithme.order.common.configuration.business.payment.TossProperties;
+import project.swithme.order.common.configuration.business.payment.PaymentProperties;
 
 @Configuration
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class BasicAuthConfiguration {
     private static final String BASIC_AUTH_PREFIX = "Basic ";
     private static final String DELIMETER = ":";
 
-    private final TossProperties properties;
+    private final PaymentProperties properties;
 
     @Bean
     public RequestInterceptor requestInterceptor() {
