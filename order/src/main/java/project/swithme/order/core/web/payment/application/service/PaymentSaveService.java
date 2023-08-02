@@ -6,7 +6,7 @@ import project.swithme.order.core.common.BaseInformation;
 import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
-import project.swithme.order.core.domain.payment.repository.toss.PaymentJpaRepository;
+import project.swithme.order.core.domain.payment.repository.PaymentJpaRepository;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
 
 @Service

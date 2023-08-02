@@ -1,4 +1,4 @@
-package project.swithme.order.core.domain.payment.repository.toss;
+package project.swithme.order.core.domain.payment.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import project.swithme.order.core.domain.payment.entity.Payment;
