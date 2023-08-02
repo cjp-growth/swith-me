@@ -26,10 +26,6 @@ public class GlobalExceptionHandler {
     }
 
     private ErrorResponse createResponse(DomainException domainException) {
-        return new ErrorResponse(
-            domainException.getCode(),
-            domainException.getErrorMessage(),
-            domainException.getDomain()
-        );
+        return new ErrorResponse(domainException.getCodeAndMessage());
     }
 }
