@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.swithme.order.core.domain.order.entity.Order;
+import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
-import project.swithme.order.core.domain.payment.entity.Toss;
-import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;
+import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
 import project.swithme.order.core.web.order.application.OrderQueryUseCase;
 import project.swithme.order.core.web.order.exception.OrderNotFoundException;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
@@ -37,17 +37,17 @@ public class PaymentFacade {
 
         paymentValidator.validate(findOrder, amount);
 
-        TossPaymentCommand command = requestApproval(orderUniqueId, paymentKey, amount);
+        PaymentCommand command = requestApproval(orderUniqueId, paymentKey, amount);
         if (command.isApproved()) {
-            Toss tossPayment = save(paymentType, findOrder, command);
+            Payment paymentPayment = save(paymentType, findOrder, command);
             findOrder.updateOrderStatus(COMPLETE);
-            findOrder.updatePrice(tossPayment.getDiscountedAmount());
-            return tossPayment.getId();
+            findOrder.updatePrice(paymentPayment.getDiscountedAmount());
+            return paymentPayment.getId();
         }
         throw new PaymentFailureException();
     }
 
-    private TossPaymentCommand requestApproval(
+    private PaymentCommand requestApproval(
         String orderUniqueId,
         String paymentKey,
         BigDecimal amount
@@ -59,10 +59,10 @@ public class PaymentFacade {
         );
     }
 
-    private Toss save(
+    private Payment save(
         PaymentType paymentType,
         Order findOrder,
-        TossPaymentCommand paymentInfo
+        PaymentCommand paymentInfo
     ) {
         return paymentSaveUseCase.save(
             findOrder.getUserId(),

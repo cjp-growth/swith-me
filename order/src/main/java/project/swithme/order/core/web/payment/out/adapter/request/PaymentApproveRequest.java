@@ -3,15 +3,15 @@ package project.swithme.order.core.web.payment.out.adapter.request;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentApproveRequest {
+public class PaymentApproveRequest {
 
     private String orderId;
     private Long amount;
 
-    private TossPaymentApproveRequest() {
+    private PaymentApproveRequest() {
     }
 
-    public TossPaymentApproveRequest(
+    public PaymentApproveRequest(
         String orderId,
         Long amount
     ) {

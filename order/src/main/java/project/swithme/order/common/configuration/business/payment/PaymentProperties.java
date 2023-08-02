@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class TossProperties {
+public class PaymentProperties {
 
     private final Map<String, String> factory;
 
@@ -21,7 +21,7 @@ public class TossProperties {
     @Value("${payment.toss.secretKey}")
     private String secretKey;
 
-    public TossProperties() {
+    public PaymentProperties() {
         factory = new HashMap<>();
         factory.put("baseUrl", baseUrl);
         factory.put("path", path);

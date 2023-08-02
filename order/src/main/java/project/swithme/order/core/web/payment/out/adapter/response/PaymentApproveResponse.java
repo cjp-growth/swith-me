@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentApproveResponse {
+public class PaymentApproveResponse {
 
     private static final String EMPTY_MESSAGE = "";
 
@@ -30,8 +30,8 @@ public class TossPaymentApproveResponse {
     private BigDecimal taxExemptionAmount;
     private CancelsResponse cancels;
     private Boolean isPartialCancelable;
-    private TossPaymentCardResponse card;
-    private TossVirtualAccountResponse virtualAccount;
+    private PaymentCardResponse card;
+    private PaymentVirtualAccountResponse virtualAccount;
     private String secret;
     private MobilePhoneResponse mobilePhone;
     private GiftCertificateResponse giftCertificate;
@@ -45,10 +45,10 @@ public class TossPaymentApproveResponse {
     private CashReceiptsResponse cashReceipts;
     private DiscountResponse discount;
 
-    private TossPaymentApproveResponse() {
+    private PaymentApproveResponse() {
     }
 
-    public TossPaymentApproveResponse(
+    public PaymentApproveResponse(
         String version,
         String paymentKey,
         String type,
@@ -71,8 +71,8 @@ public class TossPaymentApproveResponse {
         BigDecimal taxExemptionAmount,
         CancelsResponse cancels,
         Boolean isPartialCancelable,
-        TossPaymentCardResponse card,
-        TossVirtualAccountResponse virtualAccount,
+        PaymentCardResponse card,
+        PaymentVirtualAccountResponse virtualAccount,
         String secret,
         MobilePhoneResponse mobilePhone,
         GiftCertificateResponse giftCertificate,

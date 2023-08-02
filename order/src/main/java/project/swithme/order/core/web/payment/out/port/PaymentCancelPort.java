@@ -17,6 +17,6 @@ public interface PaymentCancelPort {
     @PostMapping(value = "${payment.toss.path}/{paymentKey}/cancel")
     CancelsResponse requestCancel(
         @PathVariable("paymentKey") String paymentKey,
-        @RequestBody TossPaymentCancelRequest data
+        @RequestBody PaymentCancelRequest data
     );
 }

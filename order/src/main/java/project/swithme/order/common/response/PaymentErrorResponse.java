@@ -3,12 +3,12 @@ package project.swithme.order.common.response;
 import lombok.Getter;
 
 @Getter
-public class TossPaymentErrorResponse {
+public class PaymentErrorResponse {
 
     private String code;
     private String message;
 
-    private TossPaymentErrorResponse() {
+    private PaymentErrorResponse() {
     }
 
     @Override

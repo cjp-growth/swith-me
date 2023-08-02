@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import project.swithme.order.common.configuration.feign.BasicAuthConfiguration;
-import project.swithme.order.core.web.payment.out.adapter.request.TossPaymentApproveRequest;
-import project.swithme.order.core.web.payment.out.adapter.response.TossPaymentApproveResponse;
+import project.swithme.order.core.web.payment.out.adapter.request.PaymentApproveRequest;
+import project.swithme.order.core.web.payment.out.adapter.response.PaymentApproveResponse;
 
 @FeignClient(
     name = "tossClient",
@@ -18,8 +18,8 @@ public interface PaymentApprovalAdapter {
     @PostMapping(
         value = "/v1/payments/{paymentKey}"
     )
-    TossPaymentApproveResponse requestApproval(
+    PaymentApproveResponse requestApproval(
         @PathVariable("paymentKey") String paymentKey,
-        @RequestBody TossPaymentApproveRequest request
+        @RequestBody PaymentApproveRequest request
     );
 }

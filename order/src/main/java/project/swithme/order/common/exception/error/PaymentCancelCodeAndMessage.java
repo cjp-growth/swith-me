@@ -1,6 +1,6 @@
 package project.swithme.order.common.exception.error;
 
-public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
+public enum PaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
     ALREADY_CANCELED_PAYMENT(
         400,
         "이미 취소된 결제 입니다.",
@@ -146,7 +146,7 @@ public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
     private final String krErrorMessage;
     private final String engErrorMessage;
 
-    TossPaymentCancelCodeAndMessage(
+    PaymentCancelCodeAndMessage(
         int statusCode,
         String krErrorMessage,
         String engErrorMessage
@@ -157,7 +157,7 @@ public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
     }
 
     public static CodeAndMessage findCodeAndMessage(String errorCode) {
-        return TossPaymentCancelCodeAndMessage.valueOf(errorCode);
+        return PaymentCancelCodeAndMessage.valueOf(errorCode);
     }
 
     @Override

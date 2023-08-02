@@ -3,36 +3,36 @@ package project.swithme.order.core.web.payment.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
-import project.swithme.order.core.domain.payment.entity.Toss;
-import project.swithme.order.core.domain.payment.entity.command.TossPaymentCommand;
-import project.swithme.order.core.domain.payment.repository.toss.TossJpaRepository;
+import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
+import project.swithme.order.core.domain.payment.repository.toss.PaymentJpaRepository;
 import project.swithme.order.core.web.payment.application.PaymentSaveUseCase;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentSaveService implements PaymentSaveUseCase {
 
-    private final TossJpaRepository tossRepository;
+    private final PaymentJpaRepository paymentRepository;
 
     @Override
-    public Toss save(
+    public Payment save(
         Long userId,
         Long orderId,
         PaymentType paymentType,
-        TossPaymentCommand command
+        PaymentCommand command
     ) {
-        Toss toss = createTossPayment(userId, orderId, paymentType, command);
-        return tossRepository.save(toss);
+        Payment payment = createPayment(userId, orderId, paymentType, command);
+        return paymentRepository.save(payment);
     }
 
-    private Toss createTossPayment(
+    private Payment createPayment(
         Long userId,
         Long orderId,
         PaymentType paymentType,
-        TossPaymentCommand command
+        PaymentCommand command
     ) {
-        return Toss.builder()
+        return Payment.builder()
             .version(command.getVersion())
             .paymentKey(command.getPaymentKey())
             .paymentType(paymentType)
