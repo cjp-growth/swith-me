@@ -1,5 +1,6 @@
 package project.swithme.order.test.order.domain;
 
+import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,7 +12,6 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import project.swithme.order.common.testhelper.order.sut.OrderSut;
 import project.swithme.order.core.common.BaseInformation;
 import project.swithme.order.core.domain.order.entity.Order;
-import project.swithme.order.core.domain.order.entity.OrderLine;
 import project.swithme.order.core.domain.order.entity.OrderStatus;
 import project.swithme.order.core.domain.order.entity.PayType;
 
@@ -37,24 +36,7 @@ class OrderDomainTest {
 
     @Test
     void order_create_test() {
-        List<OrderLine> orderLines = new ArrayList<>();
-        OrderLine studyCafe = OrderLine.createOrderLine(1L, 1L, 1L, BigDecimal.valueOf(100_000L));
-        OrderLine locker = OrderLine.createOrderLine(1L, 1L, 1L, BigDecimal.valueOf(30_000L));
-        orderLines.add(studyCafe);
-        orderLines.add(locker);
-
-        Order order = new Order(
-            1L,
-            1L,
-            1L,
-            UUID.randomUUID(),
-            PayType.TOSS,
-            PAYMENT_REQUEST,
-            Instant.now().plus(Duration.ofHours(1)),
-            "",
-            orderLines,
-            new BaseInformation(1L)
-        );
+        Order order = createOrder(randomUUID());
 
         OrderSut sut = new OrderSut(order)
             .shouldExist()
@@ -155,7 +137,8 @@ class OrderDomainTest {
             1L,
             1L,
             1L,
-            UUID.randomUUID(),
+            randomUUID(),
+            "스터디 카페 1달 이용권",
             PayType.TOSS,
             PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),
@@ -168,7 +151,8 @@ class OrderDomainTest {
             2L,
             1L,
             1L,
-            UUID.randomUUID(),
+            randomUUID(),
+            "스터디 카페 1달 이용권",
             PayType.TOSS,
             PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),
@@ -188,7 +172,8 @@ class OrderDomainTest {
             1L,
             1L,
             1L,
-            UUID.randomUUID(),
+            randomUUID(),
+            "스터디 카페 1달 이용권",
             PayType.TOSS,
             PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),
@@ -201,7 +186,8 @@ class OrderDomainTest {
             2L,
             1L,
             1L,
-            UUID.randomUUID(),
+            randomUUID(),
+            "스터디 카페 1달 이용권",
             PayType.TOSS,
             PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),

@@ -21,6 +21,7 @@ public final class OrderFixture {
     private static final Long LOCKER_ID = 2L;
     private static final Long RESERVATION_ID = null;
 
+    private static final String ORDER_TITLE = "스터디 카페 정기 이용권 및 락커 1달 이용권";
     private static final BigDecimal STUDY_CAFE_PRICE = BigDecimal.valueOf(100_000L);
     private static final BigDecimal LOCKER_PRICE = BigDecimal.valueOf(30_000L);
 
@@ -38,6 +39,7 @@ public final class OrderFixture {
             USER_ID,
             RESERVATION_ID,
             Generators.timeBasedGenerator().generate(),
+            ORDER_TITLE,
             PayType.TOSS,
             orderStatus,
             Instant.now().plus(Duration.ofHours(1)),
@@ -57,6 +59,7 @@ public final class OrderFixture {
             USER_ID,
             RESERVATION_ID,
             uuid,
+            ORDER_TITLE,
             PayType.TOSS,
             orderStatus,
             Instant.now().plus(Duration.ofHours(1)),
@@ -72,6 +75,7 @@ public final class OrderFixture {
             USER_ID,
             RESERVATION_ID,
             uuid,
+            ORDER_TITLE,
             PayType.TOSS,
             OrderStatus.PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),
@@ -90,6 +94,7 @@ public final class OrderFixture {
             USER_ID,
             RESERVATION_ID,
             uuid,
+            ORDER_TITLE,
             PayType.TOSS,
             OrderStatus.PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),
@@ -113,6 +118,7 @@ public final class OrderFixture {
             USER_ID,
             RESERVATION_ID,
             UUID.randomUUID(),
+            ORDER_TITLE,
             PayType.TOSS,
             OrderStatus.PAYMENT_REQUEST,
             Instant.now().plus(Duration.ofHours(1)),

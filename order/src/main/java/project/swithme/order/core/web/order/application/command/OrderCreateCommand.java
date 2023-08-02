@@ -14,6 +14,7 @@ public record OrderCreateCommand(
     BigDecimal productPrice,
     Long lockerId,
     BigDecimal lockerPrice,
+    String title,
     PayType payType
 ) {
 
@@ -42,6 +43,6 @@ public record OrderCreateCommand(
             OrderLine locker = createOrderLine(userId, studyCafeId, lockerId, lockerPrice);
             orderLines.add(locker);
         }
-        return new Order(userId, payType, orderLines);
+        return new Order(userId, title, payType, orderLines);
     }
 }

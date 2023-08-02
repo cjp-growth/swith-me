@@ -31,6 +31,9 @@ public class OrderRequest {
     @Nullable
     private BigDecimal lockerPrice;
 
+    @Nullable
+    private String title;
+
     @NotNull(message = "결제 수단을 입력해주세요.")
     @NotBlank(message = "올바른 결제 수단을 입력해주세요.")
     private String payType;
@@ -44,6 +47,7 @@ public class OrderRequest {
         BigDecimal productPrice,
         Long lockerId,
         BigDecimal lockerPrice,
+        String title,
         String payType
     ) {
         this.studyCafeId = studyCafeId;
@@ -51,6 +55,7 @@ public class OrderRequest {
         this.productPrice = productPrice;
         this.lockerId = lockerId;
         this.lockerPrice = lockerPrice;
+        this.title = title;
         this.payType = payType;
     }
 
@@ -61,6 +66,7 @@ public class OrderRequest {
             productPrice,
             lockerId,
             lockerPrice,
+            title,
             PayType.findPayType(payType)
         );
     }
