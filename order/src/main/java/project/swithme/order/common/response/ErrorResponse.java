@@ -14,7 +14,6 @@ public class ErrorResponse {
     private final int statusCode;
     private final String message;
     private final String domain = DOMAIN;
-    private String errorCode;
 
     public ErrorResponse(
         int statusCode,
@@ -27,7 +26,6 @@ public class ErrorResponse {
 
     public ErrorResponse(CodeAndMessage codeAndMessage) {
         this.statusCode = codeAndMessage.getStatusCode();
-        this.errorCode = codeAndMessage.getErrorCode();
         this.message = codeAndMessage.getKrErrorMessage();
     }
 
@@ -46,11 +44,10 @@ public class ErrorResponse {
     @Override
     public String toString() {
         return String.format(
-            "time: %s, statusCode: %s, message: %s, errorCode: %s, domain: %s",
+            "time: %s, statusCode: %s, message: %s, domain: %s",
             time,
             statusCode,
             message,
-            errorCode,
             domain
         );
     }
