@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender class="ca.pjer.logback.AwsLogsAppender" name="ASYNC_AWS_LOGS">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <if condition='property("spring.profiles.active").contains("local")'>
+      <then>
+        <logGroupName>study-with-me</logGroupName>
+      </then>
+    </if>
+    <if condition='property("spring.profiles.active").contains("dev")'>
+      <then>
+        <logGroupName>study-with-me</logGroupName>
+      </then>
+    </if>
+    <if condition='property("spring.profiles.active").contains("prod")'>
+      <then>
+        <logGroupName>study-with-me</logGroupName>
+      </then>
+    </if>
+    <layout>
+      <pattern>%d{yyyyMMdd'T'HHmmss} %thread %level %logger{15} %msg%n</pattern>
+    </layout>
+    <logRegion>ap-northeast-2</logRegion>
+    <logStreamUuidPrefix>error-</logStreamUuidPrefix>
+    <maxBatchLogEvents>50</maxBatchLogEvents>
+    <maxBlockTimeMillis>5000</maxBlockTimeMillis>
+    <maxFlushTimeMillis>30000</maxFlushTimeMillis>
+    <retentionTimeDays>0</retentionTimeDays>
+  </appender>
+
+  <springProfile name="dev">
+    <logger level="ERROR" name="org.springframework"/>
+    <logger level="ERROR" name="inc.bfactory.study-with-me"/>
+    <root level="INFO">
+      <appender-ref ref="ASYNC_AWS_LOGS"/>
+    </root>
+  </springProfile>
+
+</configuration>
