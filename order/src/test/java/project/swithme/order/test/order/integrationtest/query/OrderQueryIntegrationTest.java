@@ -1,6 +1,6 @@
 package project.swithme.order.test.order.integrationtest.query;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static project.swithme.order.common.testhelper.order.fixture.OrderFixture.createOrder;
 import static project.swithme.order.core.domain.order.entity.OrderStatus.PAYMENT_REQUEST;
 import java.util.Optional;
