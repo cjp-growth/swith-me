@@ -19,6 +19,8 @@ import project.swithme.order.common.response.ErrorResponse;
 public class GlobalExceptionHandler {
 
     private static final String TRACE_ID = "traceId";
+    private static final ResponseEntity<ErrorResponse> badRequestCache =
+        new ResponseEntity<>(ErrorResponse.ofBadRequest(), BAD_REQUEST);
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ErrorResponse> catchDomainException(DomainException domainException) {
@@ -43,7 +45,7 @@ public class GlobalExceptionHandler {
             invalidParameterException.getFields()
         );
         log.error("[### PAYMENT_ERROR] -----x> traceId: {}, {}", getTraceId(), errorLog);
-        return new ResponseEntity<>(ErrorResponse.ofBadRequest(), BAD_REQUEST);
+        return badRequestCache;
     }
 
     @ExceptionHandler(Exception.class)
