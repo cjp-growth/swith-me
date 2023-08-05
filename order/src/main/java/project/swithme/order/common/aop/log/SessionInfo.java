@@ -1,6 +1,7 @@
 package project.swithme.order.common.aop.log;
 
 import jakarta.servlet.http.HttpSession;
+import java.util.Objects;
 import lombok.Getter;
 
 @Getter
@@ -14,6 +15,22 @@ public class SessionInfo {
         this.sessionId = httpSession.getId();
         this.creationTime = httpSession.getCreationTime();
         this.lastAccessedTime = httpSession.getLastAccessedTime();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof SessionInfo that)) {
+            return false;
+        }
+        return getSessionId().equals(that.getSessionId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCreationTime(), getSessionId(), getLastAccessedTime());
     }
 
     @Override
