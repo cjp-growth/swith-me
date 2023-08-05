@@ -1,4 +1,4 @@
-package project.swithme.order.core.common;
+package project.swithme.order.core.domain.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
