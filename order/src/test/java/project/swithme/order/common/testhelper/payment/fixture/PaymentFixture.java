@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import project.swithme.order.core.common.BaseInformation;
 import project.swithme.order.core.domain.payment.entity.CardInfo;
-import project.swithme.order.core.domain.payment.entity.Method;
 import project.swithme.order.core.domain.payment.entity.Payment;
+import project.swithme.order.core.domain.payment.entity.PaymentMethod;
 import project.swithme.order.core.domain.payment.entity.PaymentStatus;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;
@@ -125,7 +125,7 @@ public final class PaymentFixture {
             .version("2022-10-10")
             .orderName("스터디카페 및 락커 1달 정기 이용권")
             .currency("KRW")
-            .method(Method.CARD)
+            .method(PaymentMethod.CARD)
             .totalAmount(new BigDecimal(130_000L))
             .balanceAmount(new BigDecimal(130_000L))
             .suppliedAmount(new BigDecimal(118_300L))
@@ -175,7 +175,7 @@ public final class PaymentFixture {
             .version("2022-10-10")
             .orderName("스터디카페 및 락커 1달 정기 이용권")
             .currency("KRW")
-            .method(Method.CARD)
+            .method(PaymentMethod.CARD)
             .totalAmount(new BigDecimal(130_000L))
             .balanceAmount(new BigDecimal(130_000L))
             .suppliedAmount(new BigDecimal(118_300L))
