@@ -2,7 +2,6 @@ package project.swithme.order.common.aop;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -19,7 +18,6 @@ import project.swithme.order.common.aop.log.CommonRequestLog;
 @Aspect
 @Order(1)
 @Component
-@RequiredArgsConstructor
 public class LogAspect {
 
     private static final String TRACE_ID = "traceId";
@@ -78,6 +76,25 @@ public class LogAspect {
     ) {
         log.info(
             "[### PAYMENT_SERVICE] <x----- traceId: {}, \nreturn: {}",
+            getTraceId(), result
+        );
+    }
+
+    @Before("bean(*Repository*))")
+    public void beforeCallRepository(JoinPoint joinPoint) {
+        log.info(
+            "[### PAYMENT_REPOSITORY] -----x> traceId: {}, \nargs:{}",
+            getTraceId(), Arrays.toString(joinPoint.getArgs())
+        );
+    }
+
+    @AfterReturning(value = "bean(*Repository*)", returning = "result")
+    public void afterCallRepository(
+        JoinPoint joinPoint,
+        Object result
+    ) {
+        log.info(
+            "[### PAYMENT_REPOSITORY] <x----- traceId: {}, \nreturn: {}",
             getTraceId(), result
         );
     }
