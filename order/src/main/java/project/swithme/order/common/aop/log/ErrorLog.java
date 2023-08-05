@@ -30,9 +30,8 @@ public class ErrorLog {
 
     @Override
     public String toString() {
-        return """
-            domain: %s, fields: %s, httpStatus: %s, statusCode: %s, message: %s, time: %s
-            """.formatted(
+        return String.format(
+            "domain: %s, fields: %s, httpStatus: %s, statusCode: %s, message: %s, time: %s",
             DOMAIN, errorFields, httpStatus, statusCode, message, time
         );
     }
