@@ -16,6 +16,7 @@
     <exclude name="AbbreviationAsWordInName"/>
     <exclude name="UnusedPrivateMethod"/>
     <exclude name="UnusedFormalParameter"/>
+    <exclude name="GuardLogStatement"/>
     <exclude name="AvoidUsingHardCodedIP"/>
     <exclude name="UnusedPrivateField"/>
     <exclude name="JUnitTestsShouldIncludeAssert"/>
