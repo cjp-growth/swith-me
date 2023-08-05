@@ -39,7 +39,7 @@ class MDCLoggingFilter implements Filter {
 
         long endTime = System.currentTimeMillis();
         long latency = endTime - startTime;
-        log.info("### [PAYMENT_END] <x----- tracId: {}, in-server-latency: {}m/s", uuid, latency);
+        log.info("### [PAYMENT_END] <x----- traceId: {}, in-server-latency: {}ms", uuid, latency);
         MDC.clear();
     }
 
