@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import project.swithme.order.common.testhelper.order.sut.OrderSut;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseInformation;
 import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.order.entity.OrderStatus;
 import project.swithme.order.core.domain.order.entity.PayType;

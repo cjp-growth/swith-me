@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseInformation;
 import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.order.entity.OrderLine;
 import project.swithme.order.core.domain.order.entity.OrderStatus;

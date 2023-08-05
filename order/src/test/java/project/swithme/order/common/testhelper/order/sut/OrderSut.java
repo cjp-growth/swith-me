@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.List;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseInformation;
 import project.swithme.order.core.domain.order.entity.Order;
 import project.swithme.order.core.domain.order.entity.OrderLine;
 
