@@ -2,7 +2,7 @@ package project.swithme.order.core.web.payment.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseInformation;
 import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
 import project.swithme.order.core.domain.payment.entity.command.PaymentCommand;

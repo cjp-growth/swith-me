@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.Getter;
-import project.swithme.order.core.common.BaseEntity;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseEntity;
+import project.swithme.order.core.domain.common.BaseInformation;
 
 @Getter
 @Entity(name = "orders")

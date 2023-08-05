@@ -2,7 +2,7 @@ package project.swithme.order.common.testhelper.payment.fixture;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseInformation;
 import project.swithme.order.core.domain.payment.entity.CardInfo;
 import project.swithme.order.core.domain.payment.entity.Payment;
 import project.swithme.order.core.domain.payment.entity.PaymentMethod;

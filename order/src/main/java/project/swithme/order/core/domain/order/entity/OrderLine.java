@@ -12,8 +12,8 @@ import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Objects;
 import lombok.Getter;
-import project.swithme.order.core.common.BaseEntity;
-import project.swithme.order.core.common.BaseInformation;
+import project.swithme.order.core.domain.common.BaseEntity;
+import project.swithme.order.core.domain.common.BaseInformation;
 
 @Getter
 @Entity(name = "order_line")
