@@ -34,7 +34,10 @@ public class LogAspect {
     }
 
     @AfterReturning(value = "bean(*API)", returning = "result")
-    public void afterCallAPI(JoinPoint joinPoint, Object result) {
+    public void afterCallAPI(
+        JoinPoint joinPoint,
+        Object result
+    ) {
         log.info(
             "[### PAYMENT_RESPONSE] <x----- traceId: {}, \nreturn: {}",
             getTraceId(), result
@@ -50,7 +53,10 @@ public class LogAspect {
     }
 
     @AfterReturning(value = "bean(*Facade)", returning = "result")
-    public void afterCallFacade(JoinPoint joinPoint, Object result) {
+    public void afterCallFacade(
+        JoinPoint joinPoint,
+        Object result
+    ) {
         log.info(
             "[### PAYMENT_FACADE] <x----- traceId: {}, \nreturn: {}",
             getTraceId(), result
@@ -66,7 +72,10 @@ public class LogAspect {
     }
 
     @AfterReturning(value = "bean(*Service)", returning = "result")
-    public void afterCallService(JoinPoint joinPoint, Object result) {
+    public void afterCallService(
+        JoinPoint joinPoint,
+        Object result
+    ) {
         log.info(
             "[### PAYMENT_SERVICE] <x----- traceId: {}, \nreturn: {}",
             getTraceId(), result
