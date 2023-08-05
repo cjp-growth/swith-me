@@ -3,7 +3,7 @@ package project.swithme.order.core.domain.payment.entity;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-public enum Method {
+public enum PaymentMethod {
     CARD("카드"),
     VIRTUAL_ACCOUNT("가상계좌"),
     SIMPLE_PAYMENT("간편결제"),
@@ -15,18 +15,18 @@ public enum Method {
 
     private final String method;
 
-    Method(String method) {
+    PaymentMethod(String method) {
         this.method = method;
     }
 
-    public static Method findMethod(String method) {
+    public static PaymentMethod findMethod(String method) {
         return Arrays.stream(values())
             .filter(equalTo(method))
             .findAny()
             .orElseThrow(() -> new IllegalArgumentException("올바른 결제 수단을 입력해주세요."));
     }
 
-    private static Predicate<Method> equalTo(String method) {
+    private static Predicate<PaymentMethod> equalTo(String method) {
         return paymentMethod -> paymentMethod.method.equals(method);
     }
 }
