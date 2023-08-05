@@ -64,8 +64,8 @@ pmd {
 
 checkstyle {
     maxWarnings = 0
-    configFile = file("${rootDir}/lint-config/checkstyle/naver-checkstyle-rules.xml")
-    configProperties = ["suppressionFile": "${rootDir}/config/checkstyle/naver-checkstyle-suppressions.xml"]
+    configFile = file("${rootDir}/lint-config/convention/study-with-me-rule.xml")
+    configProperties = ["suppressionFile": "${rootDir}/lint-config/convention/study-with-me-suppressions.xml"]
     toolVersion = checkStyleVersion
 }
 
