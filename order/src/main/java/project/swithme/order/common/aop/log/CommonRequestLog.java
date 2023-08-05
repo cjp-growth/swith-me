@@ -7,10 +7,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import lombok.Getter;
 
 @Getter
 public class CommonRequestLog {
+
+    private static final String IPV4_PATTERN =
+        "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+    private static final Pattern ipV4Pattern = Pattern.compile(IPV4_PATTERN);
+
+    private static final String IPV6_PATTERN =
+        "(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|"
+            + "([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|"
+            + "([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|"
+            + "([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|"
+            + "[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|"
+            + "fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|"
+            + "::(ffff(:0{1,4}){0,4}|(:0{1,4}){0,5}:)(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\\.25[0-5]|"
+            + "(2[0-4]|1{0,1}[0-9])?[0-9]\\.(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\\.25[0-5]|(2[0-4]|"
+            + "1{0,1}[0-9])?[0-9])";
+    private static final Pattern ipV6Pattern = Pattern.compile(IPV6_PATTERN);
 
     private String ipAddress;
     private String requestURI;
@@ -28,6 +45,14 @@ public class CommonRequestLog {
         this.queryString = servletRequest.getQueryString();
         this.cookies = extractCookies(servletRequest);
         this.sessionInfo = extractSession(servletRequest);
+    }
+
+    private static boolean isValidIpAddress(String ipAddress) {
+        if (ipAddress == null || ipAddress.isBlank()) {
+            return false;
+        }
+        return ipV4Pattern.matcher(ipAddress).matches()
+            || ipV6Pattern.matcher(ipAddress).matches();
     }
 
     // TODO. API Gateway에서 추출
@@ -48,7 +73,7 @@ public class CommonRequestLog {
         if (ip == null) {
             ip = request.getRemoteAddr();
         }
-        if (ip == null) {
+        if (!isValidIpAddress(ip)) {
             return "UN_KNOWN";
         }
         return ip;
@@ -84,7 +109,7 @@ public class CommonRequestLog {
         return parameters;
     }
 
-    private List<String> extractParameterValues(String[] values) {
+    private List<String> extractParameterValues(String... values) {
         if (values.length == 0) {
             return Collections.emptyList();
         }
