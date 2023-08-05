@@ -48,6 +48,9 @@ public class CommonRequestLog {
         if (ip == null) {
             ip = request.getRemoteAddr();
         }
+        if (ip == null) {
+            return "UN_KNOWN";
+        }
         return ip;
     }
 
