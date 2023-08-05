@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.restassured.RestDocumentationFilter;
-import project.swithme.order.core.web.order.presentation.request.OrderRequest;
+import project.swithme.order.core.web.order.presentation.request.OrderCreateRequest;
 import project.swithme.order.test.IntegrationTestBase;
 
 @DisplayName("[DocumentationTest] 주문 생성 API 테스트")
@@ -26,7 +26,7 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
     @Test
     @DisplayName("주문이 성공하면 201 CREATED가 반환된다.")
     void order_create_test() throws Exception {
-        OrderRequest request = createOrderCreateRequest();
+        OrderCreateRequest request = createOrderCreateRequest();
 
         given(this.specification)
             .filters(documents)
@@ -43,8 +43,8 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
             .all();
     }
 
-    private OrderRequest createOrderCreateRequest() {
-        return new OrderRequest(
+    private OrderCreateRequest createOrderCreateRequest() {
+        return new OrderCreateRequest(
             1L,
             1L,
             BigDecimal.valueOf(100_000),

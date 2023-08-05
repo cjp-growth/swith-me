@@ -11,7 +11,7 @@ import org.springframework.restdocs.payload.RequestFieldsSnippet;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
 import org.springframework.restdocs.snippet.Attributes;
 import project.swithme.order.core.domain.payment.entity.PaymentType;
-import project.swithme.order.core.web.order.presentation.request.OrderRequest;
+import project.swithme.order.core.web.order.presentation.request.OrderCreateRequest;
 
 public interface OrderSnippet {
 
@@ -45,7 +45,7 @@ public interface OrderSnippet {
 
     static Attributes.Attribute getAttribute(String field) {
         StringBuilder sb = new StringBuilder();
-        ConstraintDescriptions constraints = new ConstraintDescriptions(OrderRequest.class);
+        ConstraintDescriptions constraints = new ConstraintDescriptions(OrderCreateRequest.class);
 
         List<String> fieldConstraints = constraints.descriptionsForProperty(field);
         for (String constraint : fieldConstraints) {

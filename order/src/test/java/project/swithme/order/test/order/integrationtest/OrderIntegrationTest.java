@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import project.swithme.order.common.auth.StudyWithMeUser;
 import project.swithme.order.core.web.order.facade.OrderFacade;
-import project.swithme.order.core.web.order.presentation.request.OrderRequest;
+import project.swithme.order.core.web.order.presentation.request.OrderCreateRequest;
 import project.swithme.order.test.IntegrationTestBase;
 
 @DisplayName("[IntegrationTest] 주문 통합 테스트")
@@ -20,7 +20,7 @@ class OrderIntegrationTest extends IntegrationTestBase {
     @DisplayName("상품 주문이 성공하면 PK가 Null이 아니다.")
     void order_create_test() {
         StudyWithMeUser studyWithMeUser = new StudyWithMeUser(1L);
-        OrderRequest orderRequest = createOrderRequest(
+        OrderCreateRequest orderCreateRequest = createOrderRequest(
             1L,
             1L,
             BigDecimal.valueOf(75000),
@@ -29,11 +29,11 @@ class OrderIntegrationTest extends IntegrationTestBase {
             "KAKAO_PAY"
         );
 
-        Long newOrderId = orderFacade.createOrder(studyWithMeUser, orderRequest.toCommand());
+        Long newOrderId = orderFacade.createOrder(studyWithMeUser, orderCreateRequest.toCommand());
         assertNotNull(newOrderId);
     }
 
-    private OrderRequest createOrderRequest(
+    private OrderCreateRequest createOrderRequest(
         Long studyCafeId,
         Long productId,
         BigDecimal productPrice,
@@ -41,7 +41,7 @@ class OrderIntegrationTest extends IntegrationTestBase {
         BigDecimal lockerPrice,
         String payType
     ) {
-        return new OrderRequest(
+        return new OrderCreateRequest(
             studyCafeId,
             productId,
             productPrice,
