@@ -37,6 +37,10 @@ public class ErrorResponse {
         this.message = "서버 내부 오류입니다.";
     }
 
+    public static ErrorResponse ofBadRequest() {
+        return new ErrorResponse(400, "올바르지 않은 요청입니다.", DOMAIN);
+    }
+
     public static ErrorResponse ofServer() {
         return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "ORDER");
     }

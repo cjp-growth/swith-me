@@ -11,7 +11,7 @@ import project.swithme.order.core.domain.order.entity.PayType;
 import project.swithme.order.core.web.order.application.command.OrderCreateCommand;
 
 @Getter
-public class OrderRequest {
+public class OrderCreateRequest {
 
     @NotNull(message = "스터디 카페 PK를 입력해주세요.")
     @Positive(message = "올바른 스터디 카페 PK를 입력해주세요.")
@@ -19,40 +19,43 @@ public class OrderRequest {
 
     @NotNull(message = "상품 PK를 입력해주세요.")
     @Positive(message = "올바른 상품 PK를 입력해주세요.")
-    private Long productId;
+    private Long studyCafeTicketId;
 
     @NotNull(message = "상품 금액을 입력해주세요.")
-    @DecimalMin(value = "0", message = "올바른 금액을 입력해주세요.")
-    private BigDecimal productPrice;
+    @DecimalMin(value = "0", message = "올바른 스터디 카페 이용권 금액을 입력해주세요.")
+    private BigDecimal studyCafeTicketPrice;
 
     @Nullable
+    @Positive(message = "올바른 락커 PK를 입력해주세요.")
     private Long lockerId;
 
     @Nullable
+    @DecimalMin(value = "0", message = "올바른 락커 이용권 금액을 입력해주세요.")
     private BigDecimal lockerPrice;
 
     @Nullable
+    @NotBlank(message = "주문명을 입력해주세요.")
     private String title;
 
     @NotNull(message = "결제 수단을 입력해주세요.")
     @NotBlank(message = "올바른 결제 수단을 입력해주세요.")
     private String payType;
 
-    private OrderRequest() {
+    private OrderCreateRequest() {
     }
 
-    public OrderRequest(
+    public OrderCreateRequest(
         Long studyCafeId,
-        Long productId,
-        BigDecimal productPrice,
+        Long studyCafeTicketId,
+        BigDecimal studyCafeTicketPrice,
         Long lockerId,
         BigDecimal lockerPrice,
         String title,
         String payType
     ) {
         this.studyCafeId = studyCafeId;
-        this.productId = productId;
-        this.productPrice = productPrice;
+        this.studyCafeTicketId = studyCafeTicketId;
+        this.studyCafeTicketPrice = studyCafeTicketPrice;
         this.lockerId = lockerId;
         this.lockerPrice = lockerPrice;
         this.title = title;
@@ -62,12 +65,21 @@ public class OrderRequest {
     public OrderCreateCommand toCommand() {
         return new OrderCreateCommand(
             studyCafeId,
-            productId,
-            productPrice,
+            studyCafeTicketId,
+            studyCafeTicketPrice,
             lockerId,
             lockerPrice,
             title,
             PayType.findPayType(payType)
+        );
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "studyCafeId: %s, studyCafeTicketId: %s, studyCafeTicketPrice: %s, lockerId: %s, lockerPrice: %s, title: %s, payType: %s",
+            studyCafeId, studyCafeTicketId, studyCafeTicketPrice, lockerId, lockerPrice, title,
+            payType
         );
     }
 }

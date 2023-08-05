@@ -218,6 +218,6 @@ public class Payment extends BaseEntity {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.format("paymentId: %s", id);
     }
 }

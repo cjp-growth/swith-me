@@ -30,10 +30,6 @@ public class StudyWithMeUser {
 
     @Override
     public String toString() {
-        return userId.toString();
-    }
-
-    public Long getUserId() {
-        return this.userId;
+        return String.format("userId: %s", userId);
     }
 }

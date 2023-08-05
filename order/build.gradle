@@ -64,8 +64,8 @@ pmd {
 
 checkstyle {
     maxWarnings = 0
-    configFile = file("${rootDir}/lint-config/checkstyle/naver-checkstyle-rules.xml")
-    configProperties = ["suppressionFile": "${rootDir}/config/checkstyle/naver-checkstyle-suppressions.xml"]
+    configFile = file("${rootDir}/lint-config/convention/study-with-me-rule.xml")
+    configProperties = ["suppressionFile": "${rootDir}/lint-config/convention/study-with-me-suppressions.xml"]
     toolVersion = checkStyleVersion
 }
 
@@ -107,6 +107,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-webflux')
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     implementation("com.github.ben-manes.caffeine:caffeine")

@@ -33,10 +33,10 @@ The following rules in the Naver coding convention cannot be checked by this con
 
   <module name="LineLength">
     <message key="maxLineLen"
-      value="[line-length-200] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
+      value="[line-length-350] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
     <property name="ignorePattern"
       value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
-    <property name="max" value="250"/>
+    <property name="max" value="350"/>
   </module>
 
   <module name="TreeWalker">

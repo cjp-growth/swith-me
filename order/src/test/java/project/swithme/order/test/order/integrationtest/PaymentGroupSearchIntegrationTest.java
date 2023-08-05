@@ -2,9 +2,14 @@ package project.swithme.order.test.order.integrationtest;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import project.swithme.order.core.web.order.presentation.PaymentGroupSearchAPI;
 import project.swithme.order.test.IntegrationTestBase;
 
@@ -13,6 +18,18 @@ class PaymentGroupSearchIntegrationTest extends IntegrationTestBase {
 
     @SpyBean
     private PaymentGroupSearchAPI paymentGroupSearchAPI;
+
+    @BeforeEach
+    void setup() {
+        ServletRequestAttributes attributes =
+            new ServletRequestAttributes(new MockHttpServletRequest());
+        RequestContextHolder.setRequestAttributes(attributes);
+    }
+
+    @AfterEach
+    void cleanup() {
+        RequestContextHolder.resetRequestAttributes();
+    }
 
     @Test
     @DisplayName("캐싱을 적용하면 메서드(searchPayGroup)를 여러번 호출하더라도 실제로는 한 번만 호출된다.")

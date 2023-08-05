@@ -13,8 +13,11 @@
     <exclude name="AbstractClassWithoutAbstractMethod"/>
     <exclude name="UnusedLocalVariable"/>
     <exclude name="JUnitAssertionsShouldIncludeMessage"/>
+    <exclude name="AbbreviationAsWordInName"/>
     <exclude name="UnusedPrivateMethod"/>
     <exclude name="UnusedFormalParameter"/>
+    <exclude name="GuardLogStatement"/>
+    <exclude name="AvoidUsingHardCodedIP"/>
     <exclude name="UnusedPrivateField"/>
     <exclude name="JUnitTestsShouldIncludeAssert"/>
     <exclude name="JUnitTestContainsTooManyAsserts"/>

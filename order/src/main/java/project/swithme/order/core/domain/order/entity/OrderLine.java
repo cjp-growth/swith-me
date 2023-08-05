@@ -109,7 +109,7 @@ public class OrderLine extends BaseEntity {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.format("orderLineId: %s", id);
     }
 }
 

@@ -34,7 +34,8 @@ public class Response<T> {
     @Override
     public String toString() {
         return String.format(
-            "Response: [data: %s, code: %s, message: %s, time:%s]", data, code, message, time
+            "data: %s, code: %s, message: %s, time:%s",
+            data, code, message, time
         );
     }
 }

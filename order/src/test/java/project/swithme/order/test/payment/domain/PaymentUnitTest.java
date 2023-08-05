@@ -45,7 +45,8 @@ class PaymentUnitTest {
     @DisplayName("toString을 재정의 하면 지정된 양식으로 출력된다.")
     void to_string_override_test() {
         Payment payment = createPayment(1L, 1L);
+        String expected = "paymentId: " + payment.getId().toString();
 
-        assertEquals(payment.getId().toString(), payment.toString());
+        assertEquals(expected, payment.toString());
     }
 }

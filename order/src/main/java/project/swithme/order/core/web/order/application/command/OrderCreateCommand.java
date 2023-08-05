@@ -10,33 +10,18 @@ import project.swithme.order.core.domain.order.entity.PayType;
 
 public record OrderCreateCommand(
     Long studyCafeId,
-    Long productId,
-    BigDecimal productPrice,
+    Long studyCafeTicketId,
+    BigDecimal studyCafeTicketPrice,
     Long lockerId,
     BigDecimal lockerPrice,
     String title,
     PayType payType
 ) {
 
-    public OrderCreateCommand {
-        validateLocker(lockerId, lockerPrice);
-    }
-
-    private void validateLocker(
-        Long lockerId,
-        BigDecimal lockerPrice
-    ) {
-        if (lockerId != null && lockerPrice == null) {
-            throw new IllegalArgumentException("올바른 락커 정보를 입력해주세요.");
-        }
-        if (lockerId == null && lockerPrice != null) {
-            throw new IllegalArgumentException("올바른 락커 정보를 입력해주세요.");
-        }
-    }
-
     public Order toEntity(Long userId) {
         List<OrderLine> orderLines = new ArrayList<>();
-        OrderLine ticket = createOrderLine(userId, studyCafeId, productId, productPrice);
+        OrderLine ticket = createOrderLine(userId, studyCafeId, studyCafeTicketId,
+            studyCafeTicketPrice);
         orderLines.add(ticket);
 
         if (lockerId != null && lockerPrice != null) {
@@ -44,5 +29,14 @@ public record OrderCreateCommand(
             orderLines.add(locker);
         }
         return new Order(userId, title, payType, orderLines);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "studyCafeId: %s, studyCafeTicketId: %s, studyCafeTicketPrice: %s, lockerId: %s, lockerPrice: %s, title: %s, payType: %s",
+            studyCafeId, studyCafeTicketId, studyCafeTicketPrice, lockerId, lockerPrice, title,
+            payType
+        );
     }
 }
