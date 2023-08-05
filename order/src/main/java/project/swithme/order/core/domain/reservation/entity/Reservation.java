@@ -77,6 +77,6 @@ public class Reservation extends BaseEntity {
 
     @Override
     public String toString() {
-        return id.toString();
+        return String.format("reservationId: %s", id);
     }
 }

@@ -190,7 +190,7 @@ public class Order extends BaseEntity {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.format("orderId: %s", id);
     }
 }
 
