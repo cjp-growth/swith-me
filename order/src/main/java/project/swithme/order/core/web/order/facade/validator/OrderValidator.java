@@ -14,8 +14,8 @@ public class OrderValidator {
     public void validate(OrderCreateCommand orderCreateCommand) {
         productClient.validateProductDetails(
             orderCreateCommand.studyCafeId(),
-            orderCreateCommand.productId(),
-            orderCreateCommand.productPrice(),
+            orderCreateCommand.studyCafeTicketId(),
+            orderCreateCommand.studyCafeTicketPrice(),
             orderCreateCommand.lockerId(),
             orderCreateCommand.lockerPrice()
         );
