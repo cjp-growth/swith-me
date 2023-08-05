@@ -22,10 +22,10 @@ public interface OrderSnippet {
     RequestFieldsSnippet ORDER_CREATE_REQUEST_FIELD_DESCRIPTOR = requestFields(
         fieldWithPath("studyCafeId").description("스터디 카페 PK")
             .attributes(getAttribute("studyCafeId")),
-        fieldWithPath("productId").description("상품 PK")
-            .attributes(getAttribute("productId")),
-        fieldWithPath("productPrice").description("상품 가격")
-            .attributes(getAttribute("productPrice")),
+        fieldWithPath("studyCafeTicketId").description("상품(스터디 카페 이용권) PK")
+            .attributes(getAttribute("studyCafeTicketId")),
+        fieldWithPath("studyCafeTicketPrice").description("상품(스터디 카페 이용권 가격) 가격")
+            .attributes(getAttribute("studyCafeTicketPrice")),
         fieldWithPath("lockerId").description("락커 PK")
             .attributes(getAttribute("lockerId")),
         fieldWithPath("lockerPrice").description("락커 가격")

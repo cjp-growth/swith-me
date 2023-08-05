@@ -204,7 +204,8 @@ class OrderDomainTest {
     @DisplayName("toString을 재정의 하면 지정된 양식으로 출력된다.")
     void to_string_override_test() {
         Order order = createOrder(orderUniqueId);
+        String expected = "orderId: " + order.getId().toString();
 
-        assertEquals(order.getId().toString(), order.toString());
+        assertEquals(expected, order.toString());
     }
 }
