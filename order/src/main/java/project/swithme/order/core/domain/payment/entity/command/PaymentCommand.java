@@ -8,8 +8,8 @@ import project.swithme.order.core.domain.payment.entity.CardInfo;
 import project.swithme.order.core.domain.payment.entity.DiscountInfo;
 import project.swithme.order.core.domain.payment.entity.EasyPayInfo;
 import project.swithme.order.core.domain.payment.entity.GiftCertificateInfo;
-import project.swithme.order.core.domain.payment.entity.Method;
 import project.swithme.order.core.domain.payment.entity.MobilePhoneInfo;
+import project.swithme.order.core.domain.payment.entity.PaymentMethod;
 import project.swithme.order.core.domain.payment.entity.PaymentStatus;
 import project.swithme.order.core.domain.payment.entity.TransferInfo;
 import project.swithme.order.core.domain.payment.entity.VirtualAccountInfo;
@@ -24,7 +24,7 @@ public class PaymentCommand {
     private String orderName;
     private String mId;
     private String currency;
-    private Method method;
+    private PaymentMethod method;
     private BigDecimal totalAmount;
     private BigDecimal balanceAmount;
     private PaymentStatus status;
@@ -94,7 +94,7 @@ public class PaymentCommand {
         this.orderName = orderName;
         this.mId = mId;
         this.currency = currency;
-        this.method = Method.findMethod(method);
+        this.method = PaymentMethod.findMethod(method);
         this.totalAmount = totalAmount;
         this.balanceAmount = balanceAmount;
         this.status = PaymentStatus.valueOf(status);

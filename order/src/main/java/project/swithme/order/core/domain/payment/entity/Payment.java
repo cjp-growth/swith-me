@@ -48,7 +48,7 @@ public class Payment extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "method")
-    private Method method;
+    private PaymentMethod method;
 
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
@@ -139,7 +139,7 @@ public class Payment extends BaseEntity {
         String version,
         String orderName,
         String currency,
-        Method method,
+        PaymentMethod method,
         BigDecimal totalAmount,
         BigDecimal balanceAmount,
         BigDecimal suppliedAmount,
