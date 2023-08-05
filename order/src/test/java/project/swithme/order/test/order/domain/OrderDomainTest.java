@@ -55,7 +55,7 @@ class OrderDomainTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"COMPLETE", "CANCEL", "REFUND"})
-    @DisplayName("주문 상태가 PAYMENT_REQUEST가 아니라면 TRUE를 반환한다.")
+    @DisplayName("주문 상태가 PAYMENT_REQUEST가 아니라면 FALSE를 반환한다.")
     void order_invalid_status_test(String parameter) {
         Order order = createOrder(OrderStatus.valueOf(parameter));
 

@@ -21,7 +21,7 @@ class MethodUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"공짜", "무이자"})
-    @DisplayName("올바르지 않은 결제 방법을 조회하면 IllegalArgument.")
+    @DisplayName("올바르지 않은 결제 방법을 조회하면 IllegalArgument이 발생한다.")
     void invalid_method_search_test(String parameter) {
         assertThatThrownBy(() -> Method.findMethod(parameter))
             .isExactlyInstanceOf(IllegalArgumentException.class)
