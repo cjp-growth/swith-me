@@ -17,7 +17,7 @@ import project.swithme.order.core.domain.common.BaseEntity;
 import project.swithme.order.core.domain.common.BaseInformation;
 
 @Getter
-@Entity(name = "toss")
+@Entity(name = "payment")
 public class Payment extends BaseEntity {
 
     @Id
