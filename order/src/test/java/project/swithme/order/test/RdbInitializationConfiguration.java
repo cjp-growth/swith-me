@@ -1,14 +1,12 @@
 package project.swithme.order.test;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.metamodel.EntityType;
-import jakarta.persistence.metamodel.Metamodel;
+import jakarta.persistence.Query;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,34 +15,31 @@ public class RdbInitializationConfiguration {
 
     private static final String SET_FOREIGN_KEY_CHECKS_FALSE = "SET FOREIGN_KEY_CHECKS = 0";
     private static final String SET_FOREIGN_KEY_CHECKS_TRUE = "SET FOREIGN_KEY_CHECKS = 1";
-
+    private static final String ALL_TABLE_NAMES =
+        "SELECT table_name FROM information_schema.TABLES WHERE TABLE_SCHEMA = ?";
+    private final Set<String> tableNames = new HashSet<>();
     private final EntityManager entityManager;
-    private Set<String> tableNames;
+    private final String schema;
+
 
     public RdbInitializationConfiguration(
-        EntityManager entityManager,
-        Set<String> tableNames
+        @Value("${schema_name}")
+        String schema,
+        EntityManager entityManager
     ) {
+        this.schema = schema;
         this.entityManager = entityManager;
-        this.tableNames = tableNames;
-    }
-
-    private static Function<EntityType<?>, String> toLowerCase() {
-        return entityType -> entityType.getName().toLowerCase();
     }
 
     @PostConstruct
     public void afterPropertiesSet() {
-        Metamodel metamodel = entityManager.getMetamodel();
-        tableNames = metamodel.getEntities().stream()
-            .filter(isEntityTypeAndNotNull())
-            .map(toLowerCase())
-            .collect(Collectors.toUnmodifiableSet());
-    }
+        Query query = entityManager.createNativeQuery(ALL_TABLE_NAMES);
+        query.setParameter(1, schema);
 
-    private Predicate<EntityType<?>> isEntityTypeAndNotNull() {
-        return entityType -> entityType.getJavaType()
-            .getAnnotation(Entity.class) != null;
+        List<Object> tables = query.getResultList();
+        for (Object obj : tables) {
+            tableNames.add(obj.toString());
+        }
     }
 
     @Transactional
