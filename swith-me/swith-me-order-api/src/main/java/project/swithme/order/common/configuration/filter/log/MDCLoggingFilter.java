@@ -31,12 +31,12 @@ class MDCLoggingFilter implements Filter {
         MDC.put("traceId", uuid.toString());
 
         long startTime = System.currentTimeMillis();
-        log.info("[### PAYMENT_START] -----x> traceId: {}", uuid);
+        log.info("[### ORDER_START] -----x> traceId: {}", uuid);
         filterChain.doFilter(servletRequest, servletResponse);
 
         long endTime = System.currentTimeMillis();
         long latency = endTime - startTime;
-        log.info("[### PAYMENT_END] <x----- traceId: {}, in-server-latency: {}ms", uuid, latency);
+        log.info("[### ORDER_END] <x----- traceId: {}, in-server-latency: {}ms", uuid, latency);
         MDC.clear();
     }
 }
