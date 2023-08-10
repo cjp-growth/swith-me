@@ -4,7 +4,7 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.swithme.payment.common.response.codeandmessage.CodeAndMessage;
+import project.study.support.response.codeandmessage.CodeAndMessage;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
 import project.swithme.payment.core.out.port.PaymentCancelPort;
 import project.swithme.payment.core.out.port.request.PaymentCancelRequest;

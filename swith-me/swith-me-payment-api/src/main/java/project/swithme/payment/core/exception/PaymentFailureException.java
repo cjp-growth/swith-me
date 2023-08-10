@@ -1,7 +1,7 @@
 package project.swithme.payment.core.exception;
 
 import org.springframework.http.HttpStatus;
-import project.swithme.payment.common.exception.DomainException;
+import project.study.support.exception.DomainException;
 
 public class PaymentFailureException extends DomainException {
 

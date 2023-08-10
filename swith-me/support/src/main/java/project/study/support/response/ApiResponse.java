@@ -1,4 +1,4 @@
-package project.swithme.payment.common.response;
+package project.study.support.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

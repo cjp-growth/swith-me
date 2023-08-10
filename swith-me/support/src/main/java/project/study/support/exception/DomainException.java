@@ -1,8 +1,8 @@
-package project.swithme.order.common.exception;
+package project.study.support.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import project.swithme.order.common.response.codeandmessage.CodeAndMessage;
+import project.study.support.response.codeandmessage.CodeAndMessage;
 
 @Getter
 public class DomainException extends RuntimeException {

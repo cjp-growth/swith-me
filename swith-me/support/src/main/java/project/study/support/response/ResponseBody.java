@@ -1,4 +1,4 @@
-package project.swithme.order.common.response;
+package project.study.support.response;
 
 import java.time.LocalDateTime;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package project.swithme.order.common.response.codeandmessage;
+package project.study.support.response.codeandmessage;
 
 public interface CodeAndMessage {
 

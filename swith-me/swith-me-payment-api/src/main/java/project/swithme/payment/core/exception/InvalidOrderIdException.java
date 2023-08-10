@@ -2,7 +2,7 @@ package project.swithme.payment.core.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import project.swithme.payment.common.exception.DomainException;
+import project.study.support.exception.DomainException;
 
 @Getter
 public class InvalidOrderIdException extends DomainException {

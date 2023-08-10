@@ -2,7 +2,7 @@ package project.swithme.payment.core.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import lombok.Getter;
-import project.swithme.payment.common.exception.DomainException;
+import project.study.support.exception.DomainException;
 
 @Getter
 public class InvalidPriceException extends DomainException {

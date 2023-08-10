@@ -1,6 +1,6 @@
 package project.swithme.payment.core.facade.validator;
 
-import project.swithme.payment.common.exception.DomainException;
+import project.study.support.exception.DomainException;
 
 public class InvalidOrderStatusException extends DomainException {
 

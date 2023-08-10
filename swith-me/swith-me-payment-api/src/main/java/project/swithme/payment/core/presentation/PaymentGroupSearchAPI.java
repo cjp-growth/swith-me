@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import project.study.support.response.ApiResponse;
 import project.swithme.payment.common.configuration.business.PaymentGroup;
-import project.swithme.payment.common.response.ApiResponse;
 import project.swithme.payment.core.presentation.response.PayGroupsResponse;
 import project.swithme.payment.core.presentation.response.PayTypesResponse;
 

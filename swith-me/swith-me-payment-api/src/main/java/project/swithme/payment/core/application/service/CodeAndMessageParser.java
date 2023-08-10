@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import project.swithme.payment.common.response.codeandmessage.CodeAndMessage;
+import project.study.support.response.codeandmessage.CodeAndMessage;
 import project.swithme.payment.core.exception.PaymentCancelCodeAndMessage;
 import project.swithme.payment.core.exception.PaymentErrorResponse;
 

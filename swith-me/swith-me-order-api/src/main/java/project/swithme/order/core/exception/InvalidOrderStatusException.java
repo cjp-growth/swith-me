@@ -1,7 +1,7 @@
 package project.swithme.order.core.exception;
 
 import org.springframework.http.HttpStatus;
-import project.swithme.order.common.exception.DomainException;
+import project.study.support.exception.DomainException;
 
 public class InvalidOrderStatusException extends DomainException {
 
