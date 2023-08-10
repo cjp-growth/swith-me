@@ -1,4 +1,4 @@
-package project.swithme.domain.test.order;
+package project.swithme.payment.test.unittest;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import project.swithme.domain.core.order.entity.PayGroup;
-import project.swithme.domain.core.payment.PaymentGroup;
+import project.swithme.payment.common.configuration.business.PaymentGroup;
 
 @DisplayName("[UnitTest] 결제/지불 그룹 단위 테스트")
 class PaymentGroupUnitTest {
