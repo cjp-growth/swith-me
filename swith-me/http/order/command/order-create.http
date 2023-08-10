@@ -1,0 +1,13 @@
+### Order Create API ###
+POST {{api}}/orders
+Content-Type: application/json
+
+{
+  "studyCafeId": 1,
+  "studyCafeTicketId": 1,
+  "studyCafeTicketPrice": 100,
+  "payType": "TOSS",
+  "lockerId": 1,
+  "lockerPrice": 1,
+  "title": "스터디 카페 1달 정기 이용권 및 락커 이용권"
+}

@@ -1,0 +1,8 @@
+### 잘못된 주문 PK 요청 ###
+GET {{api}}/payments/payment?orderId=aaa715091a0-2d3b-11ee-b5b9-bde8208d538f&paymentKey=abcd&paymentType=NORMAL&amount=30300
+
+### 잘못된 금액 Callback ###
+GET {{api}}/payments/payment?orderId=715091a0-2d3b-11ee-b5b9-bde8208d538f&paymentKey=abcd&paymentType=NORMAL&amount=30300
+
+### 잘못된 금액 Callback ###
+GET {{api}}/payments/payment?orderId=467b7a91-2dd7-11ee-9355-0dede8d23484&paymentKey=abcd&paymentType=NORMAL&amount=1
