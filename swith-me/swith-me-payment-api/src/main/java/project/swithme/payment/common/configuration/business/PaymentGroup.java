@@ -1,4 +1,4 @@
-package project.swithme.domain.core.payment;
+package project.swithme.payment.common.configuration.business;
 
 import java.util.ArrayList;
 import java.util.HashMap;
