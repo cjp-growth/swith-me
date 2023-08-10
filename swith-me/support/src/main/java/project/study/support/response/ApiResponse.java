@@ -3,19 +3,19 @@ package project.study.support.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class ApiResponse<T> extends ResponseEntity<ResponseBody<T>> {
+public class ApiResponse<T> extends ResponseEntity<ResponsePayload<T>> {
 
     private static final String CREATED = "CREATED";
 
     public ApiResponse(T data) {
-        super(new ResponseBody<>(data, HttpStatus.CREATED), HttpStatus.CREATED);
+        super(new ResponsePayload<>(data, HttpStatus.CREATED), HttpStatus.CREATED);
     }
 
     public ApiResponse(
         T data,
         HttpStatus status
     ) {
-        super(new ResponseBody<>(data, status), status);
+        super(new ResponsePayload<>(data, status), status);
     }
 
     public ApiResponse(
@@ -23,7 +23,7 @@ public class ApiResponse<T> extends ResponseEntity<ResponseBody<T>> {
         HttpStatus status,
         String message
     ) {
-        super(new ResponseBody<>(data, status, message), status);
+        super(new ResponsePayload<>(data, status, message), status);
     }
 
     public static <T> ApiResponse<T> created(T data) {
