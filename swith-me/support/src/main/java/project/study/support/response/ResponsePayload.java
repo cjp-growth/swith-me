@@ -5,14 +5,14 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
-public class ResponseBody<T> {
+public class ResponsePayload<T> {
 
     private final T data;
     private final int code;
     private final String message;
     private final LocalDateTime time = LocalDateTime.now();
 
-    public ResponseBody(
+    public ResponsePayload(
         T data,
         HttpStatus status
     ) {
@@ -21,7 +21,7 @@ public class ResponseBody<T> {
         this.message = "Success";
     }
 
-    public ResponseBody(
+    public ResponsePayload(
         T data,
         HttpStatus status,
         String message
