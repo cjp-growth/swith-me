@@ -1,0 +1,214 @@
+import com.github.spotbugs.snom.SpotBugsTask
+
+buildscript {
+    ext {
+        snippetsDir = file("build/generated-snippets")
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin")
+        classpath("io.spring.gradle:dependency-management-plugin")
+    }
+}
+
+plugins {
+    id("java")
+    id('org.springframework.boot')
+    id("io.spring.dependency-management")
+    id("org.asciidoctor.jvm.convert")
+    id("com.epages.restdocs-api-spec")
+    id("org.hidetake.swagger.generator")
+    id("checkstyle")
+    id("pmd")
+    id("com.github.spotbugs")
+    id("jacoco")
+}
+
+pmd {
+    toolVersion = pmdVersion
+    pmdTest.enabled = true
+    consoleOutput = true
+    ignoreFailures = false
+    ruleSetFiles = files("${rootDir}/lint-config/pmd/swith-me-pmd-rules.xml")
+}
+
+checkstyle {
+    maxWarnings = 0
+    configFile = file("${rootDir}/lint-config/convention/study-with-me-rule.xml")
+    configProperties = ["suppressionFile": "${rootDir}/lint-config/convention/study-with-me-suppressions.xml"]
+    toolVersion = checkStyleVersion
+}
+
+allprojects {
+    group = projectGroup
+    version = applicationVersion
+    sourceCompatibility = javaVersion
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required = true
+            html.required = true
+        }
+    }
+}
+
+subprojects {
+    apply(plugin: "java")
+    apply(plugin: "java-library")
+    apply(plugin: "org.springframework.boot")
+    apply(plugin: "io.spring.dependency-management")
+    apply plugin: "com.github.spotbugs"
+    apply(plugin: "jacoco")
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+        implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+        implementation(group: 'com.fasterxml.uuid', name: 'java-uuid-generator', version: '3.1.4')
+
+        // SpotBugs
+        spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
+
+        // Test
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+        // Lombok
+        compileOnly("org.projectlombok:lombok")
+        annotationProcessor("org.projectlombok:lombok")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        testAnnotationProcessor("org.projectlombok:lombok")
+        testCompileOnly("org.projectlombok:lombok")
+    }
+
+    spotbugs {
+        ignoreFailures = false
+        showStackTraces = true
+        showProgress = true
+        effort = 'default'
+        reportLevel = 'default'
+        visitors = ['FindSqlInjection', 'SwitchFallthrough']
+        omitVisitors = ['FindNonShortCircuit']
+        reportsDir = file("$buildDir/spotbugs")
+        onlyAnalyze = ['project.*']
+        maxHeapSize = '1g'
+        extraArgs = ['-nested:false']
+        jvmArgs = ['-Duser.language=ja']
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+    }
+
+    tasks.withType(SpotBugsTask) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        "**/reservation/*",
+                        "**/extractor/*",
+                        "**/adapter/*",
+                        "**/common/*",
+                        "**/command/*",
+                        "**/request/*",
+                        "**/response/*",
+                        "**/exception/*",
+                        "**/configuration/*",
+                        "project/**/*Application.*",
+                        "project/**/*Request.*",
+                        "project/**/*Response.*",
+                ])
+            }))
+        }
+        finalizedBy jacocoTestCoverageVerification
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                enabled = true;
+                element = 'CLASS'
+
+                // TODO. 개발 초기 단계라 커버리지 추후 조정
+                limit {
+                    counter = 'BRANCH'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.0
+                }
+            }
+        }
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        "**/reservation/*",
+                        "**/extractor/*",
+                        "**/adapter/*",
+                        "**/common/*",
+                        "**/command/*",
+                        "**/request/*",
+                        "**/response/*",
+                        "**/exception/*",
+                        "**/configuration/*",
+                        "project/**/*Application.*",
+                        "project/**/*Request.*",
+                        "project/**/*Response.*",
+                ])
+            }))
+        }
+        finalizedBy jacocoTestCoverageVerification
+    }
+}
+
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}
+
+configurations {
+    asciidoctorExtensions
+}
+
+openapi3 {
+    setServer("http://localhost:8080")
+    title = 'Study-With-Me API 문서'
+    description = 'Study-With-Me API 문서'
+    version = '0.0.1'
+    format = 'yaml'
+}
+
+tasks.withType(GenerateSwaggerUI) {
+    dependsOn 'openapi3'
+}
+
+//tasks.withType(BootJar) {
+//    dependsOn 'copySwaggerUI'
+//}

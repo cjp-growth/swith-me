@@ -1,0 +1,37 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.springframework.boot") {
+                useVersion springBootVersion as String
+            }
+            if (requested.id.id == "io.spring.dependency-management") {
+                useVersion springDependencyManagementVersion as String
+            }
+            if (requested.id.id == "org.asciidoctor.jvm.convert") {
+                useVersion jvmConvertVersion as String
+            }
+            if (requested.id.id == "com.epages.restdocs-api-spec") {
+                useVersion restdocsApiSpecVersion as String
+            }
+            if (requested.id.id == "com.epages.restdocs-api-spec") {
+                useVersion restdocsApiSpecVersion as String
+            }
+            if (requested.id.id == "org.hidetake.swagger.generator") {
+                useVersion swaggerVersion as String
+            }
+            if (requested.id.id == "com.github.spotbugs") {
+                useVersion spotBugsVersion as String
+            }
+        }
+    }
+}
+
+rootProject.name = 'swith-me'
+
+include(
+        "swith-me-order-api",
+        "swith-me-payment-api",
+        "swith-me-domain",
+        "storage",
+        "support"
+)

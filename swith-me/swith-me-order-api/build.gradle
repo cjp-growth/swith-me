@@ -1,0 +1,17 @@
+dependencies {
+    implementation(project(":swith-me-domain"))
+    implementation(project(":storage"))
+    implementation(project(":support"))
+    testImplementation(testFixtures(project(":swith-me-domain")))
+
+    // SpringBoot
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-webflux')
+
+    // Feign
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+    // Test
+    testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
+}
