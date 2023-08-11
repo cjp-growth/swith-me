@@ -11,7 +11,7 @@ import project.swithme.payment.core.application.PaymentCancelUseCase;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/payments/fail")
-public class CardPaymentCancelAPI {
+public class TossCardPaymentCancelAPI {
 
     private final PaymentCancelUseCase paymentCancelUseCase;
 

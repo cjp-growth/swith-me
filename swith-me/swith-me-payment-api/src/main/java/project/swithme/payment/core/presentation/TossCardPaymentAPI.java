@@ -1,13 +1,13 @@
 package project.swithme.payment.core.presentation;
 
+import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.CREATED;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import project.study.support.response.ApiResponse;
+import project.study.support.response.success.ApiResponse;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.payment.core.facade.PaymentFacade;
 import project.swithme.payment.core.presentation.response.PaymentCompleteResponse;
@@ -15,7 +15,7 @@ import project.swithme.payment.core.presentation.response.PaymentCompleteRespons
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/payments")
-public class CardPaymentAPI {
+public class TossCardPaymentAPI {
 
     private final PaymentFacade paymentFacade;
 
@@ -26,8 +26,8 @@ public class CardPaymentAPI {
         @RequestParam("paymentType") PaymentType paymentType,
         @RequestParam("amount") BigDecimal amount
     ) {
-        Long paymentId = paymentFacade.pay(orderId, paymentKey, paymentType, amount);
+        Long paymentId = paymentFacade.requestApproval(orderId, paymentKey, paymentType, amount);
         PaymentCompleteResponse data = new PaymentCompleteResponse(paymentId);
-        return ApiResponse.of(data, HttpStatus.CREATED);
+        return ApiResponse.of(data, CREATED);
     }
 }
