@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import project.study.support.exception.CommonException;
 import project.study.support.exception.DomainException;
 import project.study.support.exception.OutPortException;
 import project.study.support.response.failure.ErrorResponse;
@@ -13,6 +14,12 @@ import project.study.support.response.failure.ErrorResponse;
 public class GlobalExceptionHandler {
 
     private static final String DOMAIN = "PAYMENT";
+
+    @ExceptionHandler(CommonException.class)
+    public ResponseEntity<ErrorResponse> resolveCommonException(CommonException exception) {
+        return ResponseEntity.status(exception.getStatusCode())
+            .body(ErrorResponse.of(exception));
+    }
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ErrorResponse> resolveDomainException(DomainException exception) {
