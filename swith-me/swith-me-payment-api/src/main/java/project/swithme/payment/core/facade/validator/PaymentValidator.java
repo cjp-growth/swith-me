@@ -3,6 +3,7 @@ package project.swithme.payment.core.facade.validator;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 import project.swithme.domain.core.order.entity.Order;
+import project.swithme.payment.core.exception.InvalidOrderStatusException;
 import project.swithme.payment.core.exception.InvalidPriceException;
 
 @Component

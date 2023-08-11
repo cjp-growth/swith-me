@@ -22,7 +22,7 @@ import project.swithme.domain.core.order.entity.Order;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.payment.common.persistence.PersistenceHelper;
 import project.swithme.payment.core.facade.PaymentFacade;
-import project.swithme.payment.core.presentation.CardPaymentAPI;
+import project.swithme.payment.core.presentation.TossCardPaymentAPI;
 import project.swithme.payment.test.IntegrationTestBase;
 
 @AutoConfigureMockMvc
@@ -38,14 +38,14 @@ class PaymentDocumentationTest extends IntegrationTestBase {
     private PersistenceHelper persistenceHelper;
 
     @InjectMocks
-    private CardPaymentAPI paymentAPI;
+    private TossCardPaymentAPI paymentAPI;
 
     @Mock
     private PaymentFacade paymentFacade;
 
     @BeforeEach
     void setUp() {
-        this.paymentAPI = new CardPaymentAPI(paymentFacade);
+        this.paymentAPI = new TossCardPaymentAPI(paymentFacade);
         mockMvc = MockMvcBuilders.standaloneSetup(paymentAPI)
             .build();
     }
@@ -56,7 +56,7 @@ class PaymentDocumentationTest extends IntegrationTestBase {
         Order newOrder = persistenceHelper.persist(createOrder(PAYMENT_REQUEST));
         String orderId = newOrder.getUniqueId().toString();
 
-        when(paymentFacade.pay(
+        when(paymentFacade.requestApproval(
             orderId,
             getPaymentKey(),
             PaymentType.NORMAL,

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import project.swithme.payment.common.configuration.feign.BasicAuthConfiguration;
-import project.swithme.payment.core.out.adapter.response.CancelsResponse;
-import project.swithme.payment.core.out.port.request.PaymentCancelRequest;
+import project.swithme.payment.core.out.port.adapter.response.success.CancelsResponse;
+import project.swithme.payment.core.out.port.adapter.request.PaymentCancelRequest;
 
 @FeignClient(
     name = "paymentCancelPort",

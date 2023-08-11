@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import project.study.support.codeandmessage.CodeAndMessage;
+import project.study.support.codeandmessage.parser.CodeAndMessageParser;
 import project.swithme.domain.core.payment.entity.command.PaymentCommand;
-import project.swithme.payment.common.codeandmessage.parser.TossCodeAndMessageParser;
 import project.swithme.payment.core.exception.PaymentFailureException;
 import project.swithme.payment.core.exception.TossPaymentException;
 import project.swithme.payment.core.out.port.PaymentPort;
@@ -24,7 +24,7 @@ public class PaymentAdapter implements PaymentPort {
 
     private final PaymentApprovalAdapter paymentApprovalAdapter;
     private final PaymentInfoExtractor paymentInfoExtractor;
-    private final TossCodeAndMessageParser codeAndMessageParser;
+    private final CodeAndMessageParser codeAndMessageParser;
 
     @Override
     public PaymentCommand requestApproval(
