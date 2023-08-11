@@ -8,7 +8,6 @@ import project.swithme.domain.core.payment.entity.Payment;
 import project.swithme.domain.core.payment.entity.PaymentMethod;
 import project.swithme.domain.core.payment.entity.PaymentStatus;
 import project.swithme.domain.core.payment.entity.PaymentType;
-import project.swithme.domain.core.payment.entity.command.PaymentCommand;
 
 public final class PaymentFixture {
 
@@ -20,83 +19,14 @@ public final class PaymentFixture {
         throw new AssertionError("올바른 방식으로 생성자를 호출해주세요.");
     }
 
+    public static String getOrderUniqueId() {
+        return "f453ab17-3796-11ee-ad7d-bbd883b46e6d";
+    }
+
     public static String getPaymentKey() {
         return "lqNRYD097kZLKGPx4M3M1RXWYWg9ve3BaWypv1o6bemnOJz2";
     }
 
-    public static PaymentCommand createApprovedCommand() {
-        Payment payment = createPayment(1L);
-        return new PaymentCommand(
-            payment.getVersion(),
-            getPaymentKey(),
-            payment.getPaymentType().name(),
-            payment.getOrderId().toString(),
-            payment.getOrderName(),
-            payment.getMId(),
-            payment.getCurrency(),
-            "카드",
-            payment.getTotalAmount(),
-            payment.getBalanceAmount(),
-            payment.getPaymentStatus().name(),
-            payment.getRequestedAt(),
-            payment.getApprovedAt(),
-            payment.getUseEscrow(),
-            payment.getLastTransactionKey(),
-            payment.getSuppliedAmount(),
-            payment.getVat(),
-            payment.getCultureExpense(),
-            payment.getTaxFreeAmount(),
-            payment.getTaxExemptionAmount(),
-            null,
-            payment.getCardInfo(),
-            null,
-            payment.getSecret(),
-            null,
-            null,
-            null,
-            null,
-            null,
-            "KR",
-            null
-        );
-    }
-
-    public static PaymentCommand createNotApprovedCommand() {
-        Payment payment = createPayment(1L);
-        return new PaymentCommand(
-            payment.getVersion(),
-            getPaymentKey(),
-            payment.getPaymentType().name(),
-            payment.getOrderId().toString(),
-            payment.getOrderName(),
-            payment.getMId(),
-            payment.getCurrency(),
-            "카드",
-            payment.getTotalAmount(),
-            payment.getBalanceAmount(),
-            payment.getPaymentStatus().name(),
-            payment.getRequestedAt(),
-            null,
-            payment.getUseEscrow(),
-            payment.getLastTransactionKey(),
-            payment.getSuppliedAmount(),
-            payment.getVat(),
-            payment.getCultureExpense(),
-            payment.getTaxFreeAmount(),
-            payment.getTaxExemptionAmount(),
-            null,
-            payment.getCardInfo(),
-            null,
-            payment.getSecret(),
-            null,
-            null,
-            null,
-            null,
-            null,
-            "KR",
-            null
-        );
-    }
 
     public static Payment createPayment(
         Long id,
