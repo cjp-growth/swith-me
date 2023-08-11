@@ -4,17 +4,17 @@ import lombok.Getter;
 import project.study.support.codeandmessage.CodeAndMessage;
 
 @Getter
-public class DomainException extends RuntimeException {
+public class OutPortException extends RuntimeException {
 
     private CodeAndMessage codeAndMessage;
     private String detailMessage;
 
-    public DomainException(CodeAndMessage codeAndMessage) {
+    public OutPortException(CodeAndMessage codeAndMessage) {
         super(codeAndMessage.getKrErrorMessage());
         this.codeAndMessage = codeAndMessage;
     }
 
-    public DomainException(
+    public OutPortException(
         CodeAndMessage codeAndMessage,
         String detailMessage
     ) {
@@ -23,15 +23,14 @@ public class DomainException extends RuntimeException {
         this.detailMessage = detailMessage;
     }
 
-    public DomainException(String message) {
-        super(message);
-    }
-
     public int getStatusCode() {
         return codeAndMessage.getStatusCode();
     }
 
-    public String getMessage() {
-        return codeAndMessage.getKrErrorMessage();
+    public String getErrorMessage() {
+        if (codeAndMessage != null) {
+            return codeAndMessage.getKrErrorMessage();
+        }
+        return getMessage();
     }
 }

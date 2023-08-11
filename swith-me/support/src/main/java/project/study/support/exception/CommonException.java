@@ -1,30 +1,28 @@
 package project.study.support.exception;
 
+import java.util.List;
 import lombok.Getter;
 import project.study.support.codeandmessage.CodeAndMessage;
+import project.study.support.log.Field;
 
 @Getter
-public class DomainException extends RuntimeException {
+public class CommonException extends RuntimeException {
 
-    private CodeAndMessage codeAndMessage;
-    private String detailMessage;
+    private final CodeAndMessage codeAndMessage;
+    private List<Field> fields;
 
-    public DomainException(CodeAndMessage codeAndMessage) {
+    public CommonException(CodeAndMessage codeAndMessage) {
         super(codeAndMessage.getKrErrorMessage());
         this.codeAndMessage = codeAndMessage;
     }
 
-    public DomainException(
+    public CommonException(
         CodeAndMessage codeAndMessage,
-        String detailMessage
+        List<Field> fields
     ) {
         super(codeAndMessage.getKrErrorMessage());
         this.codeAndMessage = codeAndMessage;
-        this.detailMessage = detailMessage;
-    }
-
-    public DomainException(String message) {
-        super(message);
+        this.fields = fields;
     }
 
     public int getStatusCode() {
