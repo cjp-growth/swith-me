@@ -131,7 +131,7 @@ subprojects {
                 fileTree(dir: it, exclude: [
                         "**/reservation/*",
                         "**/extractor/*",
-                        "**/adapter/*",
+                        "**/out/*",
                         "**/common/*",
                         "**/command/*",
                         "**/request/*",
@@ -170,7 +170,7 @@ subprojects {
                 fileTree(dir: it, exclude: [
                         "**/reservation/*",
                         "**/extractor/*",
-                        "**/adapter/*",
+                        "**/out/*",
                         "**/common/*",
                         "**/command/*",
                         "**/request/*",
