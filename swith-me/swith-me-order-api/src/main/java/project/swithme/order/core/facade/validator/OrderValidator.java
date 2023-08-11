@@ -2,7 +2,7 @@ package project.swithme.order.core.facade.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import project.swithme.order.core.application.command.OrderCreateCommand;
+import project.swithme.order.core.facade.command.OrderCreateCommand;
 import project.swithme.order.core.out.ProductClient;
 
 @RequiredArgsConstructor

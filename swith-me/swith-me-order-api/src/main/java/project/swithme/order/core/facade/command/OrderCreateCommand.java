@@ -1,4 +1,4 @@
-package project.swithme.order.core.application.command;
+package project.swithme.order.core.facade.command;
 
 import static project.swithme.domain.core.order.entity.OrderLine.createOrderLine;
 import java.math.BigDecimal;
