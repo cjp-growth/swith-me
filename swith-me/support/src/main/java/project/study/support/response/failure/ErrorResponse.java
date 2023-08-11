@@ -1,10 +1,11 @@
 package project.study.support.response.failure;
 
 import lombok.Getter;
-import project.study.support.exception.DomainException;
-import project.study.support.exception.OutPortException;
 import project.study.support.codeandmessage.CodeAndMessage;
 import project.study.support.codeandmessage.common.CommonErrorCodeAndMessage;
+import project.study.support.exception.CommonException;
+import project.study.support.exception.DomainException;
+import project.study.support.exception.OutPortException;
 
 @Getter
 public class ErrorResponse {
@@ -23,6 +24,10 @@ public class ErrorResponse {
     private ErrorResponse(CodeAndMessage codeAndMessage) {
         this.code = codeAndMessage.getStatusCode();
         this.message = codeAndMessage.getKrErrorMessage();
+    }
+
+    public static ErrorResponse of(CommonException exception) {
+        return new ErrorResponse(exception.getStatusCode(), exception.getMessage());
     }
 
     public static ErrorResponse of(DomainException exception) {

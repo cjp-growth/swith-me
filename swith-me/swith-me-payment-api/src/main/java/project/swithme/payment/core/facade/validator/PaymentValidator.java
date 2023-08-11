@@ -2,7 +2,7 @@ package project.swithme.payment.core.facade.validator;
 
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
-import project.swithme.domain.core.order.entity.Order;
+import project.swithme.payment.common.command.OrderValidationCommand;
 import project.swithme.payment.core.exception.InvalidOrderStatusException;
 import project.swithme.payment.core.exception.InvalidPriceException;
 
@@ -10,13 +10,13 @@ import project.swithme.payment.core.exception.InvalidPriceException;
 public class PaymentValidator {
 
     public void validate(
-        Order order,
+        OrderValidationCommand command,
         BigDecimal amount
     ) {
-        if (!order.isValidStatus()) {
+        if (!command.isValidStatus()) {
             throw new InvalidOrderStatusException();
         }
-        if (!order.validatePrice(amount)) {
+        if (!command.validatePrice(amount)) {
             throw new InvalidPriceException();
         }
     }

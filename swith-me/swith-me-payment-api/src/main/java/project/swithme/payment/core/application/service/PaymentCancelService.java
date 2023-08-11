@@ -5,17 +5,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.study.support.codeandmessage.CodeAndMessage;
-import project.swithme.payment.common.codeandmessage.parser.TossCodeAndMessageParser;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
 import project.swithme.payment.core.exception.TossPaymentException;
-import project.swithme.payment.core.out.port.PaymentCancelPort;
-import project.swithme.payment.core.out.port.adapter.request.PaymentCancelRequest;
+import project.swithme.payment.core.out.client.toss.adapter.PaymentCancelAdapter;
+import project.swithme.payment.core.out.client.toss.adapter.parser.TossCodeAndMessageParser;
+import project.swithme.payment.core.out.client.toss.adapter.request.PaymentCancelRequest;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentCancelService implements PaymentCancelUseCase {
 
-    private final PaymentCancelPort paymentCancelPort;
+    private final PaymentCancelAdapter paymentCancelAdapter;
     private final TossCodeAndMessageParser messageParser;
 
     @Override
@@ -25,7 +25,7 @@ public class PaymentCancelService implements PaymentCancelUseCase {
         String cancelReason
     ) {
         try {
-            paymentCancelPort.requestCancel(paymentKey, new PaymentCancelRequest(cancelReason));
+            paymentCancelAdapter.requestCancel(paymentKey, new PaymentCancelRequest(cancelReason));
         } catch (FeignException exception) {
             CodeAndMessage codeAndMessage = messageParser.parsePaymentCancelFailureMessage(
                 exception.getMessage());
