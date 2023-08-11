@@ -1,6 +1,5 @@
 package project.study.support.response.success;
 
-import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -10,7 +9,6 @@ public class ResponsePayload<T> {
     private final T data;
     private final int code;
     private final String message;
-    private final LocalDateTime time = LocalDateTime.now();
 
     public ResponsePayload(
         T data,
@@ -34,8 +32,8 @@ public class ResponsePayload<T> {
     @Override
     public String toString() {
         return String.format(
-            "data: %s, code: %s, message: %s, time:%s",
-            data, code, message, time
+            "data: %s, code: %s, message: %s",
+            data, code, message
         );
     }
 }
