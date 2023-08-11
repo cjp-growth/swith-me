@@ -1,4 +1,4 @@
-package project.swithme.domain.core.payment.entity.command;
+package project.swithme.payment.core.facade.command;
 
 import java.math.BigDecimal;
 import java.time.Instant;
