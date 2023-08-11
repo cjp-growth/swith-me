@@ -4,20 +4,21 @@ import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.swithme.domain.core.order.entity.Order;
 import project.swithme.domain.core.payment.entity.Payment;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.domain.core.payment.entity.command.PaymentCommand;
+import project.swithme.payment.common.command.OrderValidationCommand;
 import project.swithme.payment.core.application.PaymentSaveUseCase;
 import project.swithme.payment.core.exception.PaymentFailureException;
 import project.swithme.payment.core.facade.validator.PaymentValidator;
-import project.swithme.payment.core.out.port.PaymentPort;
+import project.swithme.payment.core.out.OrderQueryPort;
+import project.swithme.payment.core.out.PaymentPort;
 
 @Component
 @RequiredArgsConstructor
 public class PaymentFacade {
 
-    //private final OrderQueryUseCase orderQueryUseCase;
+    private final OrderQueryPort orderQueryPort;
     private final PaymentValidator paymentValidator;
     private final PaymentSaveUseCase paymentSaveUseCase;
     private final PaymentPort paymentPort;
@@ -29,31 +30,25 @@ public class PaymentFacade {
         PaymentType paymentType,
         BigDecimal amount
     ) {
-        // Order findOrder = orderQueryUseCase.findByUniqueId(orderUniqueId)
-        // .orElseThrow(OrderNotFoundException::new);
+        OrderValidationCommand findOrderCommand = orderQueryPort.findOrderByUniqueId(orderUniqueId);
 
-        // paymentValidator.validate(null, amount);
+        paymentValidator.validate(findOrderCommand, amount);
 
-        PaymentCommand command = paymentPort.requestApproval(paymentKey, orderUniqueId, amount);
-        if (!command.isApproved()) {
+        PaymentCommand paymentCommand = paymentPort.requestApproval(
+            paymentKey,
+            orderUniqueId,
+            amount
+        );
+        if (!paymentCommand.isApproved()) {
             throw new PaymentFailureException();
         }
-        Payment paymentPayment = save(paymentType, null, command);
-        // findOrder.updateOrderStatus(COMPLETE);
-        // findOrder.updatePrice(paymentPayment.getDiscountedAmount());
-        return paymentPayment.getId();
-    }
 
-    private Payment save(
-        PaymentType paymentType,
-        Order findOrder,
-        PaymentCommand paymentInfo
-    ) {
-        return paymentSaveUseCase.save(
-            findOrder.getUserId(),
-            findOrder.getId(),
+        Payment newPayment = paymentSaveUseCase.save(
+            findOrderCommand.getUserId(),
+            findOrderCommand.getOrderId(),
             paymentType,
-            paymentInfo
+            paymentCommand
         );
+        return newPayment.getId();
     }
 }
