@@ -1,13 +1,11 @@
 package project.swithme.payment.core.exception;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import lombok.Getter;
+import static project.study.support.codeandmessage.order.OrderCodeAndMessage.INVALID_PRICE;
 import project.study.support.exception.DomainException;
 
-@Getter
 public class InvalidPriceException extends DomainException {
 
     public InvalidPriceException() {
-        super(BAD_REQUEST, "올바른 가격을 입력해주세요", "PAYMENT");
+        super(INVALID_PRICE);
     }
 }
