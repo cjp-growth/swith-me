@@ -1,38 +1,36 @@
 package project.study.support.log;
 
 import java.time.Instant;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class ErrorLog {
 
-    private static final String DOMAIN = "PAYMENT";
-    private String httpStatus;
+    private String domain;
     private int statusCode;
     private String message;
-    private List<Field> errorFields;
+    private String detailMessage;
     private Instant time = Instant.now();
 
     @Builder
     public ErrorLog(
-        String httpStatus,
+        String domain,
         int statusCode,
         String message,
-        List<Field> errorFields
+        String detailMessage
     ) {
-        this.httpStatus = httpStatus;
+        this.domain = domain;
         this.statusCode = statusCode;
         this.message = message;
-        this.errorFields = errorFields;
+        this.detailMessage = detailMessage;
     }
 
     @Override
     public String toString() {
         return String.format(
-            "domain: %s, fields: %s, httpStatus: %s, statusCode: %s, message: %s, time: %s",
-            DOMAIN, errorFields, httpStatus, statusCode, message, time
+            "domain: %s, statusCode: %s, message: %s, detailMessage: %s, time: %s",
+            domain, statusCode, message, detailMessage, time
         );
     }
 }
