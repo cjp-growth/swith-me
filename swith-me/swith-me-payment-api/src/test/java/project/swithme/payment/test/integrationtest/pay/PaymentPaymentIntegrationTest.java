@@ -25,7 +25,7 @@ import project.swithme.payment.core.application.PaymentSaveUseCase;
 import project.swithme.payment.core.exception.OrderNotFoundException;
 import project.swithme.payment.core.facade.PaymentFacade;
 import project.swithme.payment.core.facade.validator.PaymentValidator;
-import project.swithme.payment.core.out.port.PaymentPort;
+import project.swithme.payment.core.out.PaymentPort;
 import project.swithme.payment.test.IntegrationTestBase;
 
 @Description(content = "토스 API 서비스를 호출하기 때문에 필요한 일부 모킹 처리 ")
