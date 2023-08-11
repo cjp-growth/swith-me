@@ -15,7 +15,8 @@ import project.swithme.domain.core.payment.entity.GiftCertificateInfo;
 import project.swithme.domain.core.payment.entity.MobilePhoneInfo;
 import project.swithme.domain.core.payment.entity.TransferInfo;
 import project.swithme.domain.core.payment.entity.VirtualAccountInfo;
-import project.swithme.domain.core.payment.entity.command.PaymentCommand;
+import project.swithme.payment.core.facade.command.PaymentCommand;
+import project.swithme.payment.core.out.client.toss.adapter.response.success.CashReceiptResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.CashReceiptsResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.DiscountResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.EasyPayResponse;
@@ -23,9 +24,8 @@ import project.swithme.payment.core.out.client.toss.adapter.response.success.Gif
 import project.swithme.payment.core.out.client.toss.adapter.response.success.MobilePhoneResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.PaymentApproveResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.PaymentCardResponse;
-import project.swithme.payment.core.out.client.toss.adapter.response.success.TransferResponse;
-import project.swithme.payment.core.out.client.toss.adapter.response.success.CashReceiptResponse;
 import project.swithme.payment.core.out.client.toss.adapter.response.success.PaymentVirtualAccountResponse;
+import project.swithme.payment.core.out.client.toss.adapter.response.success.TransferResponse;
 
 @Component
 public class PaymentInfoExtractor {

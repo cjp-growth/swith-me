@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Getter;
 import project.swithme.domain.core.order.entity.PayType;
-import project.swithme.order.core.application.command.OrderCreateCommand;
+import project.swithme.order.core.facade.command.OrderCreateCommand;
 
 @Getter
 public class OrderCreateRequest {

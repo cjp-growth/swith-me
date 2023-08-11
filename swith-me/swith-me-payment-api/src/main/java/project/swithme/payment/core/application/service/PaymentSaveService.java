@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import project.swithme.domain.core.common.BaseInformation;
 import project.swithme.domain.core.payment.entity.Payment;
 import project.swithme.domain.core.payment.entity.PaymentType;
-import project.swithme.domain.core.payment.entity.command.PaymentCommand;
 import project.swithme.domain.core.payment.repository.PaymentJpaRepository;
 import project.swithme.payment.core.application.PaymentSaveUseCase;
+import project.swithme.payment.core.facade.command.PaymentCommand;
 
 @Service
 @RequiredArgsConstructor

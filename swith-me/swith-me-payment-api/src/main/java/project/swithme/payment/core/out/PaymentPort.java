@@ -1,7 +1,7 @@
 package project.swithme.payment.core.out;
 
 import java.math.BigDecimal;
-import project.swithme.domain.core.payment.entity.command.PaymentCommand;
+import project.swithme.payment.core.facade.command.PaymentCommand;
 
 public interface PaymentPort {
 
