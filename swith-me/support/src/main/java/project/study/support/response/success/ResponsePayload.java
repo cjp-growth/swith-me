@@ -1,4 +1,4 @@
-package project.study.support.response;
+package project.study.support.response.success;
 
 import java.time.LocalDateTime;
 import lombok.Getter;
