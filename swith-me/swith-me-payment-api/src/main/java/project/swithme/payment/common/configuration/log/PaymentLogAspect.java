@@ -61,7 +61,7 @@ public class PaymentLogAspect {
         );
     }
 
-    @Before("bean(*Service))")
+    @Before("bean(*UseCase))")
     public void beforeCallService(JoinPoint joinPoint) {
         log.info(
             "[### PAYMENT_SERVICE] -----x> traceId: {}, \nargs:{}",
@@ -69,13 +69,32 @@ public class PaymentLogAspect {
         );
     }
 
-    @AfterReturning(value = "bean(*Service)", returning = "result")
+    @AfterReturning(value = "bean(*UseCase)", returning = "result")
     public void afterCallService(
         JoinPoint joinPoint,
         Object result
     ) {
         log.info(
             "[### PAYMENT_SERVICE] <x----- traceId: {}, \nreturn: {}",
+            getTraceId(), result
+        );
+    }
+
+    @Before("bean(*QueryClient))")
+    public void beforeCallClient(JoinPoint joinPoint) {
+        log.info(
+            "[### PAYMENT_OUT] -----x> traceId: {}, \nargs:{}",
+            getTraceId(), Arrays.toString(joinPoint.getArgs())
+        );
+    }
+
+    @AfterReturning(value = "bean(*QueryClient)", returning = "result")
+    public void afterCallClient(
+        JoinPoint joinPoint,
+        Object result
+    ) {
+        log.info(
+            "[### PAYMENT_OUT] <x----- traceId: {}, \nreturn: {}",
             getTraceId(), result
         );
     }
