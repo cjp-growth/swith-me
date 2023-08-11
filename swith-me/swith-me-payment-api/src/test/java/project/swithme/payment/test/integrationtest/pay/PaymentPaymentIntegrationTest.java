@@ -71,7 +71,7 @@ class PaymentPaymentIntegrationTest extends IntegrationTestBase {
             FIXED_TOTAL_PRICE
         )).thenReturn(createApprovedCommand());
 
-        Long paymentId = paymentFacade.pay(
+        Long paymentId = paymentFacade.requestApproval(
             order.getUniqueId().toString(),
             getPaymentKey(),
             NORMAL,
@@ -88,7 +88,7 @@ class PaymentPaymentIntegrationTest extends IntegrationTestBase {
         BigDecimal price = new BigDecimal(130_000L);
 
         assertThatThrownBy(
-            () -> paymentFacade.pay(uuid.toString(), getPaymentKey(), NORMAL, price))
+            () -> paymentFacade.requestApproval(uuid.toString(), getPaymentKey(), NORMAL, price))
             .isExactlyInstanceOf(OrderNotFoundException.class)
             .isInstanceOf(RuntimeException.class)
             .hasMessage("주문을 찾을 수 없습니다.");

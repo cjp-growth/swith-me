@@ -1,33 +1,37 @@
 package project.study.support.exception;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import project.study.support.response.codeandmessage.CodeAndMessage;
+import project.study.support.codeandmessage.CodeAndMessage;
 
 @Getter
 public class DomainException extends RuntimeException {
 
-    private final int statusCode;
-    private final String errorMessage;
-    private HttpStatus status;
     private CodeAndMessage codeAndMessage;
-
-    public DomainException(
-        HttpStatus status,
-        String errorMessage,
-        String domain
-    ) {
-        super(errorMessage);
-        this.status = HttpStatus.valueOf(status.value());
-        this.statusCode = status.value();
-        this.errorMessage = errorMessage;
-    }
+    private String detailMessage;
 
     public DomainException(CodeAndMessage codeAndMessage) {
         super(codeAndMessage.getKrErrorMessage());
-        this.statusCode = codeAndMessage.getStatusCode();
-        this.status = HttpStatus.valueOf(statusCode);
         this.codeAndMessage = codeAndMessage;
-        this.errorMessage = codeAndMessage.getKrErrorMessage();
+    }
+
+    public DomainException(
+        CodeAndMessage codeAndMessage,
+        String detailMessage
+    ) {
+        super(codeAndMessage.getKrErrorMessage());
+        this.codeAndMessage = codeAndMessage;
+        this.detailMessage = detailMessage;
+    }
+
+    public DomainException(String message) {
+        super(message);
+    }
+
+    public int getStatusCode() {
+        return codeAndMessage.getStatusCode();
+    }
+
+    public String getMessage() {
+        return codeAndMessage.getKrErrorMessage();
     }
 }

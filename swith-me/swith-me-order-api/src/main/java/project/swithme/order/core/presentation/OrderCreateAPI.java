@@ -1,12 +1,12 @@
 package project.swithme.order.core.presentation;
 
+import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.CREATED;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import project.study.support.response.ApiResponse;
+import project.study.support.response.success.ApiResponse;
 import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.order.common.annotation.auth.LoginUser;
 import project.swithme.order.core.facade.OrderFacade;
@@ -30,6 +30,6 @@ public class OrderCreateAPI {
         validator.validate(request);
         Long orderId = orderFacade.createOrder(studyWithMeUser, request.toCommand());
         OrderCreateResponse data = new OrderCreateResponse(orderId);
-        return ApiResponse.created(data, HttpStatus.CREATED);
+        return ApiResponse.of(data, CREATED);
     }
 }

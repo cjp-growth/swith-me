@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
-import project.swithme.payment.core.presentation.CardPaymentCancelAPI;
+import project.swithme.payment.core.presentation.TossCardPaymentCancelAPI;
 import project.swithme.payment.test.IntegrationTestBase;
 
 @AutoConfigureMockMvc
@@ -24,14 +24,14 @@ class PaymentCancelDocumentationTest extends IntegrationTestBase {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private CardPaymentCancelAPI paymentCancelAPI;
+    private TossCardPaymentCancelAPI paymentCancelAPI;
 
     @Mock
     private PaymentCancelUseCase paymentCancelUseCase;
 
     @BeforeEach
     void setUp() {
-        this.paymentCancelAPI = new CardPaymentCancelAPI(paymentCancelUseCase);
+        this.paymentCancelAPI = new TossCardPaymentCancelAPI(paymentCancelUseCase);
         mockMvc = MockMvcBuilders.standaloneSetup(paymentCancelAPI)
             .build();
     }

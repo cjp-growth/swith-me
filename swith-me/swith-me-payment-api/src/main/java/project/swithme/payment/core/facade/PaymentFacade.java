@@ -23,7 +23,7 @@ public class PaymentFacade {
     private final PaymentPort paymentPort;
 
     @Transactional
-    public Long pay(
+    public Long requestApproval(
         String orderUniqueId,
         String paymentKey,
         PaymentType paymentType,
@@ -32,28 +32,16 @@ public class PaymentFacade {
         // Order findOrder = orderQueryUseCase.findByUniqueId(orderUniqueId)
         // .orElseThrow(OrderNotFoundException::new);
 
-        paymentValidator.validate(null, amount);
+        // paymentValidator.validate(null, amount);
 
-        PaymentCommand command = requestApproval(orderUniqueId, paymentKey, amount);
-        if (command.isApproved()) {
-            Payment paymentPayment = save(paymentType, null, command);
-            // findOrder.updateOrderStatus(COMPLETE);
-            // findOrder.updatePrice(paymentPayment.getDiscountedAmount());
-            return paymentPayment.getId();
+        PaymentCommand command = paymentPort.requestApproval(paymentKey, orderUniqueId, amount);
+        if (!command.isApproved()) {
+            throw new PaymentFailureException();
         }
-        throw new PaymentFailureException();
-    }
-
-    private PaymentCommand requestApproval(
-        String orderUniqueId,
-        String paymentKey,
-        BigDecimal amount
-    ) {
-        return paymentPort.requestApproval(
-            paymentKey,
-            orderUniqueId,
-            amount
-        );
+        Payment paymentPayment = save(paymentType, null, command);
+        // findOrder.updateOrderStatus(COMPLETE);
+        // findOrder.updatePrice(paymentPayment.getDiscountedAmount());
+        return paymentPayment.getId();
     }
 
     private Payment save(

@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import project.swithme.domain.core.order.entity.Order;
 import project.swithme.domain.core.order.entity.OrderStatus;
 import project.swithme.payment.core.exception.InvalidPriceException;
-import project.swithme.payment.core.facade.validator.InvalidOrderStatusException;
+import project.swithme.payment.core.exception.InvalidOrderStatusException;
 import project.swithme.payment.core.facade.validator.PaymentValidator;
 
 @DisplayName("[UnitTest] 주문 검증기 단위 테스트")
