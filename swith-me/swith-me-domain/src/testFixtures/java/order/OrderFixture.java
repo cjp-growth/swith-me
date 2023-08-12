@@ -100,7 +100,7 @@ public final class OrderFixture {
     }
 
     public static OrderLine createOrderLine(Long id) {
-        OrderLine orderLine = new OrderLine(
+        return new OrderLine(
             id,
             STUDY_CAFE_ID,
             STUDY_CAFE_TICKET_ID,
@@ -108,20 +108,6 @@ public final class OrderFixture {
             null,
             new BaseInformation(1L)
         );
-        Order order = new Order(
-            1L,
-            USER_ID,
-            RESERVATION_ID,
-            UUID.randomUUID(),
-            ORDER_TITLE,
-            PayType.TOSS,
-            OrderStatus.PAYMENT_REQUEST,
-            Instant.now().plus(Duration.ofHours(1)),
-            null,
-            List.of(orderLine),
-            new BaseInformation(1L)
-        );
-        return orderLine;
     }
 
     private static List<OrderLine> createOrderLines() {
