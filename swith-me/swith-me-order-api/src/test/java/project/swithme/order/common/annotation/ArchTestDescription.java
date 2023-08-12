@@ -4,7 +4,9 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.TYPE})
-public @interface Description {
+public @interface ArchTestDescription {
 
-    String content() default "";
+    String[] target() default "";
+
+    String[] contents() default "";
 }
