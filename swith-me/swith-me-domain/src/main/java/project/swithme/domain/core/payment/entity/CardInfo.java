@@ -7,6 +7,7 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.Getter;
 
 @Getter
@@ -28,13 +29,13 @@ public class CardInfo {
     private String cardNumber;
 
     @Column(name = "installment_plan_months")
-    private int installmentPlanMonths;
+    private Integer installmentPlanMonths;
 
     @Column(name = "card_approve_no")
     private String cardApproveNo;
 
     @Column(name = "use_card_point")
-    private boolean useCardPoint;
+    private Boolean useCardPoint;
 
     @Column(name = "card_type")
     @Enumerated(EnumType.STRING)
@@ -49,7 +50,7 @@ public class CardInfo {
     private AcquireStatus acquireStatus;
 
     @Column(name = "is_interest_free")
-    private boolean isInterestFree;
+    private Boolean isInterestFree;
 
     @Column(name = "interest_payer")
     @Enumerated(EnumType.STRING)
@@ -87,5 +88,33 @@ public class CardInfo {
         this.cardType = findByType(cardType);
         this.ownerType = OwnerType.findByType(ownerType);
         this.acquireStatus = AcquireStatus.findByStatus(acquireStatus);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof CardInfo cardInfo)) {
+            return false;
+        }
+        return getCardIssuerCompany() == cardInfo.getCardIssuerCompany()
+            && getCardAcquirerCompany() == cardInfo.getCardAcquirerCompany()
+            && getCardNumber().equals(
+            cardInfo.getCardNumber()) && getCardType() == cardInfo.getCardType();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCardIssuerCompany(), getCardAcquirerCompany(), getCardNumber(),
+            getCardType());
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "cardNumber: %s, cardType: %s, cardIssuerCompany: %s, cardAcquirerCompany: %s",
+            cardNumber, cardType, cardIssuerCompany, cardAcquirerCompany
+        );
     }
 }

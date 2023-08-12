@@ -141,6 +141,13 @@ subprojects {
                         "project/**/*Application.*",
                         "project/**/*Request.*",
                         "project/**/*Response.*",
+                        "project/**/*DiscountInfo.*",
+                        "project/**/*MobilePhoneInfo.*",
+                        "project/**/*EasyPayInfo.*",
+                        "project/**/*GiftCertificateInfo.*",
+                        "project/**/*CashReceiptInfo.*",
+                        "project/**/*CashReceiptsInfo.*",
+                        "project/**/*TransferInfo.*",
                 ])
             }))
         }
@@ -180,6 +187,13 @@ subprojects {
                         "project/**/*Application.*",
                         "project/**/*Request.*",
                         "project/**/*Response.*",
+                        "project/**/*DiscountInfo.*",
+                        "project/**/*MobilePhoneInfo.*",
+                        "project/**/*EasyPayInfo.*",
+                        "project/**/*GiftCertificateInfo.*",
+                        "project/**/*CashReceiptInfo.*",
+                        "project/**/*CashReceiptsInfo.*",
+                        "project/**/*TransferInfo.*",
                 ])
             }))
         }

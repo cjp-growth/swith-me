@@ -8,6 +8,7 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import java.time.Instant;
+import java.util.Objects;
 import lombok.Getter;
 
 @Getter
@@ -87,5 +88,31 @@ public class VirtualAccountInfo {
 
     public static VirtualAccountInfo createEmptyVirtualAccountInfo() {
         return new VirtualAccountInfo();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof VirtualAccountInfo that)) {
+            return false;
+        }
+        return getAccountNumber().equals(that.getAccountNumber())
+            && getVirtualAccountBank() == that.getVirtualAccountBank() && getCustomerName().equals(
+            that.getCustomerName()) && getDueDate().equals(that.getDueDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAccountNumber(), getVirtualAccountBank(), getCustomerName(),
+            getDueDate());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("accountNumber: %s, bank: %s, customer: %s, dueDate: %s",
+            accountNumber, refundBank, customerName, dueDate
+        );
     }
 }

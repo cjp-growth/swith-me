@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import project.swithme.domain.common.sut.payment.PaymentSut;
 import project.swithme.domain.core.payment.entity.Payment;
 
 @DisplayName("[UnitTest] 결제 단위 테스트")
@@ -15,7 +16,44 @@ class PaymentUnitTest {
     @Test
     @DisplayName("결제 객체를 생성할 수 있다.")
     void payment_create_test() {
-        assertNotNull(createPayment(1L));
+        PaymentSut sut = new PaymentSut(createPayment(1L));
+
+        sut.shouldExist()
+            .withoutId()
+            .withVersion()
+            .withPaymentKey()
+            .withPaymentType()
+            .withOrderId()
+            .withOrderName()
+            .withoutMid()
+            .withCurrency()
+            .withMethod()
+            .withTotalAmount()
+            .withBalancedAmount()
+            .withPaymentStatus()
+            .withRequestedAt()
+            .withApprovedAt()
+            .withUseEscrow()
+            .withLastTransactionKey()
+            .withSuppliedAmount()
+            .withVat()
+            .withCultureExpense()
+            .withTaxFreeAmount()
+            .withTaxExemptionAmount()
+            .withPartialCancelable()
+            .withCardInfo()
+            .withoutVirtualAccountInfo()
+            .withoutSecretKey()
+            .withoutMobileInfo()
+            .withoutGiftCertificateInfo()
+            .withoutTransferInfo()
+            .withoutReceiptUrl()
+            .withoutEasyPayInfo()
+            .withCountry()
+            .withoutDiscountedAmount()
+            .withBaseInformation();
+
+        assertNotNull(sut);
     }
 
     @Test
