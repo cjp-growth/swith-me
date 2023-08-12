@@ -78,22 +78,6 @@ public class Order extends BaseEntity {
 
     public Order(
         Long userId,
-        PayType payType,
-        List<OrderLine> orderLines
-    ) {
-        this.userId = userId;
-        this.payType = payType;
-        this.uniqueId = Generators.timeBasedGenerator().generate();
-        this.orderStatus = OrderStatus.PAYMENT_REQUEST;
-        this.depositDeadline = createDeadline();
-        this.orderLines = init(orderLines);
-        this.totalPrice = getTotalPrice();
-        this.discountedTotalPrice = totalPrice;
-        this.baseInformation = new BaseInformation(userId);
-    }
-
-    public Order(
-        Long userId,
         String title,
         PayType payType,
         List<OrderLine> orderLines
