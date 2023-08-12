@@ -23,9 +23,10 @@ public interface ArchTestConst {
 
     // FacadeLayer
     String ORDER_FACADE = "OrderFacade";
+
+    // ApplicationLayer
     String ORDER_USE_CASE = "OrderUseCase";
     String ORDER_QUERY_USE_CASE = "OrderQueryUseCase";
-    String ORDER_REPOSITORY = "OrderJpaRepository";
 
     // Class
     String ADAPTER = "Adapter";
