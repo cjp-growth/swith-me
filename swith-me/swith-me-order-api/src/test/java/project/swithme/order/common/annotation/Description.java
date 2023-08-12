@@ -3,7 +3,7 @@ package project.swithme.order.common.annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target({ElementType.FIELD, ElementType.TYPE})
 public @interface Description {
 
     String content() default "";
