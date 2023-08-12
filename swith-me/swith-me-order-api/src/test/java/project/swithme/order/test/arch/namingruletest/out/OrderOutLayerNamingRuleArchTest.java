@@ -17,7 +17,7 @@ import project.swithme.order.test.arch.TestExcludeConfiguration;
 public class OrderOutLayerNamingRuleArchTest {
 
     @ArchTest
-    @Description(content = "ProductClient의 구현체들은 Adapter가 이름이 끝에 붙어야 한다.")
+    @Description(content = "ProductClient의 구현체들은 Adapter가 클래스 이름에 붙어야 한다.")
     ArchRule orderUseCaseImplRule = classes().that().implement(ProductClient.class)
         .should().haveSimpleNameEndingWith(ADAPTER);
 }
