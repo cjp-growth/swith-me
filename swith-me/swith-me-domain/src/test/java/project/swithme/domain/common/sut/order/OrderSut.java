@@ -41,6 +41,11 @@ public final class OrderSut {
         return this;
     }
 
+    public OrderSut withTitle() {
+        assertNotNull(order.getTitle());
+        return this;
+    }
+
     public OrderSut withPayType() {
         assertNotNull(order.getPayType());
         return this;

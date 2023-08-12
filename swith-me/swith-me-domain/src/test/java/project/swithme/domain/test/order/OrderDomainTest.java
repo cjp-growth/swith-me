@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import order.OrderFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,14 +37,14 @@ class OrderDomainTest {
     }
 
     @Test
+    @DisplayName("주문을 생성할 수 있다.")
     void order_create_test() {
-        Order order = createOrder(randomUUID());
-
-        OrderSut sut = new OrderSut(order)
+        OrderSut sut = new OrderSut(createOrder(randomUUID()))
             .shouldExist()
             .withUserId()
             .withReservationId()
             .withUniqueId()
+            .withTitle()
             .withPayType()
             .withOrderStatus()
             .withDepositDeadline()
@@ -51,6 +53,14 @@ class OrderDomainTest {
             .withBasicInformation();
 
         assertNotNull(sut);
+
+        Order otherOrder = new Order(
+            1L,
+            "스터디 카페 한 달 정기 이용권",
+            PayType.TOSS,
+            List.of(OrderFixture.createOrderLine(1L))
+        );
+        assertNotNull(otherOrder);
     }
 
     @ParameterizedTest
