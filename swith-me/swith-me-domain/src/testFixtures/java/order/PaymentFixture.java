@@ -8,6 +8,7 @@ import project.swithme.domain.core.payment.entity.Payment;
 import project.swithme.domain.core.payment.entity.PaymentMethod;
 import project.swithme.domain.core.payment.entity.PaymentStatus;
 import project.swithme.domain.core.payment.entity.PaymentType;
+import project.swithme.domain.core.payment.entity.VirtualAccountInfo;
 
 public final class PaymentFixture {
 
@@ -32,24 +33,10 @@ public final class PaymentFixture {
         Long id,
         Long orderId
     ) {
-        CardInfo cardInfo = new CardInfo(
-            new BigDecimal(130_000L),
-            "24",
-            "24",
-            "01234*123409*01234",
-            "0",
-            "000000",
-            Boolean.FALSE,
-            "신용",
-            "개인",
-            "COMPLETED",
-            Boolean.FALSE,
-            "BUYER"
-        );
         return Payment.builder()
             .id(id)
             .orderId(orderId)
-            .paymentKey("abcde-aabcd")
+            .paymentKey(getPaymentKey())
             .paymentType(PaymentType.NORMAL)
             .mId(null)
             .version("2022-10-10")
@@ -63,13 +50,14 @@ public final class PaymentFixture {
 
             .taxExemptionAmount(BigDecimal.ZERO)
             .taxFreeAmount(BigDecimal.ZERO)
+            .isPartialCancelable(true)
 
             .paymentStatus(PaymentStatus.DONE)
             .requestedAt(Instant.now())
             .approvedAt(Instant.now().plusSeconds(1_000L))
             .useEscrow(false)
             .cultureExpense(false)
-            .cardInfo(cardInfo)
+            .cardInfo(createCardInfo())
             .virtualAccountInfo(null)
             .secret(null)
             .mobileInfo(null)
@@ -83,23 +71,10 @@ public final class PaymentFixture {
     }
 
     public static Payment createPayment(Long id) {
-        CardInfo cardInfo = new CardInfo(
-            new BigDecimal(130_000L),
-            "24",
-            "24",
-            "01234*123409*01234",
-            "0",
-            "000000",
-            Boolean.FALSE,
-            "신용",
-            "개인",
-            "COMPLETED",
-            Boolean.FALSE,
-            "BUYER"
-        );
+        CardInfo cardInfo = createCardInfo();
         return Payment.builder()
             .orderId(id)
-            .paymentKey("abcde-aabcd")
+            .paymentKey(getPaymentKey())
             .paymentType(PaymentType.NORMAL)
             .mId(null)
             .version("2022-10-10")
@@ -113,11 +88,13 @@ public final class PaymentFixture {
 
             .taxExemptionAmount(BigDecimal.ZERO)
             .taxFreeAmount(BigDecimal.ZERO)
+            .isPartialCancelable(true)
 
             .paymentStatus(PaymentStatus.DONE)
             .requestedAt(Instant.now())
             .approvedAt(Instant.now().plusSeconds(1_000L))
             .useEscrow(false)
+            .lastTransactionKey("abcefa-asdfsadf")
             .cultureExpense(false)
             .cardInfo(cardInfo)
             .virtualAccountInfo(null)
@@ -129,6 +106,40 @@ public final class PaymentFixture {
             .easyPayInfo(null)
             .country("KR")
             .baseInformation(new BaseInformation(1L))
+            .discountedAmount(null)
             .build();
+    }
+
+    public static CardInfo createCardInfo() {
+        return new CardInfo(
+            new BigDecimal(130_000L),
+            "24",
+            "24",
+            "01234*123409*01234",
+            "0",
+            "000000",
+            Boolean.FALSE,
+            "신용",
+            "개인",
+            "COMPLETED",
+            Boolean.FALSE,
+            "BUYER"
+        );
+    }
+
+    public static VirtualAccountInfo createVirtualAccountInfo() {
+        return new VirtualAccountInfo(
+            "일반",
+            "1234-****-1546",
+            "039",
+            "Jung",
+            Instant.now().plusSeconds(10_000),
+            "NONE",
+            Boolean.FALSE,
+            "INCOMPLETED",
+            "Jung",
+            "039",
+            "1234-****-1546"
+        );
     }
 }
