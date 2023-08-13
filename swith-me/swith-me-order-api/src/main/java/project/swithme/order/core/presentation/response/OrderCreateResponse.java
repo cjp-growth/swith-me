@@ -1,14 +1,13 @@
 package project.swithme.order.core.presentation.response;
 
+import lombok.Getter;
+
+@Getter
 public class OrderCreateResponse {
 
     private Long orderId;
 
     private OrderCreateResponse() {
-    }
-
-    public OrderCreateResponse(Long orderId) {
-        this.orderId = orderId;
     }
 
     @Override
