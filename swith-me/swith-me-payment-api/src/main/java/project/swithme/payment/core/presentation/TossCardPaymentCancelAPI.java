@@ -1,11 +1,12 @@
 package project.swithme.payment.core.presentation;
 
+import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.OK;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import project.study.support.response.success.ApiResponse;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
 
 @RestController
@@ -16,12 +17,11 @@ public class TossCardPaymentCancelAPI {
     private final PaymentCancelUseCase paymentCancelUseCase;
 
     @PostMapping
-    public ResponseEntity<Void> cancelPayment(
+    public ApiResponse<Void> cancelPayment(
         @RequestParam("paymentKey") String paymentKey,
         @RequestParam("cancelReason") String cancelReason
     ) {
         paymentCancelUseCase.cancelPayment(paymentKey, cancelReason);
-        return ResponseEntity.ok()
-            .build();
+        return ApiResponse.of(OK);
     }
 }
