@@ -6,7 +6,7 @@ import project.study.support.codeandmessage.CodeAndMessage;
 
 public class ApiResponse<T> extends ResponseEntity<ResponsePayload<T>> {
 
-    public static Object EMPTY_BODY = null;
+    public static final Object EMPTY_BODY = null;
 
     public ApiResponse(
         T data,
