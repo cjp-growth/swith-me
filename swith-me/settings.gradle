@@ -22,6 +22,9 @@ pluginManagement {
             if (requested.id.id == "com.github.spotbugs") {
                 useVersion spotBugsVersion as String
             }
+            if (requested.id.id == "com.ewerk.gradle.plugins.querydsl") {
+                useVersion querydslVersion as String
+            }
         }
     }
 }
