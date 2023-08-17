@@ -9,7 +9,7 @@ import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.domain.core.history.entity.OrderPaymentHistory;
 import project.swithme.domain.core.history.repository.OrderPaymentHistoryJpaRepository;
 import project.swithme.order.core.facade.OrderFacade;
-import project.swithme.order.core.presentation.request.OrderCreateRequest;
+import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
 import project.swithme.order.test.IntegrationTestBase;
 
 @DisplayName("[IntegrationTest] 주문/결제 내역 통합 테스트")
