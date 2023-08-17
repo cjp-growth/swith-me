@@ -1,15 +1,5 @@
 import com.github.spotbugs.snom.SpotBugsTask
 
-buildscript {
-    ext {
-        snippetsDir = file("build/generated-snippets")
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin")
-        classpath("io.spring.gradle:dependency-management-plugin")
-    }
-}
-
 plugins {
     id("java")
     id('org.springframework.boot')
@@ -36,6 +26,12 @@ checkstyle {
     configFile = file("${rootDir}/lint-config/convention/study-with-me-rule.xml")
     configProperties = ["suppressionFile": "${rootDir}/lint-config/convention/study-with-me-suppressions.xml"]
     toolVersion = checkStyleVersion
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 allprojects {
@@ -81,12 +77,16 @@ subprojects {
         // Test
         testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+        // QueryDSL
+        api("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+
         // Lombok
         compileOnly("org.projectlombok:lombok")
         annotationProcessor("org.projectlombok:lombok")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-        testAnnotationProcessor("org.projectlombok:lombok")
-        testCompileOnly("org.projectlombok:lombok")
+        annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
+        annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+        annotationProcessor("jakarta.persistence:jakarta.persistence-api")
     }
 
     spotbugs {
@@ -104,14 +104,6 @@ subprojects {
         jvmArgs = ['-Duser.language=ja']
     }
 
-    bootJar {
-        enabled = false
-    }
-
-    jar {
-        enabled = true
-    }
-
     tasks.test {
         useJUnitPlatform()
         finalizedBy jacocoTestReport
@@ -126,6 +118,11 @@ subprojects {
 
     jacocoTestReport {
         dependsOn test
+        def qClasses = []
+        for (qPattern in "**/QA".."**/QZ") {
+            qClasses.add(qPattern + "*")
+        }
+
         afterEvaluate {
             classDirectories.setFrom(files(classDirectories.files.collect {
                 fileTree(dir: it, exclude: [
@@ -148,37 +145,33 @@ subprojects {
                         "project/**/*CashReceiptInfo.*",
                         "project/**/*CashReceiptsInfo.*",
                         "project/**/*TransferInfo.*",
-                ])
+                ] + qClasses)
             }))
         }
         finalizedBy jacocoTestCoverageVerification
     }
 
     jacocoTestCoverageVerification {
+        def qClasses = []
+        for (qPattern in '*.QA'..'*.QZ') {
+            qClasses.add(qPattern + '*')
+        }
+
         violationRules {
             rule {
                 enabled = true;
                 element = 'CLASS'
 
-                // TODO. 개발 초기 단계라 커버리지 추후 조정
                 limit {
                     counter = 'BRANCH'
                     value = 'COVEREDRATIO'
-                    minimum = 0.0
+                    minimum = 0.7
                 }
-            }
-        }
-    }
-
-    jacocoTestReport {
-        dependsOn test
-        afterEvaluate {
-            classDirectories.setFrom(files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: [
+                excludes = [
                         "**/reservation/*",
                         "**/extractor/*",
                         "**/out/*",
-                        "**/common/*",
+                        "**/common/*.*",
                         "**/command/*",
                         "**/request/*",
                         "**/response/*",
@@ -193,11 +186,14 @@ subprojects {
                         "project/**/*GiftCertificateInfo.*",
                         "project/**/*CashReceiptInfo.*",
                         "project/**/*CashReceiptsInfo.*",
-                        "project/**/*TransferInfo.*",
-                ])
-            }))
+                        "project.swithme.domain.core.payment.entity.TransferInfo",
+                        "project.swithme.domain.core.payment.entity.DiscountInfo",
+                        "project.swithme.domain.core.reservation.entity.Reservation",
+                        "project.swithme.domain.core.common.BaseInformation",
+                        "project.swithme.domain.common.StudyWithMeUser"
+                ] + qClasses
+            }
         }
-        finalizedBy jacocoTestCoverageVerification
     }
 }
 
@@ -226,3 +222,11 @@ tasks.withType(GenerateSwaggerUI) {
 //tasks.withType(BootJar) {
 //    dependsOn 'copySwaggerUI'
 //}
+
+tasks.named('bootJar') {
+    enabled = false
+}
+
+tasks.named('jar') {
+    enabled = true
+}

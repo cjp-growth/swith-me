@@ -5,3 +5,7 @@ dependencies {
     implementation("ca.pjer:logback-awslogs-appender:1.6.0")
     implementation("org.codehaus.janino:janino")
 }
+
+bootJar {
+    enabled = false
+}
