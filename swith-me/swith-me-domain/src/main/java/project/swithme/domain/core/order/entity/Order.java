@@ -158,6 +158,10 @@ public class Order extends BaseEntity {
         }
     }
 
+    public boolean isOrderer(Long userId) {
+        return this.userId.equals(userId);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
