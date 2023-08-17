@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.order.core.facade.OrderFacade;
-import project.swithme.order.core.presentation.request.OrderCreateRequest;
+import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
 import project.swithme.order.test.IntegrationTestBase;
 
 @DisplayName("[IntegrationTest] 주문 통합 테스트")
