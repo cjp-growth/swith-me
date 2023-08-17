@@ -26,6 +26,10 @@ public class ErrorResponse {
         this.message = codeAndMessage.getKrErrorMessage();
     }
 
+    public static ErrorResponse of(CodeAndMessage codeAndMessage) {
+        return new ErrorResponse(codeAndMessage);
+    }
+
     public static ErrorResponse of(CommonException exception) {
         return new ErrorResponse(exception.getStatusCode(), exception.getMessage());
     }
