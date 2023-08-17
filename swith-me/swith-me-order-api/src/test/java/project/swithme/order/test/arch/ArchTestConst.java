@@ -5,21 +5,12 @@ public interface ArchTestConst {
     // Package
     String PRESENTATION_LAYER_PACKAGE = "..presentation..";
     String FACADE_LAYER_PACKAGE = "..facade..";
-    String SERVICE_LAYER_PACKAGE = "..application..";
-    String PRESENTATION_LAYER_VALIDATOR_PACKAGE = "..presentation.validator..";
-    String PRESENTATION_LAYER_REQUEST_PACKAGE = "..presentation.request..";
-    String PRESENTATION_LAYER_RESPONSE_PACKAGE = "..presentation.response..";
-    String FACADE_LAYER_COMMAND_PACKAGE = "..facade.command..";
-    String FACADE_LAYER_VALIDATOR_PACKAGE = "..facade.validator..";
+    String QUERY_SERVICE_LAYER_PACKAGE = "..application.query..";
+    String DAO_LAYER_PACKAGE = "..dao..";
     String TEST_PACKAGE = "project/swithme/order/test";
 
     // PresentationLayer
     String ORDER_CREATE_CONTROLLER = "OrderCreateAPI";
-    String ORDER_CREATE_REQUEST = "OrderCreateRequest";
-    String ORDER_CREATE_RESPONSE = "OrderCreateResponse";
-    String ORDER_CREATE_REQUEST_VALIDATOR = "OrderCreateValidator";
-    String ORDER_CREATE_COMMAND = "OrderCreateCommand";
-    String ORDER_CREATE_VALIDATOR = "OrderValidator";
 
     // FacadeLayer
     String ORDER_FACADE = "OrderFacade";
@@ -31,4 +22,5 @@ public interface ArchTestConst {
     // Class
     String ADAPTER = "Adapter";
     String SERVICE = "Service";
+    String DAO = "Dao";
 }

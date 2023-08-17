@@ -1,4 +1,4 @@
-package project.swithme.order.core.presentation;
+package project.swithme.order.core.presentation.command;
 
 import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.CREATED;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +10,9 @@ import project.study.support.response.success.ApiResponse;
 import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.order.common.annotation.auth.LoginUser;
 import project.swithme.order.core.facade.OrderFacade;
-import project.swithme.order.core.presentation.request.OrderCreateRequest;
-import project.swithme.order.core.presentation.response.OrderCreateResponse;
-import project.swithme.order.core.presentation.validator.OrderCreateValidator;
+import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
+import project.swithme.order.core.presentation.command.response.OrderCreateResponse;
+import project.swithme.order.core.presentation.command.validator.OrderCreateValidator;
 
 @RestController
 @RequiredArgsConstructor

@@ -5,7 +5,6 @@ dependencies {
     testImplementation(testFixtures(project(":swith-me-domain")))
 
     // SpringBoot
-    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-webflux')
 
@@ -14,5 +13,14 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.tngtech.archunit:archunit-junit5:0.17.0")
+}
+
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = true
 }

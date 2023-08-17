@@ -1,4 +1,4 @@
-package project.swithme.order.core.presentation.validator;
+package project.swithme.order.core.presentation.command.validator;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import project.study.support.exception.InvalidParameterException;
 import project.study.support.log.Field;
 import project.swithme.domain.core.order.entity.PayType;
-import project.swithme.order.core.presentation.request.OrderCreateRequest;
+import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
 
 @Component
 public class OrderCreateValidator {

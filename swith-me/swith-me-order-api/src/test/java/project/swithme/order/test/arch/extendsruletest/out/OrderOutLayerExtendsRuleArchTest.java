@@ -1,4 +1,4 @@
-package project.swithme.order.test.arch.namingruletest.out;
+package project.swithme.order.test.arch.extendsruletest.out;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static project.swithme.order.test.arch.ArchTestConst.ADAPTER;
@@ -14,10 +14,10 @@ import project.swithme.order.test.arch.TestExcludeConfiguration;
 @DisplayName("[ArchTest] PresentationLayer 계층 테스트")
 @AnalyzeClasses(packagesOf = {
     OrderApplication.class}, importOptions = TestExcludeConfiguration.class)
-public class OrderOutLayerNamingRuleArchTest {
+public class OrderOutLayerExtendsRuleArchTest {
 
     @ArchTest
-    @Description(content = "ProductClient의 구현체들은 Adapter가 클래스 이름에 붙어야 한다.")
+    @Description(content = "ProductClient의 구현체들은 Adapter가 클래스 이름 끝에 붙어야 한다.")
     ArchRule orderUseCaseImplRule = classes().that().implement(ProductClient.class)
         .should().haveSimpleNameEndingWith(ADAPTER);
 }

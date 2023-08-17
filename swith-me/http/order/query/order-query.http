@@ -1,0 +1,11 @@
+### Order Detail Query API(OK) ###
+GET {{api}}/orders/{{orderId}}
+Content-Type: application/json
+
+### Order Detail Query API(BAD_REQUEST) ###
+GET {{api}}/orders/hello-world
+Content-Type: application/json
+
+### Order Detail Query API(BAD_REQUEST) ###
+GET {{api}}/orders/
+Content-Type: application/json

@@ -1,4 +1,4 @@
-package project.swithme.order.core.presentation.request;
+package project.swithme.order.core.presentation.command.request;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.DecimalMin;

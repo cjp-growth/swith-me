@@ -5,7 +5,7 @@ import static project.swithme.order.test.arch.ArchTestConst.FACADE_LAYER_PACKAGE
 import static project.swithme.order.test.arch.ArchTestConst.ORDER_FACADE;
 import static project.swithme.order.test.arch.ArchTestConst.ORDER_QUERY_USE_CASE;
 import static project.swithme.order.test.arch.ArchTestConst.ORDER_USE_CASE;
-import static project.swithme.order.test.arch.ArchTestConst.SERVICE_LAYER_PACKAGE;
+import static project.swithme.order.test.arch.ArchTestConst.QUERY_SERVICE_LAYER_PACKAGE;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.library.Architectures.LayeredArchitecture;
@@ -18,7 +18,7 @@ import project.swithme.order.test.arch.TestExcludeConfiguration;
     packages = "project.swithme.order",
     importOptions = TestExcludeConfiguration.class
 )
-class ServiceLayerArchTest {
+class OrderServiceLayerArchTest {
 
     @ArchTest
     @ArchTestDescription(
@@ -27,8 +27,8 @@ class ServiceLayerArchTest {
     )
     LayeredArchitecture applicationLayerAccessTest = layeredArchitecture()
         .layer(ORDER_FACADE).definedBy(FACADE_LAYER_PACKAGE)
-        .layer(ORDER_USE_CASE).definedBy(SERVICE_LAYER_PACKAGE)
-        .layer(ORDER_QUERY_USE_CASE).definedBy(SERVICE_LAYER_PACKAGE)
+        .layer(ORDER_USE_CASE).definedBy(QUERY_SERVICE_LAYER_PACKAGE)
+        .layer(ORDER_QUERY_USE_CASE).definedBy(QUERY_SERVICE_LAYER_PACKAGE)
 
         .whereLayer(ORDER_USE_CASE).mayOnlyBeAccessedByLayers(ORDER_FACADE)
         .whereLayer(ORDER_QUERY_USE_CASE).mayOnlyBeAccessedByLayers(ORDER_FACADE);

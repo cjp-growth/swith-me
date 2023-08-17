@@ -6,3 +6,29 @@ dependencies {
     api("org.springframework.boot:spring-boot-starter-data-jpa")
     api("org.springframework.data:spring-data-envers")
 }
+
+tasks.named('spotbugsMain').configure {
+    dependsOn ':swith-me-domain:compileTestJava'
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+}
+
+sourceSets {
+    main.java.srcDirs += [querydslDir]
+}
+
+clean.doLast {
+    file(querydslDir).deleteDir()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
