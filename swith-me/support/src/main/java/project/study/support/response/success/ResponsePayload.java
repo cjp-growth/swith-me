@@ -12,15 +12,6 @@ public class ResponsePayload<T> {
 
     public ResponsePayload(
         T data,
-        HttpStatus status
-    ) {
-        this.data = data;
-        this.code = status.value();
-        this.message = "Success";
-    }
-
-    public ResponsePayload(
-        T data,
         HttpStatus status,
         String message
     ) {
