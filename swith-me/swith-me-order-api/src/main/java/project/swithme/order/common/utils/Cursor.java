@@ -24,7 +24,7 @@ public class Cursor {
         return new Cursor(index, limit);
     }
 
-    public boolean isFirstPage() {
+    public boolean pointRecentlyData() {
         return index == null;
     }
 

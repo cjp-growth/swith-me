@@ -14,7 +14,7 @@ import project.swithme.order.common.utils.CursorFactory;
 public class PagingArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String CURSOR_POINTER = "index";
-    private static final String PAGE_SIZE = "size";
+    private static final String PAGE_SIZE = "limit";
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
