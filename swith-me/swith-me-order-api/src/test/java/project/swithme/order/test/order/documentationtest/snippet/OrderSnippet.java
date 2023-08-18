@@ -7,11 +7,14 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import java.util.List;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.payload.RequestFieldsSnippet;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
+import org.springframework.restdocs.request.QueryParametersSnippet;
 import org.springframework.restdocs.restassured.RestAssuredRestDocumentation;
 import org.springframework.restdocs.restassured.RestDocumentationFilter;
 import org.springframework.restdocs.snippet.Attributes;
@@ -41,6 +44,11 @@ public interface OrderSnippet {
             .attributes(getAttribute("payType"))
     );
 
+    QueryParametersSnippet MY_ORDERS_SEARCH_QUERY_PARAM = queryParameters(
+        parameterWithName("index").description("주문 PK"),
+        parameterWithName("limit").description("페이지 크기")
+    );
+
     ResponseFieldsSnippet MY_ORDERS_SEARCH_RESPONSE =
         responseFields(
             fieldWithPath("data.hasNext").type(BOOLEAN).description("다음 페이지 유무"),
@@ -56,6 +64,7 @@ public interface OrderSnippet {
 
     RestDocumentationFilter MY_ORDERS_SEARCH_DOCUMENT = RestAssuredRestDocumentation.document(
         "{class_name}/{method_name}/",
+        MY_ORDERS_SEARCH_QUERY_PARAM,
         MY_ORDERS_SEARCH_RESPONSE
     );
 
