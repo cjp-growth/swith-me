@@ -25,7 +25,7 @@ public final class CursorFactory {
         if (parsedIndex == null) {
             return null;
         }
-        if (parsedIndex <= ZERO || parsedIndex >= Long.MAX_VALUE) {
+        if (parsedIndex <= ZERO) {
             return null;
         }
         return parsedIndex;
