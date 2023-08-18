@@ -1,6 +1,7 @@
 package project.swithme.order.common.configuration.handler.auth;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -8,6 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.order.common.annotation.auth.LoginUser;
 
+@Order(1)
 public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
