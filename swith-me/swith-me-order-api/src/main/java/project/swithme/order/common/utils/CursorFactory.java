@@ -47,7 +47,7 @@ public final class CursorFactory {
         if (limit == null) {
             return DEFAULT_LIMIT;
         }
-        if (parsedLimit > PAGE_LIMIT) {
+        if (parsedLimit < ZERO || parsedLimit > PAGE_LIMIT) {
             return DEFAULT_LIMIT;
         }
         return parsedLimit;
