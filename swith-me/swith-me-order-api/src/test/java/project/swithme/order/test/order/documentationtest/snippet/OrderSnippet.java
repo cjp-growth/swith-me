@@ -46,7 +46,9 @@ public interface OrderSnippet {
 
     QueryParametersSnippet MY_ORDERS_SEARCH_QUERY_PARAM = queryParameters(
         parameterWithName("index").description("주문 PK"),
-        parameterWithName("limit").description("페이지 크기")
+        parameterWithName("limit").description("페이지 크기"),
+        parameterWithName("startDate").description("조회 시작 날짜").optional(),
+        parameterWithName("endDate").description("조회 마지막 날짜").optional()
     );
 
     ResponseFieldsSnippet MY_ORDERS_SEARCH_RESPONSE =

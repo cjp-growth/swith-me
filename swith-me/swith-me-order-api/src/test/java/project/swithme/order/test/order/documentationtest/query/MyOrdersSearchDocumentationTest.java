@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static project.swithme.domain.core.order.entity.OrderStatus.PAYMENT_REQUEST;
 import static project.swithme.order.test.order.documentationtest.snippet.OrderSnippet.MY_ORDERS_SEARCH_DOCUMENT;
+import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -28,9 +29,11 @@ class MyOrdersSearchDocumentationTest extends IntegrationTestBase {
             .contentType(APPLICATION_JSON)
             .filters(MY_ORDERS_SEARCH_DOCUMENT)
             .get(
-                "/api/orders/my-orders?index={index}&limit={limit}",
+                "/api/orders/my-orders?index={index}&limit={limit}&startDate={startDate}&endDate={endDate}",
                 cursor.getIndex(),
-                cursor.getLimit()
+                cursor.getLimit(),
+                LocalDate.of(2020, 10, 23).toString(),
+                LocalDate.now().toString()
             )
 
             .then()
