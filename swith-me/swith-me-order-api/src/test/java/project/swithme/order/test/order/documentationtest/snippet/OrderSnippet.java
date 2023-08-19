@@ -1,16 +1,22 @@
 package project.swithme.order.test.order.documentationtest.snippet;
 
+import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.BOOLEAN;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.NUMBER;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.STRING;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import java.util.List;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.payload.RequestFieldsSnippet;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
+import org.springframework.restdocs.request.QueryParametersSnippet;
+import org.springframework.restdocs.restassured.RestAssuredRestDocumentation;
+import org.springframework.restdocs.restassured.RestDocumentationFilter;
 import org.springframework.restdocs.snippet.Attributes;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
@@ -36,6 +42,30 @@ public interface OrderSnippet {
             .attributes(getAttribute("title")),
         fieldWithPath("payType").description("결제 수단")
             .attributes(getAttribute("payType"))
+    );
+
+    QueryParametersSnippet MY_ORDERS_SEARCH_QUERY_PARAM = queryParameters(
+        parameterWithName("index").description("주문 PK"),
+        parameterWithName("limit").description("페이지 크기")
+    );
+
+    ResponseFieldsSnippet MY_ORDERS_SEARCH_RESPONSE =
+        responseFields(
+            fieldWithPath("data.hasNext").type(BOOLEAN).description("다음 페이지 유무"),
+            fieldWithPath("data.size").type(NUMBER).description("데이터 크기"),
+            fieldWithPath("data.orders[].orderId").type(NUMBER).description("주문 PK"),
+            fieldWithPath("data.orders[].title").type(STRING).description("주문명"),
+            fieldWithPath("data.orders[].orderStatus").type(STRING).description("주문 상태"),
+            fieldWithPath("data.orders[].payType").type(STRING).description("결제 방법"),
+            fieldWithPath("data.orders[].orderDate").type(STRING).description("주문 날짜"),
+            fieldWithPath("code").type(STRING).description("응답 코드"),
+            fieldWithPath("message").type(STRING).description("응답 메시지")
+        );
+
+    RestDocumentationFilter MY_ORDERS_SEARCH_DOCUMENT = RestAssuredRestDocumentation.document(
+        "{class_name}/{method_name}/",
+        MY_ORDERS_SEARCH_QUERY_PARAM,
+        MY_ORDERS_SEARCH_RESPONSE
     );
 
     ResponseFieldsSnippet ORDER_CREATE_RESPONSE =

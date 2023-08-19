@@ -9,3 +9,7 @@ Content-Type: application/json
 ### Order Detail Query API(BAD_REQUEST) ###
 GET {{api}}/orders/
 Content-Type: application/json
+
+### My Orders Query API ###
+GET {{api}}/orders/my-orders?index=11&limit=10
+Content-Type: application/json
