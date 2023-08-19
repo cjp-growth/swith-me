@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,9 @@ class PagingArgumentResolverUnitTest {
     @DisplayName("CursorPageable 어노테이션을 확인할 수 있다.")
     void paging_argument_test() throws Exception {
         Method method = OrderPagingAPI.class
-            .getMethod("findMyOrders", StudyWithMeUser.class, Cursor.class);
+            .getMethod("findMyOrders",
+                StudyWithMeUser.class, Cursor.class, LocalDate.class, LocalDate.class
+            );
         MethodParameter methodParameter = new MethodParameter(method, 1);
 
         assertTrue(argumentResolver.supportsParameter(methodParameter));
@@ -43,7 +46,9 @@ class PagingArgumentResolverUnitTest {
         when(webRequestMock.getHeader("limit"))
             .thenReturn("10");
 
-        Object object = argumentResolver.resolveArgument(null, null, webRequestMock, null);
+        Object object = argumentResolver.resolveArgument(
+            null, null, webRequestMock, null
+        );
 
         assertTrue(object instanceof Cursor);
     }
