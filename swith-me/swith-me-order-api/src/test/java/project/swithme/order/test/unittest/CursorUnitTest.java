@@ -36,11 +36,21 @@ class CursorUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "-1", "-2", "-3", "-4", "-5", "-6", "-10",
-        "124132481048234810482130481204823140923840239850291358120358231058123501235821035"
+        "-1", "-2", "-3", "-4", "-5", "-6", "-10"
     })
     @DisplayName("limit 값이 음수면 기본 값(10)으로 초기화 된다.")
     void cursor_negative_limit_test(String parameter) {
+        Cursor cursor = CursorFactory.createCursor("10", parameter);
+
+        assertEquals(10, cursor.getLimit());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "124132481048234810482130481204823140923840239850291358120358231058123501235821035"
+    })
+    @DisplayName("limit 값이 Long 최댓값을 넘어가면 기본 값(10)으로 초기화 된다.")
+    void cursor_out_of_range_limit_test(String parameter) {
         Cursor cursor = CursorFactory.createCursor("10", parameter);
 
         assertEquals(10, cursor.getLimit());
@@ -75,11 +85,21 @@ class CursorUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "-1", "-2", "-3", "-4", "-5", "-6", "-10",
+        "-1", "-2", "-3", "-4", "-5", "-6", "-10"
+    })
+    @DisplayName("index 값이 음수라면 null로 초기화 된다.")
+    void cursor_negative_index_test(String parameter) {
+        Cursor cursor = CursorFactory.createCursor(parameter, "10");
+
+        assertNull(cursor.getIndex());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
         "124132481048234810482130481204823140923840239850291358120358231058123501235821035"
     })
-    @DisplayName("index 값이 음수라면 기본 값(10)으로 초기화 된다.")
-    void cursor_negative_index_test(String parameter) {
+    @DisplayName("index 값이 Long 최댓값을 넘어가면 null로 초기화 된다.")
+    void cursor_index_out_of_range_test(String parameter) {
         Cursor cursor = CursorFactory.createCursor(parameter, "10");
 
         assertNull(cursor.getIndex());
