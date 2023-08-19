@@ -1,5 +1,6 @@
 package project.swithme.order.core.application;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import project.swithme.domain.common.StudyWithMeUser;
@@ -12,5 +13,10 @@ public interface OrderQueryUseCase {
 
     Optional<Order> findByUniqueId(String orderUniqueId);
 
-    List<Order> findMyOrders(StudyWithMeUser studyWithMeUser, Cursor cursor);
+    List<Order> findMyOrders(
+        StudyWithMeUser studyWithMeUser,
+        Cursor cursor,
+        LocalDate startDate,
+        LocalDate endDate
+    );
 }

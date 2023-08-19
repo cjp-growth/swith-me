@@ -1,5 +1,6 @@
 package project.swithme.order.core.application.query;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,8 +45,10 @@ public class OrderQueryService implements OrderQueryUseCase {
     @Override
     public List<Order> findMyOrders(
         StudyWithMeUser studyWithMeUser,
-        Cursor cursor
+        Cursor cursor,
+        LocalDate startDate,
+        LocalDate endDate
     ) {
-        return orderDao.findMyOrders(studyWithMeUser, cursor);
+        return orderDao.findMyOrders(studyWithMeUser, cursor, startDate, endDate);
     }
 }
