@@ -34,6 +34,7 @@ rootProject.name = 'swith-me'
 include(
         "swith-me-order-api",
         "swith-me-payment-api",
+        "swith-me-notification-api",
         "swith-me-domain",
         "storage",
         "support"
