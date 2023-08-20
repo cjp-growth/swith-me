@@ -10,7 +10,7 @@ import project.study.support.log.Field;
 @Component
 public class OrderPagingValidator {
 
-    public void validateDate(
+    public void validate(
         LocalDate startDate,
         LocalDate endDate
     ) {

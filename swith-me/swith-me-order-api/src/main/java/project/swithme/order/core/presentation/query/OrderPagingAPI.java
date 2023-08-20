@@ -33,7 +33,7 @@ public class OrderPagingAPI {
         @RequestParam(required = false) LocalDate startDate,
         @RequestParam(required = false) LocalDate endDate
     ) {
-        validator.validateDate(startDate, endDate);
+        validator.validate(startDate, endDate);
 
         List<Order> data = orderQueryUseCase.findMyOrders(
             studyWithMeUser, cursor, startDate, endDate
