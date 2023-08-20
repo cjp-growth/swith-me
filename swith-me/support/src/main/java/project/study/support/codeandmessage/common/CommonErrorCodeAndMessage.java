@@ -6,6 +6,7 @@ public enum CommonErrorCodeAndMessage implements CodeAndMessage {
     INVALID_REQUEST(400, "올바르지 않은 요청입니다."),
     API_SPEC_UN_MATCHED(400, "외부 서버 API 스펙과 매핑을 확인해주세요."),
     INVALID_PATH_VARIABLE(400, "올바른 경로를 확인해주세요."),
+    INVALID_QUERY_PARAMETERS(400, "올바른 파라미터를 입력해주세요."),
     UN_AUTHORIZED(401, "권한이 존재하지 않습니다."),
     URL_NOTFOUND(404, "존재하지 않는 URL 입니다."),
     INTERNAL_SERVER_ERROR(500, "서버 내부 오류입니다."),
