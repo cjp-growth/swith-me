@@ -87,20 +87,19 @@ public class OrderQueryDao implements OrderDao {
 
     private Instant getStartDate(LocalDate date) {
         if (date == null) {
-            return UTC_BASE_TIME
-                .atStartOfDay(UTC)
-                .toInstant();
+            return getInstant(UTC_BASE_TIME);
         }
-        return date.atStartOfDay(UTC)
-            .toInstant();
+        return getInstant(date);
     }
 
     private Instant getEndDate(LocalDate date) {
         if (date == null) {
-            return LocalDate.now()
-                .atStartOfDay(UTC)
-                .toInstant();
+            return getInstant(LocalDate.now());
         }
+        return getInstant(date);
+    }
+
+    private Instant getInstant(LocalDate date) {
         return date.atStartOfDay(UTC)
             .toInstant();
     }
