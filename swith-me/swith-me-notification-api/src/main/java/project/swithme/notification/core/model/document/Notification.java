@@ -37,6 +37,12 @@ public class Notification {
     @Field(name = "createdAt")
     private Instant createdAt = Instant.now();
 
+    /**
+     * @Nullary-Constructor. JPA 기본 생성자로 notification 외부 패키지에서 호출하지 말 것.
+     */
+    protected Notification() {
+    }
+
     public Notification(
         Long userId,
         String orderId,
@@ -47,6 +53,30 @@ public class Notification {
         this.orderId = orderId;
         this.eventType = EventType.ORDER;
         this.message = message;
+    }
+
+    public Notification(
+        String _id,
+        UUID uniqueId,
+        Long userId,
+        String orderId,
+        EventType eventType,
+        String message,
+        boolean checked,
+        Instant createdAt
+    ) {
+        this._id = _id;
+        this.uniqueId = uniqueId;
+        this.userId = userId;
+        this.orderId = orderId;
+        this.eventType = eventType;
+        this.message = message;
+        this.checked = checked;
+        this.createdAt = createdAt;
+    }
+
+    public void updateReadable() {
+        this.checked = true;
     }
 
     @Override
