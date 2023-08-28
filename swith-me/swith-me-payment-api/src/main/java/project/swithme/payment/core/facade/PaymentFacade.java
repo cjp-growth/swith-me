@@ -24,7 +24,7 @@ public class PaymentFacade {
     private final PaymentValidator paymentValidator;
     private final PaymentSaveUseCase paymentSaveUseCase;
     private final PaymentPort paymentPort;
-    private final EventPublisher<PaymentSuccessEvent> eventEventPublisher;
+    private final EventPublisher<PaymentSuccessEvent> eventPublisher;
 
     @Transactional
     public Long requestApproval(
@@ -61,6 +61,6 @@ public class PaymentFacade {
             findOrderCommand.getOrderUniqueIdAsString(),
             findOrderCommand.getUserId()
         );
-        eventEventPublisher.publishEvent(event);
+        eventPublisher.publishEvent(event);
     }
 }
