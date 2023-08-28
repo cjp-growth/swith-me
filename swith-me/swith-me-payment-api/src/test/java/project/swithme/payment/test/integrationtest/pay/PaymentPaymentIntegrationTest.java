@@ -6,7 +6,7 @@ import static order.PaymentFixture.getOrderUniqueId;
 import static order.PaymentFixture.getPaymentKey;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doReturn;
 import static project.swithme.domain.core.order.entity.OrderStatus.PAYMENT_REQUEST;
 import static project.swithme.domain.core.payment.entity.PaymentType.NORMAL;
 import static project.swithme.payment.common.mockresponse.OrderCommandMockResponse.createApprovedCommand;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import project.swithme.domain.core.order.entity.Order;
+import project.swithme.domain.core.order.event.PaymentSuccessEvent;
 import project.swithme.payment.common.annotation.Description;
 import project.swithme.payment.common.command.OrderValidationCommand;
 import project.swithme.payment.common.persistence.PersistenceHelper;
@@ -26,6 +26,7 @@ import project.swithme.payment.core.application.PaymentSaveUseCase;
 import project.swithme.payment.core.exception.PaymentFailureException;
 import project.swithme.payment.core.facade.PaymentFacade;
 import project.swithme.payment.core.facade.validator.PaymentValidator;
+import project.swithme.payment.core.out.EventPublisher;
 import project.swithme.payment.core.out.OrderQueryPort;
 import project.swithme.payment.core.out.PaymentPort;
 import project.swithme.payment.test.IntegrationTestBase;
@@ -48,8 +49,11 @@ class PaymentPaymentIntegrationTest extends IntegrationTestBase {
     @SpyBean
     private PaymentSaveUseCase paymentSaveUseCase;
 
-    @MockBean
+    @SpyBean
     private PaymentPort paymentPort;
+
+    @MockBean
+    private EventPublisher<PaymentSuccessEvent> eventEventPublisher;
 
     @BeforeEach
     void setUp() {
@@ -57,26 +61,31 @@ class PaymentPaymentIntegrationTest extends IntegrationTestBase {
             orderQueryPort,
             paymentValidator,
             paymentSaveUseCase,
-            paymentPort
+            paymentPort,
+            eventEventPublisher
         );
     }
 
     @Test
     @DisplayName("결제가 승인되면 PK를 반환한다.")
     void payment_success_test() {
-        Order order = persistenceHelper.persist(createOrder(PAYMENT_REQUEST));
+        persistenceHelper.persist(createOrder(PAYMENT_REQUEST));
+        OrderValidationCommand command = getCommand();
 
-        when(orderQueryPort.findOrderByUniqueId(getOrderUniqueId()))
-            .thenReturn(getCommand());
+        doReturn(command)
+            .when(orderQueryPort)
+            .findOrderByUniqueId(getOrderUniqueId());
 
-        when(paymentPort.requestApproval(
-            getPaymentKey(),
-            order.getUniqueId().toString(),
-            FIXED_TOTAL_PRICE
-        )).thenReturn(createApprovedCommand());
+        doReturn(createApprovedCommand())
+            .when(paymentPort)
+            .requestApproval(
+                getPaymentKey(),
+                getOrderUniqueId(),
+                FIXED_TOTAL_PRICE
+            );
 
         Long paymentId = paymentFacade.requestApproval(
-            order.getUniqueId().toString(),
+            getOrderUniqueId(),
             getPaymentKey(),
             NORMAL,
             FIXED_TOTAL_PRICE
@@ -90,14 +99,17 @@ class PaymentPaymentIntegrationTest extends IntegrationTestBase {
     void payment_failure_by_invalid_order_test() {
         OrderValidationCommand command = getCommand();
 
-        when(orderQueryPort.findOrderByUniqueId(getOrderUniqueId()))
-            .thenReturn(command);
+        doReturn(command)
+            .when(orderQueryPort)
+            .findOrderByUniqueId(getOrderUniqueId());
 
-        when(paymentPort.requestApproval(
-            getPaymentKey(),
-            command.getOrderUniqueId().toString(),
-            FIXED_TOTAL_PRICE
-        )).thenReturn(createNotApprovedCommand());
+        doReturn(createNotApprovedCommand())
+            .when(paymentPort)
+            .requestApproval(
+                getPaymentKey(),
+                getOrderUniqueId(),
+                FIXED_TOTAL_PRICE
+            );
 
         assertThatThrownBy(
             () -> paymentFacade.requestApproval(
