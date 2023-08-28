@@ -1,4 +1,4 @@
-package project.swithme.notification.core.out;
+package project.swithme.notification.core.web.out;
 
 public interface OrderQueryPort {
 

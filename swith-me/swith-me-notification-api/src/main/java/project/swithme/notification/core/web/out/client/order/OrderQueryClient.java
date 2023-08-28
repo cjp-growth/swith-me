@@ -1,13 +1,13 @@
-package project.swithme.notification.core.out.client.order;
+package project.swithme.notification.core.web.out.client.order;
 
 import feign.FeignException;
 import org.springframework.stereotype.Component;
 import project.study.support.exception.ApiCallFailureException;
 import project.study.support.exception.ErrorMessageParseException;
-import project.swithme.notification.core.exception.InvalidOrderException;
-import project.swithme.notification.core.out.OrderQueryPort;
-import project.swithme.notification.core.out.client.order.adapter.OrderAdapter;
-import project.swithme.notification.core.out.client.order.adapter.response.OrderResponse;
+import project.swithme.notification.core.web.exception.InvalidOrderException;
+import project.swithme.notification.core.web.out.OrderQueryPort;
+import project.swithme.notification.core.web.out.client.order.adapter.OrderAdapter;
+import project.swithme.notification.core.web.out.client.order.adapter.response.OrderResponse;
 
 @Component
 public class OrderQueryClient implements OrderQueryPort {

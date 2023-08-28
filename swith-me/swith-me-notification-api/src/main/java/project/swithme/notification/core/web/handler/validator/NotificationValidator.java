@@ -1,4 +1,4 @@
-package project.swithme.notification.core.handler.validator;
+package project.swithme.notification.core.web.handler.validator;
 
 import org.springframework.stereotype.Component;
 

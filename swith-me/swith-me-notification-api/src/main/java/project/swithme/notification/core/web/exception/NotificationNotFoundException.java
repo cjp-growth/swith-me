@@ -1,4 +1,4 @@
-package project.swithme.notification.core.exception;
+package project.swithme.notification.core.web.exception;
 
 import static project.study.support.codeandmessage.notification.NotificationCodeAndMessage.NOTIFICATION_NOT_FOUND;
 import project.study.support.exception.DomainException;

@@ -1,4 +1,4 @@
-package project.swithme.notification.core.handler;
+package project.swithme.notification.core.web.handler;
 
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;

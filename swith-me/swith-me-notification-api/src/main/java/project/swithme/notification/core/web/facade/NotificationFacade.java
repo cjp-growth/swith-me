@@ -1,9 +1,9 @@
-package project.swithme.notification.core.facade;
+package project.swithme.notification.core.web.facade;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import project.swithme.notification.core.application.NotificationSaveUseCase;
-import project.swithme.notification.core.out.OrderQueryPort;
+import project.swithme.notification.core.web.application.NotificationSaveUseCase;
+import project.swithme.notification.core.web.out.OrderQueryPort;
 
 @Component
 @RequiredArgsConstructor

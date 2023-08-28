@@ -1,10 +1,10 @@
-package project.swithme.notification.core.out.client.order.adapter;
+package project.swithme.notification.core.web.out.client.order.adapter;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import project.swithme.notification.common.configuration.feign.FeignJsonConfiguration;
-import project.swithme.notification.core.out.client.order.adapter.response.OrderResponse;
+import project.swithme.notification.core.web.out.client.order.adapter.response.OrderResponse;
 
 @FeignClient(
     name = "orderClient",

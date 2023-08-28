@@ -1,4 +1,4 @@
-package project.swithme.notification.core.application;
+package project.swithme.notification.core.web.application;
 
 import project.swithme.notification.core.model.document.Notification;
 

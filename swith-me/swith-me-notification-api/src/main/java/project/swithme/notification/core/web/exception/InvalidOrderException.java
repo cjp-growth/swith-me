@@ -1,4 +1,4 @@
-package project.swithme.notification.core.exception;
+package project.swithme.notification.core.web.exception;
 
 import static project.study.support.codeandmessage.order.OrderCodeAndMessage.INVALID_ORDER;
 import project.study.support.exception.DomainException;

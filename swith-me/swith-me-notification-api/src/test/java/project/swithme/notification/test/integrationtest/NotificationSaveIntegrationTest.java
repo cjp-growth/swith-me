@@ -10,12 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import project.swithme.notification.core.application.NotificationQueryUseCase;
-import project.swithme.notification.core.application.NotificationSaveUseCase;
-import project.swithme.notification.core.exception.NotificationNotFoundException;
-import project.swithme.notification.core.facade.NotificationFacade;
 import project.swithme.notification.core.model.document.Notification;
-import project.swithme.notification.core.out.OrderQueryPort;
+import project.swithme.notification.core.web.application.NotificationQueryUseCase;
+import project.swithme.notification.core.web.application.NotificationSaveUseCase;
+import project.swithme.notification.core.web.exception.NotificationNotFoundException;
+import project.swithme.notification.core.web.facade.NotificationFacade;
+import project.swithme.notification.core.web.out.OrderQueryPort;
 import project.swithme.notification.test.IntegrationTestBase;
 
 @DisplayName("[IntegrationTest] 알림 저장 통합 테스트")
