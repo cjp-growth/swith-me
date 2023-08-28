@@ -21,5 +21,5 @@ dependencies {
     // Test
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-
+    testImplementation("org.springframework.kafka:spring-kafka-test")
 }
