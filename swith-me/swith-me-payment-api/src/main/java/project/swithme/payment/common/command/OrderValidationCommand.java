@@ -35,4 +35,16 @@ public class OrderValidationCommand {
     public boolean validatePrice(BigDecimal amount) {
         return this.price.equals(amount);
     }
+
+    public String getOrderUniqueIdAsString() {
+        return orderUniqueId.toString();
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "orderId: %s, userId: %s, orderUniqueId: %s, orderStatus: %s, price: %s",
+            orderId, userId, orderUniqueId, orderStatus, price
+        );
+    }
 }

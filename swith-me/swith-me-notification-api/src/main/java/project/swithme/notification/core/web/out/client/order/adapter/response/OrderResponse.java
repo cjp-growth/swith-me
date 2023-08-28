@@ -1,4 +1,4 @@
-package project.swithme.payment.core.out.client.order.adapter.response;
+package project.swithme.notification.core.web.out.client.order.adapter.response;
 
 import java.math.BigDecimal;
 import lombok.Getter;

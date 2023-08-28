@@ -26,6 +26,9 @@ public class OrderQueryClient implements OrderQueryPort {
         OrderResponse response;
         try {
             response = orderAdapter.findOrderByUniqueId(orderUniqueId);
+            if (response == null) {
+                throw new OrderNotFoundException();
+            }
             return convertToDomainLanguage(response);
         } catch (FeignException exception) {
             throw new OrderNotFoundException();
