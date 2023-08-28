@@ -1,9 +1,9 @@
-package project.swithme.notification.core.model.repository;
+package project.swithme.notification.core.domain.notification.repository;
 
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import project.swithme.notification.core.model.document.Notification;
+import project.swithme.notification.core.domain.notification.document.Notification;
 
 public interface NotificationRepository extends CrudRepository<Notification, String> {
 

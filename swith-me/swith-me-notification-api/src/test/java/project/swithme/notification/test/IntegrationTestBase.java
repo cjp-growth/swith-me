@@ -13,7 +13,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import project.swithme.notification.core.model.repository.NotificationRepository;
+import project.swithme.notification.core.domain.notification.repository.NotificationRepository;
 
 @Testcontainers
 @EmbeddedKafka(ports = 0)

@@ -2,8 +2,8 @@ package project.swithme.notification.core.web.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.swithme.notification.core.model.document.Notification;
-import project.swithme.notification.core.model.repository.NotificationRepository;
+import project.swithme.notification.core.domain.notification.document.Notification;
+import project.swithme.notification.core.domain.notification.repository.NotificationRepository;
 import project.swithme.notification.core.web.application.NotificationSaveUseCase;
 
 @Service

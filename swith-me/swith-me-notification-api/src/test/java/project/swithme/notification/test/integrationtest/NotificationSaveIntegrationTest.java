@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import project.swithme.notification.core.model.document.Notification;
+import project.swithme.notification.core.domain.notification.document.Notification;
 import project.swithme.notification.core.web.application.NotificationQueryUseCase;
 import project.swithme.notification.core.web.application.NotificationSaveUseCase;
 import project.swithme.notification.core.web.exception.NotificationNotFoundException;

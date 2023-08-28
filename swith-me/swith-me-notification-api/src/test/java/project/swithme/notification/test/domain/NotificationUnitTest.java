@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import project.swithme.notification.core.model.document.Notification;
+import project.swithme.notification.core.domain.notification.document.Notification;
 
 @DisplayName("[UnitTest] 알림 단위 테스트")
 class NotificationUnitTest {

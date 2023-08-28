@@ -3,8 +3,8 @@ package project.swithme.notification.common.fixture;
 import java.time.Instant;
 import java.util.UUID;
 import project.swithme.notification.common.utils.UUIDGenerators;
-import project.swithme.notification.core.model.document.EventType;
-import project.swithme.notification.core.model.document.Notification;
+import project.swithme.notification.core.domain.notification.document.EventType;
+import project.swithme.notification.core.domain.notification.document.Notification;
 
 public final class NotificationFixture {
 

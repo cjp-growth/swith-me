@@ -1,4 +1,4 @@
-package project.swithme.notification.core.model.document;
+package project.swithme.notification.core.domain.notification.document;
 
 import static project.swithme.notification.common.utils.UUIDGenerators.createUUID;
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package project.swithme.notification.core.model.document;
+package project.swithme.notification.core.domain.notification.document;
 
 import java.util.Arrays;
 
