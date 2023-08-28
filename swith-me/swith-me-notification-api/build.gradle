@@ -1,9 +1,19 @@
+ext {
+    testcontainersVersion = '1.18.1'
+}
+
 dependencies {
     implementation(project(":swith-me-domain"))
     implementation(project(":support"))
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    
+
     // Feign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+    // Test
+    testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
+    testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
+    testImplementation("org.testcontainers:mongodb:${testcontainersVersion}")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
 }
