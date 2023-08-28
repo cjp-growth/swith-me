@@ -1,4 +1,4 @@
-package project.swithme.notification.core.web.application.service;
+package project.swithme.notification.core.web.application.command;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
