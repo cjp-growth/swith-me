@@ -1,9 +1,11 @@
 package project.swithme.payment.core.out.client.toss.adapter.response.success;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
 import lombok.Getter;
 
 @Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentApproveResponse {
 
     private static final String EMPTY_MESSAGE = "";
@@ -48,84 +50,8 @@ public class PaymentApproveResponse {
     private PaymentApproveResponse() {
     }
 
-    public PaymentApproveResponse(
-        String version,
-        String paymentKey,
-        String type,
-        String orderId,
-        String orderName,
-        String mId,
-        String currency,
-        String method,
-        BigDecimal totalAmount,
-        BigDecimal balanceAmount,
-        String status,
-        String requestedAt,
-        String approvedAt,
-        String useEscrow,
-        String lastTransactionKey,
-        BigDecimal suppliedAmount,
-        String vat,
-        Boolean cultureExpense,
-        BigDecimal taxFreeAmount,
-        BigDecimal taxExemptionAmount,
-        CancelsResponse cancels,
-        Boolean isPartialCancelable,
-        PaymentCardResponse card,
-        PaymentVirtualAccountResponse virtualAccount,
-        String secret,
-        MobilePhoneResponse mobilePhone,
-        GiftCertificateResponse giftCertificate,
-        TransferResponse transfer,
-        ReceiptResponse receipt,
-        CheckoutResponse checkout,
-        EasyPayResponse easyPay,
-        String country,
-        FailureResponse failure,
-        CashReceiptResponse cashReceipt,
-        CashReceiptsResponse cashReceipts,
-        DiscountResponse discount
-    ) {
-        this.version = version;
-        this.paymentKey = paymentKey;
-        this.type = type;
-        this.orderId = orderId;
-        this.orderName = orderName;
-        this.mId = mId;
-        this.currency = currency;
-        this.method = method;
-        this.totalAmount = totalAmount;
-        this.balanceAmount = balanceAmount;
-        this.status = status;
-        this.requestedAt = requestedAt;
-        this.approvedAt = approvedAt;
-        this.useEscrow = useEscrow;
-        this.lastTransactionKey = lastTransactionKey;
-        this.suppliedAmount = suppliedAmount;
-        this.vat = vat;
-        this.cultureExpense = cultureExpense;
-        this.taxFreeAmount = taxFreeAmount;
-        this.taxExemptionAmount = taxExemptionAmount;
-        this.cancels = cancels;
-        this.isPartialCancelable = isPartialCancelable;
-        this.card = card;
-        this.virtualAccount = virtualAccount;
-        this.secret = secret;
-        this.mobilePhone = mobilePhone;
-        this.giftCertificate = giftCertificate;
-        this.transfer = transfer;
-        this.receipt = receipt;
-        this.checkout = checkout;
-        this.easyPay = easyPay;
-        this.country = country;
-        this.failure = failure;
-        this.cashReceipt = cashReceipt;
-        this.cashReceipts = cashReceipts;
-        this.discount = discount;
+    @Override
+    public String toString() {
+        return String.format("orderId: %s", orderId);
     }
-
-    //    @Override
-//    public String toString() {
-//        return String.format("orderId: %s", orderId);
-//    }
 }
