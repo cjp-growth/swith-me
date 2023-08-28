@@ -8,6 +8,7 @@ public class OrderResponse {
 
     private Long orderId;
     private Long userId;
+    private String title;
     private String orderUniqueId;
     private String orderStatus;
     private BigDecimal price;
@@ -18,8 +19,8 @@ public class OrderResponse {
     @Override
     public String toString() {
         return String.format(
-            "orderId: %s, userId: %s, orderUniqueId: %s, orderStatus: %s, price: %s",
-            orderId, userId, orderUniqueId, orderStatus, price
+            "orderId: %s, userId: %s, title: %s, orderUniqueId: %s, orderStatus: %s, price: %s",
+            orderId, userId, title, orderUniqueId, orderStatus, price
         );
     }
 }
