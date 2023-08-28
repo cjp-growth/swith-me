@@ -55,8 +55,10 @@ class NotificationUnitTest {
         );
 
         assertTrue(notification.equals(notification));
-        assertTrue(!"1".equals(otherNotification));
         assertTrue(!notification.equals(otherNotification));
+
+        String otherObject = "1";
+        assertTrue(!otherObject.equals(otherNotification));
     }
 
     @Test
