@@ -2,7 +2,9 @@
 **/extractor/*
 **/out/*
 **/common/*.*
+**/facade/command/*
 **/dao/*
+**/infrastructure/*
 **/request/*
 **/response/*
 **/validator/*
