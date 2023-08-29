@@ -11,6 +11,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -18,6 +20,7 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.operation.preprocess.OperationPreprocessor;
 import org.springframework.restdocs.restassured.RestAssuredOperationPreprocessorsConfigurer;
 import project.swithme.payment.common.annotation.IntegrationTest;
+import project.swithme.payment.common.testcontainer.TestContainer;
 
 @IntegrationTest
 public abstract class IntegrationTestBase {
@@ -37,6 +40,16 @@ public abstract class IntegrationTestBase {
 
     protected IntegrationTestBase() {
         initRestAssureConfiguration();
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        TestContainer.start();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        TestContainer.stop();
     }
 
     @BeforeEach
