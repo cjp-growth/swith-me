@@ -16,6 +16,9 @@ pluginManagement {
             if (requested.id.id == "com.epages.restdocs-api-spec") {
                 useVersion restdocsApiSpecVersion as String
             }
+            if (requested.id.id == "com.epages:restdocs-api-spec-mockmvc") {
+                useVersion restdocsApiSpecVersion as String
+            }
             if (requested.id.id == "org.hidetake.swagger.generator") {
                 useVersion swaggerVersion as String
             }
@@ -24,6 +27,9 @@ pluginManagement {
             }
             if (requested.id.id == "com.ewerk.gradle.plugins.querydsl") {
                 useVersion querydslVersion as String
+            }
+            if (requested.id.id == "com.epages.restdocs-api-spec") {
+                useVersion restdocsApiSpecVersion as String
             }
         }
     }
