@@ -5,7 +5,6 @@ import static order.PaymentFixture.FIXED_TOTAL_PRICE;
 import static order.PaymentFixture.FIXED_TOTAL_PRICE_PARAM;
 import static order.PaymentFixture.getPaymentKey;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static project.swithme.domain.core.order.entity.OrderStatus.PAYMENT_REQUEST;
 import static project.swithme.payment.test.documentationtest.snippet.PaymentSnippet.getOrderCreateRequestParams;
@@ -15,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import project.swithme.domain.core.order.entity.Order;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.payment.common.persistence.PersistenceHelper;
@@ -50,9 +49,8 @@ class PaymentDocumentationTest extends IntegrationTestBase {
             FIXED_TOTAL_PRICE
         )).thenReturn(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders
+        mockMvc.perform(RestDocumentationRequestBuilders
                 .get("/api/payments/toss")
-                .content(APPLICATION_JSON_VALUE)
                 .queryParam("orderId", orderId)
                 .queryParam("paymentKey", getPaymentKey())
                 .queryParam("paymentType", PaymentType.NORMAL.name())

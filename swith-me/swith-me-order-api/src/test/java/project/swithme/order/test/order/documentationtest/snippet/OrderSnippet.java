@@ -1,9 +1,9 @@
 package project.swithme.order.test.order.documentationtest.snippet;
 
+import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.BOOLEAN;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.NUMBER;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.STRING;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
@@ -18,14 +18,9 @@ import org.springframework.restdocs.request.QueryParametersSnippet;
 import org.springframework.restdocs.restassured.RestAssuredRestDocumentation;
 import org.springframework.restdocs.restassured.RestDocumentationFilter;
 import org.springframework.restdocs.snippet.Attributes;
-import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
 
 public interface OrderSnippet {
-
-    String PAYMENT_NORMAL = PaymentType.NORMAL.name();
-    String PAYMENT_KEY = "vNA96Bjgq7XZYkKL4MrjOOEqnYGGk80zJwlEWR52xydGPnOQ";
-    String AMOUNT = "130000";
 
     RequestFieldsSnippet ORDER_CREATE_REQUEST_FIELD_DESCRIPTOR = requestFields(
         fieldWithPath("studyCafeId").description("스터디 카페 PK")
