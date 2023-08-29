@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import project.swithme.domain.common.StudyWithMeUser;
 import project.swithme.order.core.facade.OrderFacade;
 import project.swithme.order.core.presentation.command.request.OrderCreateRequest;
@@ -36,7 +36,7 @@ class OrderCreateDocumentationTest extends IntegrationTestBase {
             new StudyWithMeUser(1L), createOrderCreateRequest().toCommand()
         )).thenReturn(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders
+        mockMvc.perform(RestDocumentationRequestBuilders
                 .post("/api/orders")
                 .content(objectMapper.writeValueAsString(createOrderCreateRequest()))
                 .contentType(APPLICATION_JSON_VALUE)

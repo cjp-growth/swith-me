@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
 import project.swithme.payment.test.IntegrationTestBase;
 
@@ -36,7 +36,7 @@ class PaymentCancelDocumentationTest extends IntegrationTestBase {
             .when(paymentCancelUseCase)
             .cancelPayment(getPaymentKey(), cancelReason);
 
-        mockMvc.perform(MockMvcRequestBuilders
+        mockMvc.perform(RestDocumentationRequestBuilders
                 .post("/api/payments/fail")
                 .content(APPLICATION_JSON_VALUE)
                 .queryParam("paymentKey", getPaymentKey())

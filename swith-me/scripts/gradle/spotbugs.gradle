@@ -1,0 +1,14 @@
+spotbugs {
+    ignoreFailures = false
+    showStackTraces = true
+    showProgress = true
+    effort = 'default'
+    reportLevel = 'default'
+    visitors = ['FindSqlInjection', 'SwitchFallthrough']
+    omitVisitors = ['FindNonShortCircuit']
+    reportsDir = file("$buildDir/spotbugs")
+    onlyAnalyze = ['project.*']
+    maxHeapSize = '1g'
+    extraArgs = ['-nested:false']
+    jvmArgs = ['-Duser.language=ja']
+}

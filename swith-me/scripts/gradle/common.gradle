@@ -1,0 +1,18 @@
+allprojects {
+    group = projectGroup
+    version = applicationVersion
+    sourceCompatibility = javaVersion
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required = true
+            html.required = true
+        }
+    }
+}

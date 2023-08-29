@@ -13,43 +13,13 @@ plugins {
     id("jacoco")
 }
 
-pmd {
-    toolVersion = pmdVersion
-    pmdTest.enabled = true
-    consoleOutput = true
-    ignoreFailures = false
-    ruleSetFiles = files("${rootDir}/lint-config/pmd/swith-me-pmd-rules.xml")
-}
-
-checkstyle {
-    maxWarnings = 0
-    configFile = file("${rootDir}/lint-config/convention/study-with-me-rule.xml")
-    configProperties = ["suppressionFile": "${rootDir}/lint-config/convention/study-with-me-suppressions.xml"]
-    toolVersion = checkStyleVersion
-}
+apply(from: "${rootDir}/scripts/gradle/common.gradle")
+apply(from: "${rootDir}/scripts/gradle/pmd.gradle")
+apply(from: "${rootDir}/scripts/gradle/checkstyle.gradle")
 
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
-    }
-}
-
-allprojects {
-    group = projectGroup
-    version = applicationVersion
-    sourceCompatibility = javaVersion
-    compileJava.options.encoding = 'UTF-8'
-    compileTestJava.options.encoding = 'UTF-8'
-
-    repositories {
-        mavenCentral()
-    }
-
-    tasks.withType(Checkstyle) {
-        reports {
-            xml.required = true
-            html.required = true
-        }
     }
 }
 
@@ -58,8 +28,10 @@ subprojects {
     apply(plugin: "java-library")
     apply(plugin: "org.springframework.boot")
     apply(plugin: "io.spring.dependency-management")
-    apply plugin: "com.github.spotbugs"
+    apply(plugin: "com.github.spotbugs")
     apply(plugin: "jacoco")
+    apply(from: "${rootDir}/scripts/gradle/spotbugs.gradle")
+    apply(from: "${rootDir}/scripts/gradle/jacoco.gradle")
 
     dependencyManagement {
         imports {
@@ -89,21 +61,6 @@ subprojects {
         annotationProcessor("jakarta.persistence:jakarta.persistence-api")
     }
 
-    spotbugs {
-        ignoreFailures = false
-        showStackTraces = true
-        showProgress = true
-        effort = 'default'
-        reportLevel = 'default'
-        visitors = ['FindSqlInjection', 'SwitchFallthrough']
-        omitVisitors = ['FindNonShortCircuit']
-        reportsDir = file("$buildDir/spotbugs")
-        onlyAnalyze = ['project.*']
-        maxHeapSize = '1g'
-        extraArgs = ['-nested:false']
-        jvmArgs = ['-Duser.language=ja']
-    }
-
     tasks.test {
         useJUnitPlatform()
         finalizedBy jacocoTestReport
@@ -115,92 +72,6 @@ subprojects {
             html.enabled = true
         }
     }
-
-    jacocoTestReport {
-        dependsOn test
-        def qClasses = []
-        for (qPattern in "**/QA".."**/QZ") {
-            qClasses.add(qPattern + "*")
-        }
-
-        afterEvaluate {
-            classDirectories.setFrom(files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: [
-                        "**/reservation/*",
-                        "**/extractor/*",
-                        "**/out/*",
-                        "**/common/*",
-                        "**/request/*",
-                        "**/response/*",
-                        "**/exception/*",
-                        "**/configuration/*",
-                        "project/**/*Application.*",
-                        "project/**/*Request.*",
-                        "project/**/*Response.*",
-                        "project/**/*DiscountInfo.*",
-                        "project/**/*MobilePhoneInfo.*",
-                        "project/**/*EasyPayInfo.*",
-                        "project/**/*GiftCertificateInfo.*",
-                        "project/**/*CashReceiptInfo.*",
-                        "project/**/*CashReceiptsInfo.*",
-                        "project/**/*TransferInfo.*",
-                ] + qClasses)
-            }))
-        }
-        finalizedBy jacocoTestCoverageVerification
-    }
-
-    jacocoTestCoverageVerification {
-        def qClasses = []
-        for (qPattern in '*.QA'..'*.QZ') {
-            qClasses.add(qPattern + '*')
-        }
-
-        violationRules {
-            rule {
-                enabled = true;
-                element = 'CLASS'
-
-                limit {
-                    counter = 'BRANCH'
-                    value = 'COVEREDRATIO'
-                    minimum = 0.7
-                }
-                excludes = [
-                        "**/reservation/*",
-                        "**/extractor/*",
-                        "**/out/*",
-                        "**/common/*.*",
-                        "**/dao/*",
-                        "**/request/*",
-                        "**/response/*",
-                        "**/exception/*",
-                        "**/configuration/*",
-                        "project/**/*Application.*",
-                        "project/**/*Request.*",
-                        "project/**/*Response.*",
-                        "project/**/*Command.*",
-                        "project/**/*DiscountInfo.*",
-                        "project/**/*MobilePhoneInfo.*",
-                        "project/**/*EasyPayInfo.*",
-                        "project/**/*GiftCertificateInfo.*",
-                        "project/**/*CashReceiptInfo.*",
-                        "project/**/*CashReceiptsInfo.*",
-                        "project.swithme.domain.core.payment.entity.TransferInfo",
-                        "project.swithme.domain.core.payment.entity.DiscountInfo",
-                        "project.swithme.domain.core.reservation.entity.Reservation",
-                        "project.swithme.domain.core.common.BaseInformation",
-                        "project.swithme.domain.common.StudyWithMeUser"
-                ] + qClasses
-            }
-        }
-    }
-}
-
-swaggerSources {
-    sample {
-        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
-    }
 }
 
 configurations {
@@ -209,19 +80,11 @@ configurations {
 
 openapi3 {
     setServer("http://localhost:8080")
-    title = 'Study-With-Me API 문서'
-    description = 'Study-With-Me API 문서'
-    version = '0.0.1'
-    format = 'yaml'
+    title = "Study-With-Me API 문서"
+    description = "Study-With-Me API 문서"
+    version = '0.1.0'
+    format = "yaml"
 }
-
-tasks.withType(GenerateSwaggerUI) {
-    dependsOn 'openapi3'
-}
-
-//tasks.withType(BootJar) {
-//    dependsOn 'copySwaggerUI'
-//}
 
 tasks.named('bootJar') {
     enabled = false
