@@ -1,3 +1,17 @@
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
+
+plugins {
+    id("com.epages.restdocs-api-spec")
+}
+
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}
+
 dependencies {
     implementation(project(":swith-me-domain"))
     implementation(project(":storage"))
@@ -14,13 +28,45 @@ dependencies {
     // Test
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:${restdocsApiSpecVersion}")
     testImplementation("com.tngtech.archunit:archunit-junit5:0.17.0")
 }
 
-bootJar {
-    enabled = true
+task copyJsonToYaml(type: Copy) {
+    def inputFile = file("${project.buildDir}/api-spec/openapi3.json")
+    def outputFile = file("${project.buildDir}/api-spec/openapi3.yaml")
+
+    if (inputFile.exists()) {
+        def jsonContent = new ObjectMapper().readValue(inputFile, Object.class)
+        def yamlMapper = new YAMLMapper()
+
+        yamlMapper.enable(YAMLGenerator.Feature.LITERAL_BLOCK_STYLE)
+
+        def processNode
+        processNode = { node ->
+            node.each { key, value ->
+                if (value instanceof String && value.startsWith("{") && value.endsWith("}")) {
+                    try {
+                        node[key] = new ObjectMapper().readValue(value, Map)
+                    } catch (Exception ignored) {
+                    }
+                } else if (value instanceof Map) {
+                    processNode(value)
+                }
+            }
+        }
+
+        processNode(jsonContent)
+
+        yamlMapper.writeValue(outputFile, jsonContent)
+        println "Converted ${inputFile} to ${outputFile}"
+    } else {
+        println "Input file does not exist: ${inputFile}"
+    }
 }
 
-jar {
-    enabled = true
+task copyOpenApiSpecToMerged(type: Copy) {
+    dependsOn copyJsonToYaml
+    from "${project.buildDir}/api-spec/openapi3.yaml"
+    into "${project.rootProject.projectDir}/api-specs/${project.name}"
 }
