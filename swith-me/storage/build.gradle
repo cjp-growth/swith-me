@@ -1,5 +1,7 @@
 dependencies {
     api(group: "mysql", name: "mysql-connector-java", version: mysqlConnectorVersion)
+    api("org.testcontainers:junit-jupiter:${testContainerVersion}")
+    api("org.testcontainers:mysql:${testContainerVersion}")
 }
 
 bootJar {
