@@ -31,6 +31,12 @@ pluginManagement {
             if (requested.id.id == "com.epages.restdocs-api-spec") {
                 useVersion restdocsApiSpecVersion as String
             }
+            if (requested.id.id == "com.tngtech.archunit") {
+                useVersion archUnitVersion as String
+            }
+            if (requested.id.id == "org.testcontainers") {
+                useVersion testContainerVersion as String
+            }
         }
     }
 }
