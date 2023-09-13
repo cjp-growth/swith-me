@@ -48,7 +48,9 @@ public abstract class IntegrationTestBase {
 
     @BeforeAll
     static void beforeAll() {
-        TestContainer.start();
+        synchronized (TestContainer.class) {
+            TestContainer.start();
+        }
     }
 
     @AfterAll
