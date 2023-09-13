@@ -1,15 +1,5 @@
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
-
 plugins {
     id("com.epages.restdocs-api-spec")
-}
-
-swaggerSources {
-    sample {
-        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
-    }
 }
 
 dependencies {
@@ -29,44 +19,16 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:${restdocsApiSpecVersion}")
+    testImplementation("com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}")
     testImplementation("com.tngtech.archunit:archunit-junit5:${archUnitVersion}")
 }
 
-task copyJsonToYaml(type: Copy) {
-    def inputFile = file("${project.buildDir}/api-spec/openapi3.json")
-    def outputFile = file("${project.buildDir}/api-spec/openapi3.yaml")
-
-    if (inputFile.exists()) {
-        def jsonContent = new ObjectMapper().readValue(inputFile, Object.class)
-        def yamlMapper = new YAMLMapper()
-
-        yamlMapper.enable(YAMLGenerator.Feature.LITERAL_BLOCK_STYLE)
-
-        def processNode
-        processNode = { node ->
-            node.each { key, value ->
-                if (value instanceof String && value.startsWith("{") && value.endsWith("}")) {
-                    try {
-                        node[key] = new ObjectMapper().readValue(value, Map)
-                    } catch (Exception ignored) {
-                    }
-                } else if (value instanceof Map) {
-                    processNode(value)
-                }
-            }
-        }
-
-        processNode(jsonContent)
-
-        yamlMapper.writeValue(outputFile, jsonContent)
-        println "Converted ${inputFile} to ${outputFile}"
-    } else {
-        println "Input file does not exist: ${inputFile}"
-    }
+openapi3 {
+    setServer("http://localhost:8080")
+    title = "SwitMe 주문 API"
+    description = "SwitMe 주문 API 문서 입니다."
+    version = "0.1.0"
+    format = "json"
 }
 
-task copyOpenApiSpecToMerged(type: Copy) {
-    dependsOn copyJsonToYaml
-    from "${project.buildDir}/api-spec/openapi3.yaml"
-    into "${project.rootProject.projectDir}/api-specs/${project.name}"
-}
+build.dependsOn(':swith-me-order-api:openapi3')
