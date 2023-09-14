@@ -15,8 +15,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @ActiveProfiles("test")
 @Target(ElementType.TYPE)
-@Execution(ExecutionMode.CONCURRENT)
 @Retention(RetentionPolicy.RUNTIME)
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public @interface IntegrationTest {
