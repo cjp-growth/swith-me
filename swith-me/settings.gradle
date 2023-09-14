@@ -37,6 +37,12 @@ pluginManagement {
             if (requested.id.id == "org.testcontainers") {
                 useVersion testContainerVersion as String
             }
+            if (requested.id.id == "com.fasterxml.uuid:java-uuid-generator") {
+                useVersion uuidVersion as String
+            }
+            if (requested.id.id == "com.querydsl:querydsl-jpa") {
+                useVersion queryDSLVersion as String
+            }
         }
     }
 }

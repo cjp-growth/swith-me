@@ -2,12 +2,6 @@ plugins {
     id("com.epages.restdocs-api-spec")
 }
 
-swaggerSources {
-    sample {
-        setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
-    }
-}
-
 dependencies {
     implementation(project(":swith-me-domain"))
     implementation(project(":storage"))
@@ -32,25 +26,16 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:${restdocsApiSpecVersion}")
+    testImplementation("com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}")
     testImplementation("org.springframework.kafka:spring-kafka-test")
 }
 
-task copyJsonToYaml(type: Copy) {
-    def sourceFile = new File("${project.buildDir}/api-spec/openapi3.json")
-    def destinationFile = new File("${project.buildDir}/api-spec/openapi3.yaml")
-
-    if (sourceFile.exists()) {
-        println "Source file exist: $sourceFile"
-        destinationFile.text = sourceFile.text
-    } else {
-        println "Source file does not exist: $sourceFile"
-    }
+openapi3 {
+    setServer("http://localhost:8080")
+    title = "SwitMe 결제 API"
+    description = "SwitMe 결제 API 문서 입니다."
+    version = "0.1.0"
+    format = "json"
 }
 
-task copyOpenApiSpecToMerged(type: Copy) {
-    dependsOn copyJsonToYaml
-    from "${project.buildDir}/api-spec/openapi3.yaml"
-    into "${project.rootProject.projectDir}/api-specs/${project.name}"
-}
-
-build.dependsOn copyOpenApiSpecToMerged
+build.dependsOn(':swith-me-payment-api:openapi3')

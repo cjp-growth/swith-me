@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -16,6 +18,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @EmbeddedKafka(ports = 0)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public @interface IntegrationTest {

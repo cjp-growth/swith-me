@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import project.swithme.domain.core.order.event.PaymentSuccessEvent;
-import project.swithme.payment.common.annotation.Description;
 import project.swithme.payment.common.command.OrderValidationCommand;
 import project.swithme.payment.common.persistence.PersistenceHelper;
 import project.swithme.payment.core.application.PaymentSaveUseCase;
@@ -31,7 +30,6 @@ import project.swithme.payment.core.out.OrderQueryPort;
 import project.swithme.payment.core.out.PaymentPort;
 import project.swithme.payment.test.IntegrationTestBase;
 
-@Description(content = "토스 API 서비스를 호출하기 때문에 필요한 일부 모킹 처리 ")
 @DisplayName("[IntegrationTest] 토스 결제 통합 테스트")
 class PaymentPaymentIntegrationTest extends IntegrationTestBase {
 
