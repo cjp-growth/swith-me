@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import project.study.support.codeandmessage.CodeAndMessage;
 import project.study.support.codeandmessage.parser.CodeAndMessageParser;
-import project.swithme.payment.core.exception.PaymentFailureException;
-import project.swithme.payment.core.exception.TossPaymentException;
+import project.study.support.exception.ApiSpecUnMatchedException;
+import project.study.support.exception.OutPortException;
 import project.swithme.payment.core.facade.command.PaymentCommand;
 import project.swithme.payment.core.out.PaymentPort;
 import project.swithme.payment.core.out.client.toss.adapter.TossPaymentAdapter;
@@ -42,11 +42,11 @@ public class PaymentClient implements PaymentPort {
             return convertToDomainLanguage(response);
         } catch (FeignException exception) {
             CodeAndMessage codeAndMessage = parseMessage(exception);
-            throw new TossPaymentException(codeAndMessage);
-        } catch (IllegalArgumentException | PaymentFailureException exception) {
-            throw new PaymentFailureException(API_SPEC_UN_MATCHED, exception.getMessage());
+            throw new OutPortException(codeAndMessage);
+        } catch (IllegalArgumentException | OutPortException exception) {
+            throw new ApiSpecUnMatchedException(API_SPEC_UN_MATCHED, exception.getMessage());
         } catch (Exception exception) {
-            throw new PaymentFailureException(BAD_GATEWAY, exception.getMessage());
+            throw new OutPortException(BAD_GATEWAY, exception.getMessage());
         }
     }
 

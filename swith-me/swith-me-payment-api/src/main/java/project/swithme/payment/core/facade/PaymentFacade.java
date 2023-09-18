@@ -1,5 +1,6 @@
 package project.swithme.payment.core.facade;
 
+import static project.study.support.codeandmessage.payment.PaymentCodeAndMessage.INVALID_PAYMENT_EXECUTION;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -42,7 +43,7 @@ public class PaymentFacade {
             amount
         );
         if (!paymentCommand.isApproved()) {
-            throw new PaymentFailureException();
+            throw new PaymentFailureException(INVALID_PAYMENT_EXECUTION);
         }
 
         Payment newPayment = paymentSaveUseCase.save(

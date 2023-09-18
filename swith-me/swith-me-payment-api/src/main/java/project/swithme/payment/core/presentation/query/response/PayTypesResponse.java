@@ -1,4 +1,4 @@
-package project.swithme.payment.core.presentation.response;
+package project.swithme.payment.core.presentation.query.response;
 
 import java.util.List;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package project.swithme.payment.core.presentation;
+package project.swithme.payment.core.presentation.command;
 
 import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.CREATED;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import project.study.support.response.success.ApiResponse;
 import project.swithme.domain.core.payment.entity.PaymentType;
 import project.swithme.payment.core.facade.PaymentFacade;
-import project.swithme.payment.core.presentation.response.PaymentCompleteResponse;
+import project.swithme.payment.core.presentation.command.response.PaymentCompleteResponse;
 
 @RestController
 @RequiredArgsConstructor

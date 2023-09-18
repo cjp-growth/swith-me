@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import project.study.support.exception.InvalidParameterException;
+import project.study.support.log.Field;
 import project.swithme.domain.core.order.entity.PayGroup;
 
 public class PaymentGroup {
@@ -36,10 +38,10 @@ public class PaymentGroup {
         return new ArrayList<>(payGroups);
     }
 
-    public List<String> getPayTypes(String payGroup) {
-        if (payGroup.isBlank() || !payGroups.contains(payGroup)) {
-            throw new IllegalArgumentException("올바른 결제 그룹을 입력해주세요.");
+    public List<String> getPayTypes(String payType) {
+        if (payType.isBlank() || !payGroups.contains(payType)) {
+            throw new InvalidParameterException(List.of(Field.of("payType", payType)));
         }
-        return payTypeMap.get(payGroup);
+        return payTypeMap.get(payType);
     }
 }

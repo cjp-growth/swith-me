@@ -1,9 +1,8 @@
 package project.study.support.codeandmessage.out.toss;
 
 import project.study.support.codeandmessage.CodeAndMessage;
-import project.study.support.codeandmessage.PaymentCodeAndMessage;
 
-public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
+public enum TossPaymentCancelCodeAndMessage implements CodeAndMessage {
     ALREADY_CANCELED_PAYMENT(
         400,
         "이미 취소된 결제 입니다.",
@@ -171,10 +170,5 @@ public enum TossPaymentCancelCodeAndMessage implements PaymentCodeAndMessage {
     @Override
     public String getKrErrorMessage() {
         return krErrorMessage;
-    }
-
-    @Override
-    public String getEngErrorMessage() {
-        return engErrorMessage;
     }
 }

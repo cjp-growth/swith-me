@@ -1,9 +1,8 @@
 package project.study.support.codeandmessage.out.toss;
 
 import project.study.support.codeandmessage.CodeAndMessage;
-import project.study.support.codeandmessage.PaymentCodeAndMessage;
 
-public enum TossPaymentApprovalCodeAndMessage implements PaymentCodeAndMessage {
+public enum TossPaymentApprovalCodeAndMessage implements CodeAndMessage {
     ALREADY_PROCESSED_PAYMENT(
         409,
         "이미 처리된 결제 입니다.",
@@ -41,10 +40,5 @@ public enum TossPaymentApprovalCodeAndMessage implements PaymentCodeAndMessage {
     @Override
     public String getKrErrorMessage() {
         return krErrorMessage;
-    }
-
-    @Override
-    public String getEngErrorMessage() {
-        return engErrorMessage;
     }
 }
