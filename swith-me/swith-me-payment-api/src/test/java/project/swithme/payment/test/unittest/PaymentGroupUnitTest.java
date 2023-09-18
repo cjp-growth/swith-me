@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import project.study.support.exception.InvalidParameterException;
 import project.swithme.domain.core.order.entity.PayGroup;
 import project.swithme.payment.common.configuration.business.PaymentGroup;
 
@@ -32,9 +33,9 @@ class PaymentGroupUnitTest {
     @DisplayName("공백 또는 올바르지 않은 결제 그룹을 입력하면 IllegalArgumentException이 발생한다.")
     void pay_type_search_failure_test(String parameter) {
         assertThatThrownBy(() -> paymentGroup.getPayTypes(parameter))
-            .isExactlyInstanceOf(IllegalArgumentException.class)
+            .isExactlyInstanceOf(InvalidParameterException.class)
             .isInstanceOf(RuntimeException.class)
-            .hasMessage("올바른 결제 그룹을 입력해주세요.");
+            .hasMessage("올바르지 않은 요청입니다.");
     }
 
     @ParameterizedTest

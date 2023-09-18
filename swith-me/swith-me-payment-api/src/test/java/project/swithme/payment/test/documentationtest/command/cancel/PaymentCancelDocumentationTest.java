@@ -4,22 +4,18 @@ import static order.PaymentFixture.getPaymentKey;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static project.swithme.payment.test.documentationtest.snippet.PaymentSnippet.getOrderCancelSnippet;
+import static project.swithme.payment.test.documentationtest.snippet.PaymentSnippet.TOSS_CARD_PAYMENT_CANCEL_HANDLER;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import project.swithme.payment.core.application.PaymentCancelUseCase;
-import project.swithme.payment.test.IntegrationTestBase;
+import project.swithme.payment.test.DocumentationTestBase;
 
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
 @DisplayName("[DocumentationTest] 주문 취소 API 테스트")
-class PaymentCancelDocumentationTest extends IntegrationTestBase {
+class PaymentCancelDocumentationTest extends DocumentationTestBase {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +38,7 @@ class PaymentCancelDocumentationTest extends IntegrationTestBase {
                 .queryParam("paymentKey", getPaymentKey())
                 .queryParam("cancelReason", cancelReason)
             )
-            .andExpect(status().isOk())
-            .andDo(getOrderCancelSnippet());
+            .andDo(TOSS_CARD_PAYMENT_CANCEL_HANDLER)
+            .andExpect(status().isOk());
     }
 }

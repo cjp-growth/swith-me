@@ -10,11 +10,11 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import project.swithme.payment.core.presentation.PaymentGroupSearchAPI;
-import project.swithme.payment.test.IntegrationTestBase;
+import project.swithme.payment.core.presentation.query.PaymentGroupSearchAPI;
+import project.swithme.payment.test.DocumentationTestBase;
 
 @DisplayName("[IntegrationTest] 결제 그룹/타입 조회 캐싱 테스트")
-class PaymentGroupSearchIntegrationTest extends IntegrationTestBase {
+class PaymentGroupSearchCacheIntegrationTest extends DocumentationTestBase {
 
     @SpyBean
     private PaymentGroupSearchAPI paymentGroupSearchAPI;
@@ -34,6 +34,7 @@ class PaymentGroupSearchIntegrationTest extends IntegrationTestBase {
     @Test
     @DisplayName("캐싱을 적용하면 메서드(searchPayGroup)를 여러번 호출하더라도 실제로는 한 번만 호출된다.")
     void pay_group_method_call_count_with_cache_test() {
+
         paymentGroupSearchAPI.searchPayGroup();
         paymentGroupSearchAPI.searchPayGroup();
         paymentGroupSearchAPI.searchPayGroup();
