@@ -31,7 +31,7 @@ import project.swithme.payment.core.out.PaymentPort;
 import project.swithme.payment.test.IntegrationTestBase;
 
 @DisplayName("[IntegrationTest] 토스 결제 통합 테스트")
-class PaymentPaymentIntegrationTest extends IntegrationTestBase {
+class PaymentIntegrationTest extends IntegrationTestBase {
 
     private PaymentFacade paymentFacade;
 
