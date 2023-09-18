@@ -1,4 +1,4 @@
-package project.swithme.payment.core.presentation;
+package project.swithme.payment.core.presentation.command;
 
 import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.OK;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package project.swithme.payment.core.presentation;
+package project.swithme.payment.core.presentation.query;
 
 import static project.study.support.codeandmessage.common.SuccessCodeAndMessage.OK;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.study.support.response.success.ApiResponse;
 import project.swithme.payment.common.configuration.business.PaymentGroup;
-import project.swithme.payment.core.presentation.response.PayGroupsResponse;
-import project.swithme.payment.core.presentation.response.PayTypesResponse;
+import project.swithme.payment.core.presentation.query.response.PayGroupsResponse;
+import project.swithme.payment.core.presentation.query.response.PayTypesResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,10 +26,10 @@ public class PaymentGroupSearchAPI {
         return ApiResponse.of(data, OK);
     }
 
-    @GetMapping
+    @GetMapping("/pay-types")
     @Cacheable(cacheNames = "payTypes")
-    public ApiResponse<PayTypesResponse> searchPayTypes(@RequestParam("payGroup") String payGroup) {
-        PayTypesResponse data = new PayTypesResponse(paymentGroup.getPayTypes(payGroup));
+    public ApiResponse<PayTypesResponse> searchPayTypes(@RequestParam("payType") String payType) {
+        PayTypesResponse data = new PayTypesResponse(paymentGroup.getPayTypes(payType));
         return ApiResponse.of(data, OK);
     }
 }
