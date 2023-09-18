@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import project.swithme.payment.test.DocumentationTestBase;
 
+@DisplayName("[DocumentationTest] 결제 수단 리스트 조회 실패 API 테스트")
 class PayTypesSearchDocumentationFailureTest extends DocumentationTestBase {
 
     @Test
