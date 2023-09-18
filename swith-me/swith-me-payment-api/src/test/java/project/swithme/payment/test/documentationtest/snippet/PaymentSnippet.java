@@ -1,13 +1,11 @@
 package project.swithme.payment.test.documentationtest.snippet;
 
 import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document;
-import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.NUMBER;
 import static javax.xml.xpath.XPathEvaluationResult.XPathResultType.STRING;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
@@ -17,11 +15,8 @@ import javax.management.openmbean.SimpleType;
 import javax.swing.text.html.parser.DTDConstants;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.restdocs.payload.ResponseFieldsSnippet;
 import org.springframework.restdocs.request.ParameterDescriptor;
-import org.springframework.restdocs.request.QueryParametersSnippet;
 import org.springframework.restdocs.restassured.RestDocumentationFilter;
-import org.springframework.restdocs.snippet.Attributes;
 
 public interface PaymentSnippet {
 
@@ -122,7 +117,6 @@ public interface PaymentSnippet {
             preprocessResponse(prettyPrint()),
             queryParameters(TOSS_CARD_PAYMENT_QUERY_PARAMETERS)
         );
-
 
     ParameterDescriptor[] TOSS_CARD_PAYMENT_CANCEL_QUERY_PARAMETERS = new ParameterDescriptor[]{
         parameterWithName("paymentKey").description("결제 키"),
