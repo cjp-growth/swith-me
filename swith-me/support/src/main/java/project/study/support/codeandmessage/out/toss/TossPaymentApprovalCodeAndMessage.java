@@ -1,9 +1,8 @@
 package project.study.support.codeandmessage.out.toss;
 
 import project.study.support.codeandmessage.CodeAndMessage;
-import project.study.support.codeandmessage.DomainCodeAndMessage;
 
-public enum TossDomainApprovalCodeAndMessage implements DomainCodeAndMessage {
+public enum TossPaymentApprovalCodeAndMessage implements CodeAndMessage {
     ALREADY_PROCESSED_PAYMENT(
         409,
         "이미 처리된 결제 입니다.",
@@ -19,7 +18,7 @@ public enum TossDomainApprovalCodeAndMessage implements DomainCodeAndMessage {
     private final String krErrorMessage;
     private final String engErrorMessage;
 
-    TossDomainApprovalCodeAndMessage(
+    TossPaymentApprovalCodeAndMessage(
         int statusCode,
         String krErrorMessage,
         String engErrorMessage
@@ -30,7 +29,7 @@ public enum TossDomainApprovalCodeAndMessage implements DomainCodeAndMessage {
     }
 
     public static CodeAndMessage findCodeAndMessage(String errorCode) {
-        return TossDomainApprovalCodeAndMessage.valueOf(errorCode);
+        return TossPaymentApprovalCodeAndMessage.valueOf(errorCode);
     }
 
     @Override
@@ -41,10 +40,5 @@ public enum TossDomainApprovalCodeAndMessage implements DomainCodeAndMessage {
     @Override
     public String getKrErrorMessage() {
         return krErrorMessage;
-    }
-
-    @Override
-    public String getEngErrorMessage() {
-        return engErrorMessage;
     }
 }

@@ -1,9 +1,8 @@
 package project.study.support.codeandmessage.out.toss;
 
 import project.study.support.codeandmessage.CodeAndMessage;
-import project.study.support.codeandmessage.DomainCodeAndMessage;
 
-public enum TossDomainCancelCodeAndMessage implements DomainCodeAndMessage {
+public enum TossPaymentCancelCodeAndMessage implements CodeAndMessage {
     ALREADY_CANCELED_PAYMENT(
         400,
         "이미 취소된 결제 입니다.",
@@ -149,7 +148,7 @@ public enum TossDomainCancelCodeAndMessage implements DomainCodeAndMessage {
     private final String krErrorMessage;
     private final String engErrorMessage;
 
-    TossDomainCancelCodeAndMessage(
+    TossPaymentCancelCodeAndMessage(
         int statusCode,
         String krErrorMessage,
         String engErrorMessage
@@ -160,7 +159,7 @@ public enum TossDomainCancelCodeAndMessage implements DomainCodeAndMessage {
     }
 
     public static CodeAndMessage findCodeAndMessage(String errorCode) {
-        return TossDomainCancelCodeAndMessage.valueOf(errorCode);
+        return TossPaymentCancelCodeAndMessage.valueOf(errorCode);
     }
 
     @Override
@@ -171,10 +170,5 @@ public enum TossDomainCancelCodeAndMessage implements DomainCodeAndMessage {
     @Override
     public String getKrErrorMessage() {
         return krErrorMessage;
-    }
-
-    @Override
-    public String getEngErrorMessage() {
-        return engErrorMessage;
     }
 }
