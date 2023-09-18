@@ -4,13 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.restdocs.RestDocumentationContextProvider;
 import project.swithme.payment.common.annotation.IntegrationTest;
 
 @IntegrationTest
-public abstract class IntegrationTestBase extends TestContainerConfiguration{
-
-    private static final String SCHEMA = "www.study-with-me.com";
+public abstract class IntegrationTestBase extends TestContainerConfiguration {
 
     @LocalServerPort
     protected int port;
@@ -25,7 +22,7 @@ public abstract class IntegrationTestBase extends TestContainerConfiguration{
     }
 
     @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
+    void setUp() {
         databaseInitialization.truncateAllEntity();
     }
 }
