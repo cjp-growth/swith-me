@@ -1,14 +1,43 @@
-## 🧑‍🤝‍🧑 Study With Me
+<div align="center">
+  <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbfBKBn%2FbtsuSf0rAG3%2FCEr3K1pVROCpLnOQVOdBW0%2Fimg.png" width="390">
+</div>
+<br/>
 
-스윗미 Order API.
+<div align="center">
 
-<br/><br/><br/><br/>
+🎫 스터디 카페 결제/예약 플랫폼
 
-## 💻 프로그래밍 규칙
+`# 스터디 카페` `# 예약` `# 구매`  <br/>
+`# 결제` `# 좌석`
 
-- 도메인 모델과 영속 모델을 별도로 구분하지 않는다.
-- 가능한 Lombok을 사용하지 않는다.
-    - 도메인을 제외한 패키지/클래스에서 @RequiredArgsConstructor 정도만 사용한다.
+</div>
+<br/>
+<div align="center">
 
-- 한 메서드에 오직 한 단계의 들여쓰기(indent)만을 하며, else 예약어를 쓰지 않는다.
-- 테스트 커버리지는 70%이상을 유지한다.
+[![Release](https://img.shields.io/badge/-📚_Api_Docs-green)](http://l-share.com:8080/)
+[![Release](https://img.shields.io/badge/-📖_Wiki-gray)](https://github.com/cjp-growth/swith-me-order/wiki) <br/>
+
+</div>
+
+<br/><br/><br/><br/><br/><br/>
+
+## 📂 Module
+
+````shell
+├── storage
+├── support
+├── domain
+└── api
+````
+
+<br/><br/><br/><br/><br/><br/>
+
+## 🚀 Module Dependency
+
+![image](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcbZGz5%2FbtsuW0Prm2z%2FayqmqsFlx3k5f1KpLc15V0%2Fimg.png)
+
+<br/><br/><br/><br/><br/><br/>
+
+## 💻 Backend
+
+![image](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2HRnI%2FbtsuGw3PGbS%2Fcj2QS62y4GGiafkGdbcMhk%2Fimg.png)
