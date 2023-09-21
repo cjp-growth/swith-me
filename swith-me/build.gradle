@@ -29,7 +29,6 @@ subprojects {
     apply(plugin: "com.github.spotbugs")
     apply(plugin: "jacoco")
     apply(from: "${rootDir}/scripts/gradle/spotbugs.gradle")
-    apply(from: "${rootDir}/scripts/gradle/jacoco.gradle")
 
     dependencyManagement {
         imports {
@@ -62,7 +61,7 @@ subprojects {
     jacocoTestReport {
         dependsOn test
         def exclusions = extractQClass()
-        file("${rootDir}/lint-config/jacoco/exclude-coverage.txt").eachLine {
+        file("${rootDir}/config/jacoco/exclude-coverage.txt").eachLine {
             exclusions.add(it)
         }
 
@@ -76,8 +75,8 @@ subprojects {
 
     jacocoTestCoverageVerification {
         def exclusions = extractQClass()
-        file("${rootDir}/lint-config/jacoco/exclude-verification.txt").eachLine {
-            exclusions.add(it.replace(" ", ""))
+        file("${rootDir}/config/jacoco/exclude-verification.txt").eachLine {
+            exclusions.add(it)
         }
 
         violationRules {
