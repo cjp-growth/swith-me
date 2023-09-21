@@ -3,10 +3,9 @@ package project.study.support.response.success;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import project.study.support.codeandmessage.CodeAndMessage;
+import project.study.support.codeandmessage.common.SuccessCodeAndMessage;
 
 public class ApiResponse<T> extends ResponseEntity<ResponsePayload<T>> {
-
-    public static final Object EMPTY_BODY = null;
 
     public ApiResponse(
         T data,
@@ -24,6 +23,14 @@ public class ApiResponse<T> extends ResponseEntity<ResponsePayload<T>> {
         );
     }
 
+    public static <T> ApiResponse<T> of(SuccessCodeAndMessage codeAndMessage) {
+        return new ApiResponse<>(
+            null,
+            HttpStatus.valueOf(codeAndMessage.getStatusCode()),
+            codeAndMessage.name()
+        );
+    }
+
     public static <T> ApiResponse<T> of(
         T data,
         CodeAndMessage codeAndMessage
@@ -32,6 +39,17 @@ public class ApiResponse<T> extends ResponseEntity<ResponsePayload<T>> {
             data,
             HttpStatus.valueOf(codeAndMessage.getStatusCode()),
             codeAndMessage.getKrErrorMessage()
+        );
+    }
+
+    public static <T> ApiResponse<T> of(
+        T data,
+        SuccessCodeAndMessage codeAndMessage
+    ) {
+        return new ApiResponse<>(
+            data,
+            HttpStatus.valueOf(codeAndMessage.getStatusCode()),
+            codeAndMessage.getStatusCode()
         );
     }
 
