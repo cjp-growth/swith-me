@@ -19,7 +19,7 @@ class MyOrdersSearchDocumentationTest extends DocumentationTestBase {
     @DisplayName("내 주문 목록 조회가 성공하면 200 OK가 반환된다.")
     void order_search_test() {
         persistenceHelper.persistAll();
-        String index = String.valueOf(100L);
+        String index = "100";
         Cursor cursor = CursorFactory.createCursor(index, "10");
         LocalDate startDate = LocalDate.of(2020, 10, 23);
         LocalDate endDate = LocalDate.now()
