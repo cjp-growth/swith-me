@@ -90,6 +90,7 @@ public interface OrderSnippet {
     };
 
     ResponseFieldsSnippet ORDER_ERROR_RESPONSE_SNIPPET = responseFields(ORDER_ERROR_RESPONSE);
+
     RestDocumentationFilter MY_ORDERS_SEARCH_FAILURE_FILTER =
         RestAssuredRestDocumentationWrapper.document(
             IDENTIFIER,
@@ -97,7 +98,7 @@ public interface OrderSnippet {
                 .queryParameters(MY_ORDERS_SEARCH_QUERY_PARAM)
                 .responseFields(ORDER_ERROR_RESPONSE)
                 .tags("Order")
-                .summary("내 주문 목록 API")
+                .summary("내 주문 목록 조회 API")
                 .privateResource(false)
                 .deprecated(false)
                 .description("내 주문 목록 조회 API 입니다."),
@@ -106,6 +107,7 @@ public interface OrderSnippet {
             queryParameters(MY_ORDERS_SEARCH_QUERY_PARAM),
             ORDER_ERROR_RESPONSE_SNIPPET
         );
+
     RestDocumentationFilter ORDER_DETAIL_SEARCH_FAILURE_HANDLER =
         RestAssuredRestDocumentationWrapper.document(
             IDENTIFIER,
@@ -113,7 +115,7 @@ public interface OrderSnippet {
                 .pathParameters(ORDER_PATH_DESCRIPTOR)
                 .responseFields(ORDER_ERROR_RESPONSE)
                 .tags("Order")
-                .summary("주문 API")
+                .summary("주문 상세 조회 API")
                 .privateResource(false)
                 .deprecated(false)
                 .description("주문 상세 조회 API 입니다."),
@@ -122,6 +124,7 @@ public interface OrderSnippet {
             pathParameters(ORDER_PATH_DESCRIPTOR),
             ORDER_ERROR_RESPONSE_SNIPPET
         );
+
     RestDocumentationFilter MY_ORDERS_SEARCH_FILTER =
         RestAssuredRestDocumentationWrapper.document(
             IDENTIFIER,
@@ -129,7 +132,7 @@ public interface OrderSnippet {
                 .queryParameters(MY_ORDERS_SEARCH_QUERY_PARAM)
                 .responseFields(MY_ORDERS_SEARCH_RESPONSE)
                 .tags("Order")
-                .summary("내 주문 목록 API")
+                .summary("내 주문 목록 조회 API")
                 .privateResource(false)
                 .deprecated(false)
                 .description("내 주문 목록 조회 API 입니다."),
@@ -138,6 +141,7 @@ public interface OrderSnippet {
             queryParameters(MY_ORDERS_SEARCH_QUERY_PARAM),
             responseFields(MY_ORDERS_SEARCH_RESPONSE)
         );
+
     RestDocumentationResultHandler ORDER_CREATE_REQUEST_HANDLER =
         MockMvcRestDocumentationWrapper.document(
             IDENTIFIER,
@@ -145,15 +149,16 @@ public interface OrderSnippet {
                 .requestFields(ORDER_CREATE_REQUEST_FIELDS)
                 .responseFields(ORDER_CREATE_REQUEST_RESPONSE)
                 .tags("Order")
-                .summary("주문 API")
+                .summary("주문 생성 API")
                 .privateResource(false)
                 .deprecated(false)
-                .description("주문 API 입니다."),
+                .description("주문 생성 API 입니다."),
             preprocessRequest(prettyPrint()),
             preprocessResponse(prettyPrint()),
             requestFields(ORDER_CREATE_REQUEST_FIELDS),
             responseFields(ORDER_CREATE_REQUEST_RESPONSE)
         );
+
     RestDocumentationFilter ORDER_DETAIL_SEARCH_HANDLER =
         RestAssuredRestDocumentationWrapper.document(
             IDENTIFIER,
@@ -161,7 +166,7 @@ public interface OrderSnippet {
                 .pathParameters(ORDER_PATH_DESCRIPTOR)
                 .responseFields(ORDER_DETAIL_SEARCH_RESPONSE)
                 .tags("Order")
-                .summary("주문 API")
+                .summary("주문 상세 조회 API")
                 .privateResource(false)
                 .deprecated(false)
                 .description("주문 상세 조회 API 입니다."),
