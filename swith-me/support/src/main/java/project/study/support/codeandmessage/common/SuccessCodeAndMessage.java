@@ -1,29 +1,26 @@
 package project.study.support.codeandmessage.common;
 
-import project.study.support.codeandmessage.CodeAndMessage;
+import lombok.Getter;
 
-public enum SuccessCodeAndMessage implements CodeAndMessage {
-    OK(200, "Success"),
-    CREATED(201, "Created");
+@Getter
+public enum SuccessCodeAndMessage  {
+    OK(
+        200,
+        "OK"
+    ),
+    CREATED(
+        201,
+        "CREATED"
+    );
 
     private final int code;
-    private final String message;
+    private final String statusCode;
 
     SuccessCodeAndMessage(
         int code,
-        String message
+        String statusCode
     ) {
         this.code = code;
-        this.message = message;
-    }
-
-    @Override
-    public int getStatusCode() {
-        return code;
-    }
-
-    @Override
-    public String getKrErrorMessage() {
-        return message;
+        this.statusCode = statusCode;
     }
 }
