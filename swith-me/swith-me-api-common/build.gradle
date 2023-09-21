@@ -1,0 +1,48 @@
+plugins {
+    id("org.asciidoctor.jvm.convert")
+}
+
+ext {
+    snippetsDir = file("${buildDir}/generated-snippets")
+    docsDir = file("${buildDir}/docs/asciidoc")
+    staticDocsDir = file("${rootDir}/swith-me-api-common/src/main/resources/static/docs")
+}
+
+configurations {
+    asciidoctorExt
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(project(":support"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.restdocs:spring-restdocs-core:${restdocsVersion}")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations "asciidoctorExt"
+    dependsOn test
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    from docsDir
+    into staticDocsDir
+}
+
+tasks.named('spotbugsMain') {
+    dependsOn copyDocument
+}
+
+build {
+    dependsOn copyDocument
+}
