@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
         MissingServletRequestParameterException exception
     ) {
         return ResponseEntity.status(400)
-            .body(ErrorResponse.of(CommonErrorCodeAndMessage.INVALID_REQUEST));
+            .body(ErrorResponse.of(CommonErrorCodeAndMessage.INVALID_CLIENT_REQUEST));
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
