@@ -7,10 +7,6 @@ import project.study.support.exception.OutPortException;
 @Getter
 public class TossPaymentException extends OutPortException {
 
-    public TossPaymentException(CodeAndMessage codeAndMessage) {
-        super(codeAndMessage);
-    }
-
     public TossPaymentException(
         CodeAndMessage codeAndMessage,
         String detailMessage

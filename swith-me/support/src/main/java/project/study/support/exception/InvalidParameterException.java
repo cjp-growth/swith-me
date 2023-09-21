@@ -9,6 +9,6 @@ import project.study.support.log.Field;
 public class InvalidParameterException extends CommonException {
 
     public InvalidParameterException(List<Field> fields) {
-        super(CommonErrorCodeAndMessage.INVALID_REQUEST, fields);
+        super(CommonErrorCodeAndMessage.INVALID_CLIENT_REQUEST, fields);
     }
 }

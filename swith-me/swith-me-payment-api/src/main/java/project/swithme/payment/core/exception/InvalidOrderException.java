@@ -1,11 +1,11 @@
 package project.swithme.payment.core.exception;
 
-import static project.study.support.codeandmessage.order.OrderErrorCodeAndMessage.INVALID_ORDER_STATUS;
+import project.study.support.codeandmessage.CodeAndMessage;
 import project.study.support.exception.DomainException;
 
-public class InvalidOrderStatusException extends DomainException {
+public class InvalidOrderException extends DomainException {
 
-    public InvalidOrderStatusException() {
-        super(INVALID_ORDER_STATUS);
+    public InvalidOrderException(CodeAndMessage codeAndMessage) {
+        super(codeAndMessage);
     }
 }
