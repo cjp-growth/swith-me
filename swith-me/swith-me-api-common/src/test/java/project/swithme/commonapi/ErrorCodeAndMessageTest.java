@@ -73,5 +73,4 @@ public abstract class ErrorCodeAndMessageTest {
         return key(key)
             .value(value);
     }
-
 }
