@@ -33,6 +33,11 @@ public enum TossPaymentApprovalCodeAndMessage implements CodeAndMessage {
     }
 
     @Override
+    public String getErrorCode() {
+        return name();
+    }
+
+    @Override
     public int getStatusCode() {
         return statusCode;
     }
@@ -40,5 +45,10 @@ public enum TossPaymentApprovalCodeAndMessage implements CodeAndMessage {
     @Override
     public String getKrErrorMessage() {
         return krErrorMessage;
+    }
+
+    @Override
+    public String getEnErrorMessage() {
+        return engErrorMessage;
     }
 }

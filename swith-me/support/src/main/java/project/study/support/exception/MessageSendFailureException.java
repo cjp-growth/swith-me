@@ -1,6 +1,6 @@
 package project.study.support.exception;
 
-import static project.study.support.codeandmessage.notification.NotificationCodeAndMessage.NOTIFICATION_SEND_FAILURE;
+import static project.study.support.codeandmessage.notification.NotificationErrorCodeAndMessage.NOTIFICATION_SEND_FAILURE;
 
 public class MessageSendFailureException extends DomainException {
 

@@ -54,6 +54,7 @@ include(
         "swith-me-payment-api",
         "swith-me-notification-api",
         "swith-me-domain",
+        "swith-me-api-common",
         "storage",
         "support"
 )

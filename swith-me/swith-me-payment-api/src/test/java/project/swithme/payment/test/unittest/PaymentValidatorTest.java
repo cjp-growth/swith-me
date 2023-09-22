@@ -11,8 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import project.swithme.domain.core.order.entity.OrderStatus;
 import project.swithme.payment.common.command.OrderValidationCommand;
-import project.swithme.payment.core.exception.InvalidOrderStatusException;
-import project.swithme.payment.core.exception.InvalidPriceException;
+import project.swithme.payment.core.exception.InvalidOrderException;
 import project.swithme.payment.core.facade.validator.PaymentValidator;
 
 @DisplayName("[UnitTest] 주문 검증기 단위 테스트")
@@ -42,7 +41,7 @@ class PaymentValidatorTest {
         );
 
         assertThatThrownBy(() -> paymentValidator.validate(command, BigDecimal.valueOf(100_000L)))
-            .isExactlyInstanceOf(InvalidOrderStatusException.class)
+            .isExactlyInstanceOf(InvalidOrderException.class)
             .isInstanceOf(RuntimeException.class)
             .hasMessage("올바르지 않은 주문 상태입니다.");
     }
@@ -73,7 +72,7 @@ class PaymentValidatorTest {
         );
 
         assertThatThrownBy(() -> paymentValidator.validate(command, BigDecimal.valueOf(110_000L)))
-            .isExactlyInstanceOf(InvalidPriceException.class)
+            .isExactlyInstanceOf(InvalidOrderException.class)
             .isInstanceOf(RuntimeException.class)
             .hasMessage("올바른 주문 가격을 입력해주세요.");
     }
